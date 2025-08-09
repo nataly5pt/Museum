@@ -3,251 +3,222 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Nataly Glushak" />
   <title>Museum of Wonder – Collections</title>
-  <!-- Use your existing site stylesheet -->
-  <link rel="stylesheet" href="css/style.css" />
-  <style>
-    /* Minimal helpers only if your main CSS is very basic */
-    .container { max-width: 1100px; margin: 0 auto; padding: 1rem; }
-    .subnav { display: flex; gap: .5rem; flex-wrap: wrap; margin: 1rem 0; }
-    .subnav button { padding: .5rem .9rem; border-radius: .6rem; border: 1px solid #ccc; background: #fff; cursor: pointer; }
-    .subnav button.active { border-color: #666; }
-    .section-title { font-size: 1.6rem; margin: .75rem 0 1rem; }
-    .artifact { display: grid; grid-template-columns: 320px 1fr; gap: 1rem; align-items: start; background: #fff; border-radius: .8rem; padding: 1rem; margin: 1rem 0; box-shadow: 0 4px 14px rgba(0,0,0,.08); }
-    .artifact figure { margin: 0; }
-    .artifact img { width: 100%; height: auto; border-radius: .5rem; display: block; }
-    .artifact h2 { margin: 0 0 .5rem; }
-    .artifact dl { display: grid; grid-template-columns: 180px 1fr; gap: .35rem .75rem; margin: 0; }
-    .artifact dt { color: #666; }
-    .artifact dd { margin: 0; }
-    .credits { margin: 2rem 0; padding: 1rem; background: #f7f7f7; border-radius: .6rem; }
-    @media (max-width: 900px){ .artifact { grid-template-columns: 1fr; } .artifact dl { grid-template-columns: 1fr; } }
-  </style>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-  <header>
-    <h1 style="text-align:center; margin-top: 1rem;">Museum of Wonder</h1>
-    <nav style="text-align:center; margin-bottom: 1rem;">
-      <a href="index.html">Home</a> |
-      <a href="staff.html">Staff</a> |
-      <strong>Collections</strong>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <a href="../index.html" class="logo" aria-label="Museum Home">🏛️</a>
+      <span class="site-title">Museum of Wonder</span>
+    </div>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./staff.html">Staff</a></li>
+        <li><a class="active" aria-current="page" href="./collections.html">Collections</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main class="container" id="main">
-    <!-- Subnav tabs -->
+  <main id="main" class="container" role="main">
     <nav class="subnav" aria-label="Collections sections">
-      <button class="active" onclick="showSection('archaeology', this)" aria-controls="archaeology" aria-pressed="true">Archeology</button>
-      <button onclick="showSection('anthropology', this)" aria-controls="anthropology" aria-pressed="false">Anthropology</button>
+      <button class="tab is-active" onclick="showSection('archaeology', this)" aria-controls="archaeology" aria-pressed="true">Archeology</button>
+      <button class="tab" onclick="showSection('anthropology', this)" aria-controls="anthropology" aria-pressed="false">Anthropology</button>
     </nav>
 
-    <!-- ===================
-         ARCHEOLOGY (3 items)
-         =================== -->
-    <section id="archaeology" class="collection-section" aria-labelledby="arch-title">
-      <h2 id="arch-title" class="section-title">Archeology</h2>
+    <!-- Archeology -->
+    <section id="archaeology" class="collection-section">
+      <h1 class="section-title">Archeology</h1>
 
-      <!-- A1 -->
-      <article class="artifact" id="faience-scarab">
-        <figure>
-          <img src="images/collections/faience_scarab_amulet.png" alt="Blue-green faience scarab amulet with pierced longitudinal hole" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/faience-scarab-amulet.jpg" alt="Blue-green faience scarab amulet with pierced hole" loading="lazy">
           <figcaption>Faience Scarab Amulet</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Faience Scarab Amulet</h2>
           <dl>
             <dt>Name</dt><dd>Scarab amulet (pierced, molded)</dd>
             <dt>Material</dt><dd>Siliceous faience glaze over quartz paste</dd>
-            <dt>Size/Weight/Shape</dt><dd>Length 2.9 cm; width 1.9 cm; weight 6 g; ovoid beetle form</dd>
-            <dt>Estimated Age</dt><dd>~2,800–2,400 BP; typology and glaze matrix</dd>
+            <dt>Size/Weight/Shape</dt><dd>Length 2.9 cm; width 1.9 cm; 6 g; ovoid beetle form</dd>
+            <dt>Estimated Age</dt><dd>~2,800–2,400 BP</dd>
             <dt>Preservation State</dt><dd>Complete; glaze crazing; minor edge chipping</dd>
-            <dt>Location Found</dt><dd>Tell al-Nahr, Grid B2; 30 cm below surface; 29.94°N, 31.28°E</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Personal ornament/amulet</dd>
-            <dt>Evidence of Use</dt><dd>String wear in perforation; surface polishing</dd>
+            <dt>Location Found</dt><dd>Tell al-Nahr, Grid B2 (29.94°N, 31.28°E)</dd>
+            <dt>Likely Purpose</dt><dd>Personal ornament/amulet</dd>
+            <dt>Evidence of Use</dt><dd>String wear; surface polishing</dd>
             <dt>Manufacture Clues</dt><dd>Mold-made; low-relief underside; turquoise glaze</dd>
-            <dt>Found With</dt><dd>Bead fragments of faience and carnelian</dd>
-            <dt>Burial or Habitat Context</dt><dd>Domestic area floor fill; not a formal burial</dd>
-            <dt>Symbolism</dt><dd>Scarab motif; descriptive only (iconography present)</dd>
-            <dt>Comparison</dt><dd>Comparable to Late Period faience scarabs from Delta sites</dd>
-            <dt>Preservation Notes</dt><dd>Salt efflorescence removed during stabilization</dd>
+            <dt>Found With</dt><dd>Faience/carnelian beads</dd>
+            <dt>Burial or Habitat Context</dt><dd>Domestic floor fill</dd>
+            <dt>Symbolism</dt><dd>Scarab motif present (descriptive only)</dd>
+            <dt>Comparison</dt><dd>Late Period faience scarabs (Delta sites)</dd>
+            <dt>Preservation Notes</dt><dd>Salts removed; stored low-RH</dd>
           </dl>
         </div>
       </article>
 
-      <!-- A2 -->
-      <article class="artifact" id="ushabti">
-        <figure>
-          <img src="images/collections/ushabti_figurine.png" alt="Small blue ushabti figurine with crossed arms and faint tool lines" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/ushabti-figurine.png" alt="Small blue ushabti figurine with crossed arms" loading="lazy">
           <figcaption>Ushabti Figurine</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Ushabti Figurine</h2>
           <dl>
             <dt>Name</dt><dd>Funerary ushabti (miniature figurine)</dd>
             <dt>Material</dt><dd>Faience over fine clay core</dd>
-            <dt>Size/Weight/Shape</dt><dd>Height 11.2 cm; width 2.8 cm; weight 78 g; mummiform</dd>
-            <dt>Estimated Age</dt><dd>~2,600–2,300 BP; stylistic attributes</dd>
-            <dt>Preservation State</dt><dd>Partial; feet missing; glaze abrasion on nose</dd>
-            <dt>Location Found</dt><dd>North Necropolis, Tomb 14, Chamber A; 25.72°N, 32.64°E</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Funerary inclusion (servitor figure)</dd>
-            <dt>Evidence of Use</dt><dd>No wear; burial context implies placement</dd>
-            <dt>Manufacture Clues</dt><dd>Mold seams faint; black pigment traces for headdress lines</dd>
-            <dt>Found With</dt><dd>Linen scraps; faience beads; resinous residue</dd>
-            <dt>Burial or Habitat Context</dt><dd>Rock-cut tomb chamber; secondary deposit</dd>
-            <dt>Symbolism</dt><dd>Mummiform pose; crossed arms; descriptive only</dd>
-            <dt>Comparison</dt><dd>Parallels small Late Period ushabti types</dd>
-            <dt>Preservation Notes</dt><dd>Consolidated with Paraloid B-72 (reversible)</dd>
+            <dt>Size/Weight/Shape</dt><dd>H 11.2 cm; W 2.8 cm; 78 g; mummiform</dd>
+            <dt>Estimated Age</dt><dd>~2,600–2,300 BP</dd>
+            <dt>Preservation State</dt><dd>Partial; feet missing; glaze abrasion</dd>
+            <dt>Location Found</dt><dd>North Necropolis, Tomb 14</dd>
+            <dt>Likely Purpose</dt><dd>Funerary inclusion (servitor figure)</dd>
+            <dt>Evidence of Use</dt><dd>None; burial placement implied</dd>
+            <dt>Manufacture Clues</dt><dd>Mold seams faint; pigment traces</dd>
+            <dt>Found With</dt><dd>Linen scraps; faience beads</dd>
+            <dt>Burial or Habitat Context</dt><dd>Rock-cut tomb chamber</dd>
+            <dt>Symbolism</dt><dd>Mummiform pose; crossed arms</dd>
+            <dt>Comparison</dt><dd>Parallels Late Period types</dd>
+            <dt>Preservation Notes</dt><dd>Paraloid B-72 (reversible)</dd>
           </dl>
         </div>
       </article>
 
-      <!-- A3 -->
-      <article class="artifact" id="kohl-container">
-        <figure>
-          <img src="images/collections/bronze_kohl_container.png" alt="C-shaped bronze cosmetic container with narrow opening and hammered surface" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/bronze-kohl-container.jpg" alt="Bronze tube cosmetic container with hammered surface" loading="lazy">
           <figcaption>Bronze Kohl Container</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Bronze Kohl Container</h2>
           <dl>
             <dt>Name</dt><dd>Cosmetic kohl container (tube)</dd>
-            <dt>Material</dt><dd>Copper-alloy (bronze) with residual carbon</dd>
-            <dt>Size/Weight/Shape</dt><dd>Length 9.1 cm; Ø 1.2 cm; weight 94 g; cylindrical tube</dd>
-            <dt>Estimated Age</dt><dd>~3,100–2,800 BP; alloy and context</dd>
-            <dt>Preservation State</dt><dd>Complete; green patina; interior residue</dd>
-            <dt>Location Found</dt><dd>Harbor Quarter, Room 3; 31.20°N, 29.89°E; floor layer</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Cosmetic storage/applicator</dd>
-            <dt>Evidence of Use</dt><dd>Black residue; polish near rim</dd>
-            <dt>Manufacture Clues</dt><dd>Hammered sheet rolled into tube; brazed seam</dd>
-            <dt>Found With</dt><dd>Bone spatula fragment; shell inlay piece</dd>
-            <dt>Burial or Habitat Context</dt><dd>Domestic room collapse layer</dd>
-            <dt>Symbolism</dt><dd>None visible; utilitarian object</dd>
-            <dt>Comparison</dt><dd>Similar to Bronze Age Levantine cosmetic tubes</dd>
-            <dt>Preservation Notes</dt><dd>Chloride pustules stabilized; stored low-RH</dd>
+            <dt>Material</dt><dd>Copper-alloy with residual carbon</dd>
+            <dt>Size/Weight/Shape</dt><dd>L 9.1 cm; Ø 1.2 cm; 94 g; cylindrical</dd>
+            <dt>Estimated Age</dt><dd>~3,100–2,800 BP</dd>
+            <dt>Preservation State</dt><dd>Complete; green patina</dd>
+            <dt>Location Found</dt><dd>Harbor Quarter, Room 3</dd>
+            <dt>Likely Purpose</dt><dd>Cosmetic storage/applicator</dd>
+            <dt>Evidence of Use</dt><dd>Black residue; rim polish</dd>
+            <dt>Manufacture Clues</dt><dd>Hammered sheet rolled; brazed seam</dd>
+            <dt>Found With</dt><dd>Bone spatula; shell inlay</dd>
+            <dt>Burial or Habitat Context</dt><dd>Domestic collapse layer</dd>
+            <dt>Symbolism</dt><dd>None (utilitarian)</dd>
+            <dt>Comparison</dt><dd>Levantine Bronze Age tubes</dd>
+            <dt>Preservation Notes</dt><dd>Chloride pustules stabilized</dd>
           </dl>
         </div>
       </article>
     </section>
 
-    <!-- =====================
-         ANTHROPOLOGY (3 items)
-         ===================== -->
-    <section id="anthropology" class="collection-section" aria-labelledby="anth-title" style="display:none;">
-      <h2 id="anth-title" class="section-title">Anthropology</h2>
+    <!-- Anthropology -->
+    <section id="anthropology" class="collection-section is-hidden">
+      <h1 class="section-title">Anthropology</h1>
 
-      <!-- P1 -->
-      <article class="artifact" id="mummified-hand">
-        <figure>
-          <img src="images/collections/mummified_hand.png" alt="Desiccated human hand with linen traces and darkened skin" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/mummified-hand.png" alt="Desiccated human hand with linen traces" loading="lazy">
           <figcaption>Mummified Hand</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Mummified Hand</h2>
           <dl>
             <dt>Name</dt><dd>Right human hand (mummified tissue)</dd>
-            <dt>Material</dt><dd>Soft tissue, cortical bone; linen fiber residues</dd>
-            <dt>Size/Weight/Shape</dt><dd>Length preserved 17.4 cm; weight 128 g; fingers flexed</dd>
-            <dt>Estimated Age</dt><dd>~2,600–2,200 BP; associated wrappings dated</dd>
-            <dt>Preservation State</dt><dd>Partial; soft tissue desiccated; nail remnants</dd>
-            <dt>Location Found</dt><dd>North Necropolis, Tomb 7, entry fill</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Human remain; no designed function</dd>
+            <dt>Material</dt><dd>Soft tissue, cortical bone; linen fibers</dd>
+            <dt>Size/Weight/Shape</dt><dd>L 17.4 cm; 128 g; fingers flexed</dd>
+            <dt>Estimated Age</dt><dd>~2,600–2,200 BP</dd>
+            <dt>Preservation State</dt><dd>Partial; desiccated</dd>
+            <dt>Location Found</dt><dd>North Necropolis, Tomb 7</dd>
+            <dt>Likely Purpose</dt><dd>Human remain; no designed function</dd>
             <dt>Evidence of Use</dt><dd>Not applicable</dd>
             <dt>Manufacture Clues</dt><dd>Not applicable</dd>
-            <dt>Found With</dt><dd>Bitumen traces; linen strips; bead fragments</dd>
-            <dt>Burial or Habitat Context</dt><dd>Secondary disturbance deposit</dd>
-            <dt>Symbolism</dt><dd>None recorded on remain</dd>
-            <dt>Comparison</dt><dd>Mummification consistent with regional practices</dd>
-            <dt>Preservation Notes</dt><dd>Stored in inert atmosphere; handled with nitrile gloves</dd>
+            <dt>Found With</dt><dd>Bitumen traces; linen strips</dd>
+            <dt>Burial or Habitat Context</dt><dd>Secondary disturbance</dd>
+            <dt>Symbolism</dt><dd>None recorded</dd>
+            <dt>Comparison</dt><dd>Consistent with regional practices</dd>
+            <dt>Preservation Notes</dt><dd>Stored in inert atmosphere</dd>
           </dl>
         </div>
       </article>
 
-      <!-- P2 -->
-      <article class="artifact" id="cranial-vault">
-        <figure>
-          <img src="images/collections/cranial_vault_fragment.png" alt="Curved cranial vault fragment with flattened frontal contour" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/cranial-vault-fragment.jpg" alt="Curved cranial vault fragment with flattened frontal contour" loading="lazy">
           <figcaption>Cranial Vault Fragment</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Cranial Vault Fragment (Infant)</h2>
           <dl>
             <dt>Name</dt><dd>Frontal cranial vault fragment</dd>
             <dt>Material</dt><dd>Cortical and diploë bone</dd>
-            <dt>Size/Weight/Shape</dt><dd>~5.3 × 4.1 cm; thickness ~2.5 mm; gently flattened contour</dd>
-            <dt>Estimated Age</dt><dd>~900–700 BP; infant/early juvenile by thickness</dd>
-            <dt>Preservation State</dt><dd>Partial; edges eroded; weathering stage 1–2</dd>
-            <dt>Location Found</dt><dd>Plateau Overlook, Feature 12; fill layer</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Human remain; no designed function</dd>
+            <dt>Size/Weight/Shape</dt><dd>~5.3 × 4.1 cm; thickness ~2.5 mm</dd>
+            <dt>Estimated Age</dt><dd>~900–700 BP</dd>
+            <dt>Preservation State</dt><dd>Partial; eroded edges</dd>
+            <dt>Location Found</dt><dd>Plateau Overlook, Feature 12</dd>
+            <dt>Likely Purpose</dt><dd>Human remain; no designed function</dd>
             <dt>Evidence of Use</dt><dd>Not applicable</dd>
             <dt>Manufacture Clues</dt><dd>Not applicable</dd>
             <dt>Found With</dt><dd>Fine textile scraps; tiny shell bead</dd>
             <dt>Burial or Habitat Context</dt><dd>Possible subfloor interment</dd>
             <dt>Symbolism</dt><dd>None on bone surface</dd>
-            <dt>Comparison</dt><dd>Flattening comparable to cradle-board associated shaping (descriptive)</dd>
-            <dt>Preservation Notes</dt><dd>Microfragments bagged; no adhesive used</dd>
+            <dt>Comparison</dt><dd>Comparable to cradle-board flattening (descriptive)</dd>
+            <dt>Preservation Notes</dt><dd>No adhesive used; microfragments bagged</dd>
           </dl>
         </div>
       </article>
 
-      <!-- P3 -->
-      <article class="artifact" id="coprolite">
-        <figure>
-          <img src="images/collections/coprolite_sample.png" alt="Brown mineralized coprolite with laminated interior exposed" loading="lazy" />
+      <article class="artifact">
+        <figure class="artifact-media">
+          <img src="../images/collections/coprolite-sample.jpg" alt="Brown mineralized coprolite with laminated interior" loading="lazy">
           <figcaption>Coprolite Sample</figcaption>
         </figure>
-        <div>
+        <div class="artifact-meta">
           <h2>Coprolite (Mineralized Fecal Sample)</h2>
           <dl>
             <dt>Name</dt><dd>Mineralized fecal mass (coprolite)</dd>
             <dt>Material</dt><dd>Mineralized organic matter with phosphates/silicates</dd>
-            <dt>Size/Weight/Shape</dt><dd>Length 6.1 cm; Ø 2.4 cm; weight 38 g; cylindrical; laminated</dd>
-            <dt>Estimated Age</dt><dd>~2,000–1,600 BP; associated ash layer dated</dd>
-            <dt>Preservation State</dt><dd>Complete; desiccated; consolidated for handling</dd>
-            <dt>Location Found</dt><dd>Dry Shelter Cavern, Test Pit 2; midden stratum</dd>
-            <dt>Use and Function (Likely Purpose)</dt><dd>Biological by-product; no designed function</dd>
+            <dt>Size/Weight/Shape</dt><dd>L 6.1 cm; Ø 2.4 cm; 38 g; cylindrical; laminated</dd>
+            <dt>Estimated Age</dt><dd>~2,000–1,600 BP</dd>
+            <dt>Preservation State</dt><dd>Complete; desiccated</dd>
+            <dt>Location Found</dt><dd>Dry Shelter Cavern, Test Pit 2</dd>
+            <dt>Likely Purpose</dt><dd>Biological by-product; no designed function</dd>
             <dt>Evidence of Use</dt><dd>Not applicable</dd>
             <dt>Manufacture Clues</dt><dd>Not applicable</dd>
             <dt>Found With</dt><dd>Plant fiber cord; rodent-gnawed debris</dd>
             <dt>Burial or Habitat Context</dt><dd>Arid cave midden</dd>
             <dt>Symbolism</dt><dd>None</dd>
-            <dt>Comparison</dt><dd>Size/lamination similar to documented human coprolites (descriptive)</dd>
-            <dt>Preservation Notes</dt><dd>Stored in low-RH microclimate; sampled non-destructively</dd>
+            <dt>Comparison</dt><dd>Similar to documented human coprolites (descriptive)</dd>
+            <dt>Preservation Notes</dt><dd>Stored in low-RH microclimate</dd>
           </dl>
         </div>
       </article>
     </section>
 
-    <!-- AI Attribution & Sources -->
     <section class="credits" aria-labelledby="credits-title">
-      <h3 id="credits-title">AI Involvement & Sources</h3>
-      <p><strong>Disclosure:</strong> The content in this gallery was created by AI under human direction, then curated, reviewed, and edited by a human before publication.</p>
-      <ul>
-        <li><strong>Concept & Content:</strong> Student with AI drafting assistance (ChatGPT).</li>
-        <li><strong>Code:</strong> Student wrote the page; AI assisted with structure and review.</li>
-        <li><strong>Images:</strong> Replace with your own generated or sourced images and cite below. Example: “Faience Scarab image — generated with &lt;Tool Name&gt;, prompt by &lt;Your Name&gt;, Aug 9, 2025.”</li>
-      </ul>
+      <h2 id="credits-title">AI Involvement & Sources</h2>
+      <p class="ai-note">Content was created with AI under human direction and edited before publication. Cite each image/tool here.</p>
     </section>
   </main>
 
-  <footer style="text-align:center; padding:1rem; font-size:.95rem; color:#666;">
-    © <span id="year"></span> Museum of Wonder
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Museum of Wonder</p>
   </footer>
 
   <script>
-    // Year
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple tab switcher
-    function showSection(sectionId, btn){
+    function showSection(id, btn){
       const sections = document.querySelectorAll('.collection-section');
-      sections.forEach(s => s.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
+      sections.forEach(s => s.classList.add('is-hidden'));
+      document.getElementById(id).classList.remove('is-hidden');
 
-      const tabs = document.querySelectorAll('.subnav button');
-      tabs.forEach(t => { t.classList.remove('active'); t.setAttribute('aria-pressed','false'); });
-      if(btn){ btn.classList.add('active'); btn.setAttribute('aria-pressed','true'); }
+      const tabs = document.querySelectorAll('.subnav .tab');
+      tabs.forEach(t => { t.classList.remove('is-active'); t.setAttribute('aria-pressed','false'); });
+      btn.classList.add('is-active'); btn.setAttribute('aria-pressed','true');
     }
   </script>
 </body>
 </html>
+
 
