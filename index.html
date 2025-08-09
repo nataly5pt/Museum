@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Nataly Glushak" />
   <title>Museum of Wonder</title>
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <!-- Skip link for accessibility -->
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Site header + primary nav -->
   <header class="site-header" role="banner">
     <div class="brand">
       <a href="index.html" class="logo" aria-label="Museum Home">🏛️</a>
@@ -18,73 +17,65 @@
     </div>
     <nav class="main-nav" aria-label="Primary">
       <ul>
-        <li><a href="index.html" aria-current="page" class="active">Home</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a href="collections.html">Collections</a></li>
+        <li><a href="index.html" class="active" aria-current="page">Home</a></li>
+        <li><a href="html/staff.html">Staff</a></li>
+        <li><a href="html/collections.html">Collections</a></li>
       </ul>
     </nav>
   </header>
 
   <main id="main" class="container" role="main">
-    <!-- Hero / intro -->
     <section class="hero" aria-labelledby="home-hero-title">
       <h1 id="home-hero-title">Welcome to the Museum of Wonder</h1>
-      <p class="lead">A fictitious museum built for course work. Explore staff profiles and curated collections across archeology and anthropology.</p>
-      <p class="disclosure">Some content/images were generated with AI tools and edited by a human.</p>
+      <p class="lead">A fictitious museum for coursework. Explore staff profiles and our archeology & anthropology collections.</p>
+      <p class="disclosure">Some content/images were generated with AI and edited by a human.</p>
     </section>
 
-    <!-- Feature cards (example highlights) -->
     <section class="card-grid" aria-labelledby="featured-title">
       <h2 id="featured-title" class="visually-hidden">Featured Highlights</h2>
 
-      <!-- Card 1 -->
       <article class="card">
         <figure class="card-media">
-          <!-- Make sure this filename exists in /images with the same extension -->
-          <img src="images/ancient-egypt-landscape.jpg" alt="Distant view across a desert plain with the Nile in the background" loading="lazy" />
+          <img src="images/ancient-egypt-landscape.jpg" alt="Desert landscape with the Nile in the distance" loading="lazy" />
         </figure>
         <div class="card-body">
           <h3>Ancient Egypt Landscape</h3>
           <p>Explore breathtaking ancient landscapes from our collection.</p>
-          <p class="card-cta"><a href="collections.html" class="button">View Collections</a></p>
+          <p class="card-cta"><a class="button" href="html/collections.html">View Collections</a></p>
         </div>
       </article>
 
-      <!-- Card 2 -->
       <article class="card">
         <figure class="card-media">
-          <img src="images/pyramids.jpg" alt="Pyramids rising above the desert under a clear sky" loading="lazy" />
+          <img src="images/pyramids-giza.jpg" alt="Pyramids rising above the desert" loading="lazy" />
         </figure>
         <div class="card-body">
           <h3>Pyramids</h3>
           <p>Discover the mysteries of the pyramids and their builders.</p>
-          <p class="card-cta"><a href="collections.html" class="button">Explore Archeology</a></p>
+          <p class="card-cta"><a class="button" href="html/collections.html">Explore Archeology</a></p>
         </div>
       </article>
 
-      <!-- Card 3 -->
       <article class="card">
         <figure class="card-media">
-          <img src="images/egyptian-queen.jpg" alt="Stylized portrait of an Egyptian queen wearing a headdress" loading="lazy" />
+          <img src="images/egyptian-queen-portrait.jpg" alt="Portrait of an Egyptian queen in a headdress" loading="lazy" />
         </figure>
         <div class="card-body">
           <h3>Egyptian Queen</h3>
           <p>Meet the queens and rulers who shaped ancient history.</p>
-          <p class="card-cta"><a href="collections.html" class="button">Explore Anthropology</a></p>
+          <p class="card-cta"><a class="button" href="html/collections.html">Explore Anthropology</a></p>
         </div>
       </article>
     </section>
   </main>
 
   <footer class="site-footer" role="contentinfo">
-    <p>© <span id="year"></span> Museum of Wonder • This is a fictitious website for academic use.</p>
+    <p>© <span id="year"></span> Museum of Wonder • Academic use only.</p>
   </footer>
 
-  <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
 
 
