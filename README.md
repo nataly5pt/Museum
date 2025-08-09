@@ -37,9 +37,19 @@ Museum/
 └── README.md            # Documentation & rationale
 
 
-## AI Tools & Sources Used
-- **ChatGPT (GPT-4o)** – Assisted with writing artifact descriptions, creating semantic HTML structure, and optimizing CSS for responsive design.
-- **Bing Image Creator / DALL·E** – Generated artifact illustrations based on descriptive metadata.
+## AI Involvement & Sources
+
+**Concept & Content:**  
+Artifact descriptions drafted with ChatGPT; edited for descriptive neutrality and compliance with required metadata.
+
+**Images:**  
+- Obsidian Spearhead — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.  
+- Corded Storage Jar — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.  
+- Bronze Kohl Container — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.  
+- Mummified Hand — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.  
+- Cranial Vault Fragment — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.  
+- Coprolite Sample — generated with [creator.nightcafe.studio](https://creator.nightcafe.studio/), prompt by N. Glushak, Aug 9, 2025.
+
 - **W3C HTML Validator** – Used to verify HTML validity.
 - **W3C CSS Validator** – Used to verify CSS validity.
 
