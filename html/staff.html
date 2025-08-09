@@ -1,32 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Museum Staff</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Nataly Glushak" />
+  <title>Museum of Wonder – Staff</title>
+  <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
+  <!-- Skip link for keyboard users -->
+  <a class="skip-link" href="#main">Skip to content</a>
 
-<header>
-  <h1>Museum of Wonder</h1>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="staff.html">Staff</a>
-    <a href="collections.html">Collections</a>
-  </nav>
-</header>
+  <!-- Header -->
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">🏛️</span>
+      <a class="site-title" href="../index.html">Museum of Wonder</a>
+    </div>
 
-<main>
-  <h2>Our Staff</h2>
-  <p>Placeholder text for staff bios.</p>
-</main>
+    <!-- Primary nav -->
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./staff.html" aria-current="page">Staff</a></li>
+        <li><a href="./collections.html">Collections</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<footer>
-  <p>This is a fictitious website created purely for academic purposes.</p>
-  <p>Some content/images were generated with AI tools.</p>
-</footer>
+  <!-- Main -->
+  <main id="main" class="container" role="main">
+    <section aria-labelledby="staff-title">
+      <h1 id="staff-title">Staff</h1>
+      <p class="disclosure">Meet the team that stewards our collections and visitor experience.</p>
 
+      <section class="card-grid" aria-label="Staff directory">
+        <!-- Person 1 -->
+        <article class="card staff-card">
+          <figure class="card-media">
+            <!-- Use a real portrait if you have one; placeholder below -->
+            <img src="../images/ancient-egypt-portalgate.jpg"
+                 alt="Portrait placeholder: sandstone gateway under a blue sky" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3>Dr. Aria Bennett</h3>
+            <p><strong>Chief Curator, Ancient Civilizations</strong></p>
+            <p>PhD, Near Eastern Archaeology. Oversees acquisitions, conservation strategy, and gallery narratives.</p>
+            <p>Email: <a href="mailto:aria.bennett@example.edu">aria.bennett@example.edu</a></p>
+          </div>
+        </article>
+
+        <!-- Person 2 -->
+        <article class="card staff-card">
+          <figure class="card-media">
+            <img src="../images/egyptian-queen-portrait.jpg"
+                 alt="Portrait placeholder: stylized Egyptian queen illustration" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3>Samir Okoye</h3>
+            <p><strong>Collections Manager</strong></p>
+            <p>Leads cataloging, rehousing, and environmental monitoring for storage and exhibit rotation.</p>
+            <p>Email: <a href="mailto:samir.okoye@example.edu">samir.okoye@example.edu</a></p>
+          </div>
+        </article>
+
+        <!-- Person 3 -->
+        <article class="card staff-card">
+          <figure class="card-media">
+            <img src="../images/ancient-egypt-landscape.jpg"
+                 alt="Portrait placeholder: desert landscape scene" loading="lazy" />
+          </figure>
+          <div class="card-body">
+            <h3>Mina Alvarez</h3>
+            <p><strong>Education & Outreach Coordinator</strong></p>
+            <p>Designs public programs and school partnerships focused on material culture and ethics.</p>
+            <p>Email: <a href="mailto:mina.alvarez@example.edu">mina.alvarez@example.edu</a></p>
+          </div>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Museum of Wonder</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
