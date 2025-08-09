@@ -1,49 +1,158 @@
+/* ===============================
+   Global Styles
+================================== */
+html {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9f9f9;
+}
+*, *::before, *::after {
+  box-sizing: inherit;
+}
 body {
-  font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #f4f4f4;
+  color: #222;
+  line-height: 1.6;
 }
 
-header {
+/* ===============================
+   Accessibility
+================================== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  background: #fff;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #000;
+  border-radius: 0.5rem;
+  z-index: 1000;
+}
+
+/* ===============================
+   Layout Container
+================================== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ===============================
+   Header
+================================== */
+.site-header {
   background-color: #333;
-  color: white;
-  padding: 20px;
+  color: #fff;
+  padding: 1rem 0;
   text-align: center;
 }
-
-header nav a {
-  color: white;
-  margin: 0 15px;
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.site-title {
+  color: #fff;
   text-decoration: none;
+  font-weight: bold;
+  font-size: 1.25rem;
 }
 
-header nav a:hover {
+/* ===============================
+   Navigation
+================================== */
+.main-nav .nav-list {
+  list-style: none; /* Removes bullets */
+  margin: 0.5rem 0 0;
+  padding: 0;
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+}
+.main-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.main-nav a:hover,
+.main-nav a[aria-current="page"] {
   text-decoration: underline;
 }
 
-.three-columns {
+/* ===============================
+   Hero Section
+================================== */
+.hero .lead {
+  margin-top: 0.5rem;
+}
+.disclosure {
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   Cards
+================================== */
+.card-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+.card {
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
+  flex-direction: column;
+  height: 100%;
+}
+.card-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.card-body {
+  padding: 1rem;
+  flex: 1;
+}
+.card-body h3 {
+  margin-top: 0;
+}
+.card-cta .button {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border-radius: 0.5rem;
+  background: #333;
+  color: #fff;
+  text-decoration: none;
+}
+.card-cta .button:hover {
+  background: #555;
 }
 
-.three-columns div {
-  background: white;
-  padding: 20px;
-  width: 30%;
-  box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
-}
-
-footer {
-  background-color: #222;
-  color: white;
+/* ===============================
+   Footer
+================================== */
+.site-footer {
   text-align: center;
-  padding: 10px;
+  padding: 1rem 0;
+  color: #666;
+  background-color: #f2f2f2;
 }
 
-footer {
-  background-color: #222;
-  color: white;
-  text-align: center;
-  padding: 1em;
+/* ===============================
+   Responsive Design
+================================== */
+@media (max-width: 900px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
 }
+
