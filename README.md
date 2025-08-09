@@ -2,34 +2,40 @@
 
 ## Design Rationale
 The Museum of Wonder site was designed with accessibility, clarity, and clean navigation in mind. A semantic HTML structure supports screen readers and SEO, with consistent file paths and descriptive alt text to ensure all media is accessible. CSS follows a simple, responsive grid layout to present content in a visually balanced way, while meaningful filenames and logical folder organization maintain project clarity. Color, typography, and imagery were chosen to evoke a sense of history and discovery without overwhelming the user.
+This project follows best practices for:
+
+Accessible navigation (Skip to content links, semantic headings)
+
+SEO readiness (meta tags, descriptive image alt attributes)
+
+Organized file structure (HTML pages in /html, images in /images, CSS in /css)
 
 ## AI Reflection
 AI tools were used to accelerate content generation, image description, and code scaffolding under direct human supervision. All AI-generated materials were reviewed, edited, and validated for accuracy, accessibility, and alignment with project requirements. This human-in-the-loop process ensured the final work met academic standards while leveraging AI for efficiency.
 
-> **AI Disclosure:** The content in this gallery was created by AI under human direction. All outputs were curated, reviewed, and edited by a human before publication.
+> **AI Disclosure:** Some content/images in this site were created by AI and edited by a human before publication.
 
 ---
 
 ## Repository Structure
 Museum/
 │
-├── css/ # All external stylesheets
-│ └── style.css
+├── css/                 # External stylesheets
+│   └── style.css
 │
-├── html/ # HTML subpages
-│ ├── staff.html
-│ └── collections.html
+├── html/                # HTML subpages
+│   ├── staff.html
+│   └── collections.html
 │
-├── images/ # All site images
-│ ├── staff/ # Staff portraits
-│ ├── collections/ # Collection artifact images
-│ └── validation/ # HTML/CSS validation screenshots
+├── images/              # All images with descriptive filenames
+│   ├── ancient-egypt-landscape.jpg
+│   ├── staff-portrait-john-doe.jpg
+│   └── ...
 │
-├── index.html # Museum home page
-├── README.md # Project overview, design rationale, AI reflection
-└── robots.txt # Robots.txt file for web crawlers
+├── index.html           # Main landing page
+├── robots.txt           # Search engine crawler directives
+└── README.md            # Documentation & rationale
 
----
 
 ## AI Tools & Sources Used
 - **ChatGPT (GPT-4o)** – Assisted with writing artifact descriptions, creating semantic HTML structure, and optimizing CSS for responsive design.
@@ -48,8 +54,8 @@ Screenshots of HTML and CSS validation are stored in `/images/validation/`:
 ---
 
 ## Deployment
-Published via **GitHub Pages**  
-[Live Site URL](https://nataly5pt.github.io/Museum/)
+This site is hosted on GitHub Pages:
+https://nataly5pt.github.io/Museum/
 
 ---
 
