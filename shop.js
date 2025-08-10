@@ -1,4 +1,4 @@
-// Modal + Add-to-Cart (Phase 1 stub)
+// Modal + Add-to-Cart (Phase 1)
 (function () {
   const modal = document.getElementById('item-modal');
   const imgEl = document.getElementById('modal-img');
@@ -10,16 +10,14 @@
   let activeItem = null;
   let lastFocus = null;
 
-  // Open modal with data from clicked item
-  function openModal(fromArticle) {
+  function openModal(article) {
     activeItem = {
-      id: fromArticle.dataset.id,
-      title: fromArticle.dataset.title,
-      price: Number(fromArticle.dataset.price),
-      img: fromArticle.dataset.img,
-      desc: fromArticle.dataset.desc
+      id: article.dataset.id,
+      title: article.dataset.title,
+      price: Number(article.dataset.price),
+      img: article.dataset.img,
+      desc: article.dataset.desc
     };
-
     imgEl.src = activeItem.img;
     imgEl.alt = activeItem.title;
     titleEl.textContent = activeItem.title;
@@ -28,11 +26,10 @@
     addBtn.textContent = `Add ${activeItem.title} to Cart`;
 
     lastFocus = document.activeElement;
-
     modal.removeAttribute('hidden');
     modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
     addBtn.focus();
-    document.body.style.overflow = 'hidden'; // prevent background scroll
   }
 
   function closeModal() {
@@ -42,43 +39,29 @@
     if (lastFocus) lastFocus.focus();
   }
 
-  // Wire image clicks to modal
+  // Open via image click
   document.querySelectorAll('.souvenir-item .modal-trigger').forEach(img => {
-    img.addEventListener('click', (e) => {
-      const article = e.target.closest('.souvenir-item');
-      openModal(article);
-    });
+    img.addEventListener('click', e => openModal(e.target.closest('.souvenir-item')));
   });
 
-  // Close actions
-  modal.addEventListener('click', (e) => {
-    if (e.target.hasAttribute('data-close')) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (!modal.hasAttribute('hidden') && e.key === 'Escape') closeModal();
-  });
+  // Close (backdrop or X)
+  modal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) closeModal(); });
+  document.addEventListener('keydown', e => { if (!modal.hasAttribute('hidden') && e.key === 'Escape') closeModal(); });
 
-  // Add to Cart (Phase 1 stub)
+  // Add-to-cart stub
   function addToCart(item) {
-    // Phase 1 requirement: prompt only (no storage yet)
     alert(`Added to cart: ${item.title} — $${item.price.toFixed(2)} (ID: ${item.id})`);
   }
 
-  // Buttons in cards
+  // Card buttons
   document.querySelectorAll('.souvenir-item .add-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const article = e.target.closest('.souvenir-item');
-      const item = {
-        id: article.dataset.id,
-        title: article.dataset.title,
-        price: Number(article.dataset.price)
-      };
-      addToCart(item);
+    btn.addEventListener('click', e => {
+      const a = e.target.closest('.souvenir-item');
+      addToCart({ id: a.dataset.id, title: a.dataset.title, price: Number(a.dataset.price) });
     });
   });
 
-  // Button inside modal
-  addBtn.addEventListener('click', () => {
-    if (activeItem) addToCart(activeItem);
-  });
+  // Modal button
+  addBtn.addEventListener('click', () => { if (activeItem) addToCart(activeItem); });
 })();
+
