@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Nataly Glushak" />
-  <title>Museum of Wonder – Souvenir Shop</title>
+  <title>Museum of Wonder — Souvenir Shop</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -26,103 +26,104 @@
   </header>
 
   <main id="main" class="container" role="main">
-    <h1>Souvenir Shop</h1>
+    <h1 class="shop-title">Souvenir Shop</h1>
+
+    <p class="ai-banner" role="note">
+      The content in this shop was entirely created by AI under human direction. It was then curated, reviewed and edited by a human before being published.
+    </p>
+
     <p class="disclosure">Click any product image to view it larger. Prices shown in USD.</p>
 
-    <section class="shop-container" aria-label="Products">
-      <!-- ITEM 1 -->
-      <article class="souvenir-item"
+    <section class="shop-grid" aria-label="Products">
+      <!-- Card 1 -->
+      <article class="shop-card"
                data-id="item001"
-               data-title="Scarab Pendant"
-               data-price="24.00"
-               data-img="../images/shop/scarab-pendant.jpg"
-               data-desc="Replica pendant inspired by our Faience Scarab Amulet (Material: faience; Location: Tell al-Nahr; Purpose: personal ornament).">
-        <figure class="souvenir-media">
-          <img src="../images/shop/scarab-pendant.jpg"
-               alt="Turquoise scarab pendant on cord"
-               class="modal-trigger"
-               title="Replica of the Faience Scarab from the Archeology collection"
-               loading="lazy" />
+               data-title="Celestial Inkstone"
+               data-price="14.95"
+               data-img="../images/shop/celestial-inkstone.jpg"
+               data-desc="From the Archeological Collection. Carved meteorite basin with circumferential channels; likely used for mixing pigments. Material: meteoritic iron; Location found: Kalla Valley; Purpose: astronomical/ritual pigment mixing.">
+        <figure class="shop-media">
+          <img src="../images/shop/celestial-inkstone.jpg"
+               alt="Carved meteorite bowl with circular channels"
+               title="“Pigments under starlight”—inspired by the Celestial Inkstone"
+               class="modal-trigger" loading="lazy" />
         </figure>
-        <div class="souvenir-body">
-          <h2 class="souvenir-title">Scarab Pendant</h2>
-          <p class="souvenir-desc">Inspired by our faience scarab amulet. Hypoallergenic cord included.</p>
-          <p class="souvenir-price" aria-label="Price">$24.00</p>
-          <button class="button add-btn"
-                  aria-label="Add Scarab Pendant to Cart"
-                  data-action="add">Add Scarab Pendant to Cart</button>
+        <div class="shop-body">
+          <h2 class="shop-name">Celestial Inkstone</h2>
+          <p class="shop-desc">Carved meteoritic bowl with pigment channels; studio replica.</p>
+          <p class="shop-price">$14.95</p>
+          <button class="button add-btn" aria-label="Add Celestial Inkstone to Cart">
+            Add Celestial Inkstone to Cart
+          </button>
         </div>
       </article>
 
-      <!-- ITEM 2 -->
-      <article class="souvenir-item"
+      <!-- Card 2 -->
+      <article class="shop-card"
                data-id="item002"
-               data-title="Ushabti Mini"
-               data-price="18.50"
-               data-img="../images/shop/ushabti-mini.jpg"
-               data-desc="Hand-painted figure inspired by the Ushabti Figurine (Material: faience; Location: North Necropolis; Purpose: funerary inclusion).">
-        <figure class="souvenir-media">
-          <img src="../images/shop/ushabti-mini.jpg"
-               alt="Small blue ushabti figure"
-               class="modal-trigger"
-               title="Mini figure in the style of Late Period ushabti"
-               loading="lazy" />
+               data-title="Spiral Claw Fossil"
+               data-price="22.25"
+               data-img="../images/shop/spiral-claw-fossil.jpg"
+               data-desc="From the Anthropological Collection. Dense composite stone (pseudofossil) with spiral morphology. Material: limestone & ash; Location found: Erosion-cleared headland; Purpose: ceremonial or calendrical marker.">
+        <figure class="shop-media">
+          <img src="../images/shop/spiral-claw-fossil.jpg"
+               alt="Fossil-like spiral claw in pale stone"
+               title="“Time spirals beneath the surf”—Spiral Claw Fossil"
+               class="modal-trigger" loading="lazy" />
         </figure>
-        <div class="souvenir-body">
-          <h2 class="souvenir-title">Ushabti Mini</h2>
-          <p class="souvenir-desc">Pocket-size companion inspired by a funerary ushabti.</p>
-          <p class="souvenir-price" aria-label="Price">$18.50</p>
-          <button class="button add-btn"
-                  aria-label="Add Ushabti Mini to Cart"
-                  data-action="add">Add Ushabti Mini to Cart</button>
+        <div class="shop-body">
+          <h2 class="shop-name">Spiral Claw Fossil</h2>
+          <p class="shop-desc">Stone spiral replica; cast from original impression.</p>
+          <p class="shop-price">$22.25</p>
+          <button class="button add-btn" aria-label="Add Spiral Claw Fossil to Cart">
+            Add Spiral Claw Fossil to Cart
+          </button>
         </div>
       </article>
 
-      <!-- ITEM 3 -->
-      <article class="souvenir-item"
+      <!-- Card 3 -->
+      <article class="shop-card"
                data-id="item003"
-               data-title="Kohl Perfume Oil"
-               data-price="14.99"
-               data-img="../images/shop/kohl-perfume-oil.jpg"
-               data-desc="Roll-on fragrance nodding to the Bronze Kohl Container (Material: bronze; Location: Harbor Quarter; Purpose: cosmetic).">
-        <figure class="souvenir-media">
-          <img src="../images/shop/kohl-perfume-oil.jpg"
-               alt="Small bronze-tone bottle of perfume oil"
-               class="modal-trigger"
-               title="Scent of the Coral Queen — wink to Harbor rites"
-               loading="lazy" />
+               data-title="Basaltic Glyphstone of the Pelagic Abyss"
+               data-price="14.95"
+               data-img="../images/shop/basaltic-glyphstone.jpg"
+               data-desc="From the Lovecraftian feature collection. Basalt with incised glyphs; hypothesized shrine marker. Material: basalt; Location found: submarine ledge; Purpose: votive/inscription slab.">
+        <figure class="shop-media">
+          <img src="../images/shop/basaltic-glyphstone.jpg"
+               alt="Dark basalt slab with faintly incised glyphs"
+               title="“Words older than tide”—Basaltic Glyphstone"
+               class="modal-trigger" loading="lazy" />
         </figure>
-        <div class="souvenir-body">
-          <h2 class="souvenir-title">Kohl Perfume Oil</h2>
-          <p class="souvenir-desc">Warm resin notes; alcohol-free roll-on.</p>
-          <p class="souvenir-price" aria-label="Price">$14.99</p>
-          <button class="button add-btn"
-                  aria-label="Add Kohl Perfume Oil to Cart"
-                  data-action="add">Add Kohl Perfume Oil to Cart</button>
+        <div class="shop-body">
+          <h2 class="shop-name">Basaltic Glyphstone of the Pelagic Abyss</h2>
+          <p class="shop-desc">Basalt tablet replica with shallow engravings.</p>
+          <p class="shop-price">$14.95</p>
+          <button class="button add-btn" aria-label="Add Basaltic Glyphstone to Cart">
+            Add Basaltic Glyphstone to Cart
+          </button>
         </div>
       </article>
 
-      <!-- ITEM 4 -->
-      <article class="souvenir-item"
+      <!-- Card 4 -->
+      <article class="shop-card"
                data-id="item004"
-               data-title="Pyramids Poster"
-               data-price="12.00"
-               data-img="../images/shop/pyramids-poster.jpg"
-               data-desc="High-quality print from our Pyramids highlight (Material: paper; Location: Giza; Purpose: wall art).">
-        <figure class="souvenir-media">
-          <img src="../images/shop/pyramids-poster.jpg"
-               alt="Poster print featuring the Pyramids at Giza"
-               class="modal-trigger"
-               title="From our Pyramids feature — perfect wall art"
-               loading="lazy" />
+               data-title="Marker Arch Fragment"
+               data-price="22.95"
+               data-img="../images/shop/marker-arch-fragment.jpg"
+               data-desc="From the Archeological Collection. Carved sandstone arch segment with chevrons. Material: sandstone; Location found: Desert pass; Purpose: ceremonial or calendrical archway.">
+        <figure class="shop-media">
+          <img src="../images/shop/marker-arch-fragment.jpg"
+               alt="Broken stone arch standing at sunset"
+               title="“The road remembers”—Marker Arch Fragment"
+               class="modal-trigger" loading="lazy" />
         </figure>
-        <div class="souvenir-body">
-          <h2 class="souvenir-title">Pyramids Poster</h2>
-          <p class="souvenir-desc">Matte 12×18 inch archival print.</p>
-          <p class="souvenir-price" aria-label="Price">$12.00</p>
-          <button class="button add-btn"
-                  aria-label="Add Pyramids Poster to Cart"
-                  data-action="add">Add Pyramids Poster to Cart</button>
+        <div class="shop-body">
+          <h2 class="shop-name">Marker Arch Fragment</h2>
+          <p class="shop-desc">Cast fragment of a freestanding ritual arch; matte finish.</p>
+          <p class="shop-price">$22.95</p>
+          <button class="button add-btn" aria-label="Add Marker Arch Fragment to Cart">
+            Add Marker Arch Fragment to Cart
+          </button>
         </div>
       </article>
     </section>
@@ -147,7 +148,77 @@
     <p>© <span id="year"></span> Museum of Wonder</p>
   </footer>
 
-  <script src="../js/shop.js"></script>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Modal + Add-to-Cart stub
+    (function () {
+      const modal = document.getElementById('item-modal');
+      const imgEl = document.getElementById('modal-img');
+      const titleEl = document.getElementById('modal-title');
+      const descEl = document.getElementById('modal-desc');
+      const priceEl = document.getElementById('modal-price');
+      const addBtn = document.getElementById('modal-add');
+
+      let activeItem = null;
+      let lastFocus = null;
+
+      function openModal(article) {
+        activeItem = {
+          id: article.dataset.id,
+          title: article.dataset.title,
+          price: Number(article.dataset.price),
+          img: article.dataset.img,
+          desc: article.dataset.desc
+        };
+        imgEl.src = activeItem.img;
+        imgEl.alt = activeItem.title;
+        titleEl.textContent = activeItem.title;
+        descEl.textContent = activeItem.desc;
+        priceEl.textContent = `$${activeItem.price.toFixed(2)}`;
+        addBtn.textContent = `Add ${activeItem.title} to Cart`;
+
+        lastFocus = document.activeElement;
+        modal.removeAttribute('hidden');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        addBtn.focus();
+      }
+
+      function closeModal() {
+        modal.setAttribute('hidden', '');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocus) lastFocus.focus();
+      }
+
+      // Open via image click
+      document.querySelectorAll('.shop-card .modal-trigger').forEach(img => {
+        img.addEventListener('click', e => openModal(e.target.closest('.shop-card')));
+      });
+
+      // Close (backdrop or X)
+      modal.addEventListener('click', e => { if (e.target.hasAttribute('data-close')) closeModal(); });
+      document.addEventListener('keydown', e => { if (!modal.hasAttribute('hidden') && e.key === 'Escape') closeModal(); });
+
+      // Add-to-cart stub
+      function addToCart(item) {
+        alert(`Added to cart: ${item.title} — $${item.price.toFixed(2)} (ID: ${item.id})`);
+      }
+
+      // Card buttons
+      document.querySelectorAll('.shop-card .add-btn').forEach(btn => {
+        btn.addEventListener('click', e => {
+          const a = e.target.closest('.shop-card');
+          addToCart({ id: a.dataset.id, title: a.dataset.title, price: Number(a.dataset.price) });
+        });
+      });
+
+      // Modal button
+      addBtn.addEventListener('click', () => { if (activeItem) addToCart(activeItem); });
+    })();
+  </script>
 </body>
 </html>
+
