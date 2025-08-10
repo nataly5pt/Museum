@@ -155,4 +155,91 @@ body {
     grid-template-columns: 1fr;
   }
 }
+/* ========= Shop ========= */
+.shop-title { margin-bottom: .5rem; }
+.ai-banner {
+  background: #e9eef6;
+  border: 1px solid #cfd8ea;
+  color: #20324d;
+  padding: .6rem .8rem;
+  border-radius: .5rem;
+  margin: .5rem 0 1rem;
+  font-size: .95rem;
+}
+
+.shop-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.shop-card {
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  border-radius: .75rem;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.shop-media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.shop-body { padding: 1rem 1rem 1.1rem; }
+.shop-name { font-size: 1.15rem; margin: .25rem 0 .35rem; }
+.shop-desc { color: #333; font-size: .95rem; margin: 0 0 .5rem; line-height: 1.4; }
+.shop-price { font-weight: 700; margin: .25rem 0 .65rem; }
+
+.shop-card .button,
+.shop-card .add-btn {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  padding: .6rem .8rem;
+  border-radius: .5rem;
+}
+
+/* ========= Modal (reusable) ========= */
+.modal[aria-hidden="false"] { display: block; }
+.modal[hidden] { display: none; }
+.modal { position: fixed; inset: 0; z-index: 999; }
+
+.modal-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.55);
+}
+
+.modal-dialog {
+  position: relative;
+  max-width: 880px;
+  margin: 6vh auto;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.1rem 1.1rem 1.25rem;
+  box-shadow: 0 30px 80px rgba(0,0,0,.3);
+}
+
+.modal-close {
+  position: absolute; top: .4rem; right: .6rem;
+  border: 0; background: transparent;
+  font-size: 1.8rem; line-height: 1; cursor: pointer;
+}
+
+.modal-media img {
+  width: 100%; height: auto; border-radius: .5rem;
+  aspect-ratio: 16 / 9; object-fit: cover;
+  margin-bottom: .6rem;
+}
+
+.modal-title { font-weight: 700; font-size: 1.25rem; margin: .4rem 0; }
+.modal-desc { margin: .25rem 0 .35rem; color: #333; }
+.modal-price { font-weight: 700; margin: 0 0 .75rem; }
 
