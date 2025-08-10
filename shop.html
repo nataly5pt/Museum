@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="author" content="Nataly Glushak" />
+  <title>Museum of Wonder – Souvenir Shop</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="brand">
+      <span aria-hidden="true">🏛️</span>
+      <a class="site-title" href="../index.html">Museum of Wonder</a>
+    </div>
+    <nav class="main-nav" aria-label="Primary">
+      <ul class="nav-list">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="./staff.html">Staff</a></li>
+        <li><a href="./collections.html">Collections</a></li>
+        <li><a href="./shop.html" aria-current="page">Shop</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <h1>Souvenir Shop</h1>
+    <p class="disclosure">Bring a piece of the Museum home. Click any item image to view it larger. All prices USD.</p>
+
+    <section class="shop-container" aria-label="Products">
+      <!-- ITEM 1 -->
+      <article class="souvenir-item"
+               data-id="item001"
+               data-title="Scarab Pendant"
+               data-price="24.00"
+               data-img="../images/shop/scarab-pendant.jpg"
+               data-desc="Replica pendant inspired by our Faience Scarab Amulet (Material: faience; Location: Tell al-Nahr; Purpose: personal ornament).">
+        <figure class="souvenir-media">
+          <img src="../images/shop/scarab-pendant.jpg"
+               alt="Turquoise scarab pendant on cord"
+               class="modal-trigger"
+               title="Replica of the Faience Scarab from the Archeology collection"
+               loading="lazy" />
+        </figure>
+        <div class="souvenir-body">
+          <h2 class="souvenir-title">Scarab Pendant</h2>
+          <p class="souvenir-desc">Inspired by our faience scarab amulet. Hypoallergenic cord included.</p>
+          <p class="souvenir-price" aria-label="Price">$24.00</p>
+          <button class="button add-btn"
+                  aria-label="Add Scarab Pendant to Cart"
+                  data-action="add">Add Scarab Pendant to Cart</button>
+        </div>
+      </article>
+
+      <!-- ITEM 2 -->
+      <article class="souvenir-item"
+               data-id="item002"
+               data-title="Ushabti Mini"
+               data-price="18.50"
+               data-img="../images/shop/ushabti-mini.jpg"
+               data-desc="Hand-painted figure inspired by the Ushabti Figurine (Material: faience; Location: North Necropolis; Purpose: funerary inclusion).">
+        <figure class="souvenir-media">
+          <img src="../images/shop/ushabti-mini.jpg"
+               alt="Small blue ushabti figure"
+               class="modal-trigger"
+               title="Mini figure in the style of Late Period ushabti"
+               loading="lazy" />
+        </figure>
+        <div class="souvenir-body">
+          <h2 class="souvenir-title">Ushabti Mini</h2>
+          <p class="souvenir-desc">Pocket-size companion inspired by a funerary ushabti.</p>
+          <p class="souvenir-price" aria-label="Price">$18.50</p>
+          <button class="button add-btn"
+                  aria-label="Add Ushabti Mini to Cart"
+                  data-action="add">Add Ushabti Mini to Cart</button>
+        </div>
+      </article>
+
+      <!-- ITEM 3 -->
+      <article class="souvenir-item"
+               data-id="item003"
+               data-title="Kohl Perfume Oil"
+               data-price="14.99"
+               data-img="../images/shop/kohl-perfume-oil.jpg"
+               data-desc="Roll-on fragrance nodding to the Bronze Kohl Container (Material: bronze; Location: Harbor Quarter; Purpose: cosmetic).">
+        <figure class="souvenir-media">
+          <img src="../images/shop/kohl-perfume-oil.jpg"
+               alt="Small bronze-tone bottle of perfume oil"
+               class="modal-trigger"
+               title="Scent of the Coral Queen — a wink to Deep Harbor rituals"
+               loading="lazy" />
+        </figure>
+        <div class="souvenir-body">
+          <h2 class="souvenir-title">Kohl Perfume Oil</h2>
+          <p class="souvenir-desc">Warm resin notes; alcohol-free roll-on.</p>
+          <p class="souvenir-price" aria-label="Price">$14.99</p>
+          <button class="button add-btn"
+                  aria-label="Add Kohl Perfume Oil to Cart"
+                  data-action="add">Add Kohl Perfume Oil to Cart</button>
+        </div>
+      </article>
+
+      <!-- ITEM 4 -->
+      <article class="souvenir-item"
+               data-id="item004"
+               data-title="Pyramids Poster"
+               data-price="12.00"
+               data-img="../images/shop/pyramids-poster.jpg"
+               data-desc="High-quality print from our Pyramids highlight (Material: paper; Location: Giza; Purpose: wall art).">
+        <figure class="souvenir-media">
+          <img src="../images/shop/pyramids-poster.jpg"
+               alt="Poster print featuring the Pyramids at Giza"
+               class="modal-trigger"
+               title="From our Pyramids feature — perfect for dorms & studios"
+               loading="lazy" />
+        </figure>
+        <div class="souvenir-body">
+          <h2 class="souvenir-title">Pyramids Poster</h2>
+          <p class="souvenir-desc">Matte 12×18 inch archival print.</p>
+          <p class="souvenir-price" aria-label="Price">$12.00</p>
+          <button class="button add-btn"
+                  aria-label="Add Pyramids Poster to Cart"
+                  data-action="add">Add Pyramids Poster to Cart</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Modal (one dynamic modal for all items) -->
+  <div id="item-modal" class="modal" aria-hidden="true" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" aria-label="Close dialog" data-close>&times;</button>
+      <figure class="modal-media">
+        <img id="modal-img" alt="" />
+        <figcaption id="modal-title" class="modal-title"></figcaption>
+      </figure>
+      <p id="modal-desc" class="modal-desc"></p>
+      <p id="modal-price" class="modal-price"></p>
+      <button id="modal-add" class="button">Add to Cart</button>
+    </div>
+  </div>
+
+  <footer class="site-footer" role="contentinfo">
+    <p>© <span id="year"></span> Museum of Wonder</p>
+  </footer>
+
+  <script src="../js/shop.js"></script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
