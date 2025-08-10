@@ -4,91 +4,107 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="author" content="Nataly Glushak" />
-  <title>Museum of Wonder – Staff</title>
+  <title>Museum of Wonder — Staff</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header -->
   <header class="site-header" role="banner">
     <div class="brand">
-      <span class="logo" aria-hidden="true">🏛️</span>
+      <span aria-hidden="true">🏛️</span>
       <a class="site-title" href="../index.html">Museum of Wonder</a>
     </div>
-
-    <!-- Primary nav -->
     <nav class="main-nav" aria-label="Primary">
       <ul class="nav-list">
         <li><a href="../index.html">Home</a></li>
         <li><a href="./staff.html" aria-current="page">Staff</a></li>
         <li><a href="./collections.html">Collections</a></li>
+        <li><a href="./shop.html">Shop</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Main -->
   <main id="main" class="container" role="main">
-    <section aria-labelledby="staff-title">
-      <h1 id="staff-title">Staff</h1>
-      <p class="disclosure">Meet the team that stewards our collections and visitor experience.</p>
+    <h1>Our Staff</h1>
+    <p class="lead">Meet the team behind the exhibits, fieldwork, and preservation efforts.</p>
 
-      <section class="card-grid" aria-label="Staff directory">
-        <!-- Person 1 -->
-        <article class="card staff-card">
-          <figure class="card-media">
-            <!-- Use a real portrait if you have one; placeholder below -->
-            <img src="../images/ancient-egypt-portalgate.jpg"
-                 alt="Portrait placeholder: sandstone gateway under a blue sky" loading="lazy" />
-          </figure>
-          <div class="card-body">
-            <h3>Dr. Aria Bennett</h3>
-            <p><strong>Chief Curator, Ancient Civilizations</strong></p>
-            <p>PhD, Near Eastern Archaeology. Oversees acquisitions, conservation strategy, and gallery narratives.</p>
-            <p>Email: <a href="mailto:aria.bennett@example.edu">aria.bennett@example.edu</a></p>
-          </div>
-        </article>
+    <section class="card-grid" aria-label="Staff Profiles">
+      <!-- Staff 1 -->
+      <article class="card staff">
+        <figure class="card-media">
+          <img src="../images/egyptian-queen-portrait.jpg"
+               alt="Portrait representing Chief Curator" loading="lazy">
+        </figure>
+        <div class="card-body">
+          <h2 class="staff-name">Dr. Amina Selim</h2>
+          <p class="staff-role">Chief Curator</p>
+          <p>Leads exhibition strategy and research partnerships. Focus: North African material culture.</p>
+          <ul class="staff-meta">
+            <li>Email: <a href="mailto:amina.selim@example.edu">amina.selim@example.edu</a></li>
+            <li>Office: East Wing 201</li>
+          </ul>
+        </div>
+      </article>
 
-        <!-- Person 2 -->
-        <article class="card staff-card">
-          <figure class="card-media">
-            <img src="../images/egyptian-queen-portrait.jpg"
-                 alt="Portrait placeholder: stylized Egyptian queen illustration" loading="lazy" />
-          </figure>
-          <div class="card-body">
-            <h3>Samir Okoye</h3>
-            <p><strong>Collections Manager</strong></p>
-            <p>Leads cataloging, rehousing, and environmental monitoring for storage and exhibit rotation.</p>
-            <p>Email: <a href="mailto:samir.okoye@example.edu">samir.okoye@example.edu</a></p>
-          </div>
-        </article>
+      <!-- Staff 2 -->
+      <article class="card staff">
+        <figure class="card-media">
+          <img src="../images/ancient-egypt-portalgate.jpg"
+               alt="Photo representing Field Director amid ruins" loading="lazy">
+        </figure>
+        <div class="card-body">
+          <h2 class="staff-name">Luis Ortega</h2>
+          <p class="staff-role">Field Director</p>
+          <p>Coordinates excavations and archival digs; oversees site documentation and conservation-in-field.</p>
+          <ul class="staff-meta">
+            <li>Email: <a href="mailto:luis.ortega@example.edu">luis.ortega@example.edu</a></li>
+            <li>Office: Research Annex</li>
+          </ul>
+        </div>
+      </article>
 
-        <!-- Person 3 -->
-        <article class="card staff-card">
-          <figure class="card-media">
-            <img src="../images/ancient-egypt-landscape.jpg"
-                 alt="Portrait placeholder: desert landscape scene" loading="lazy" />
-          </figure>
-          <div class="card-body">
-            <h3>Mina Alvarez</h3>
-            <p><strong>Education & Outreach Coordinator</strong></p>
-            <p>Designs public programs and school partnerships focused on material culture and ethics.</p>
-            <p>Email: <a href="mailto:mina.alvarez@example.edu">mina.alvarez@example.edu</a></p>
-          </div>
-        </article>
-      </section>
+      <!-- Staff 3 -->
+      <article class="card staff">
+        <figure class="card-media">
+          <img src="../images/ushabti-figurine.png"
+               alt="Studio still representing Collections Conservator" loading="lazy">
+        </figure>
+        <div class="card-body">
+          <h2 class="staff-name">Mei Lin</h2>
+          <p class="staff-role">Collections Conservator</p>
+          <p>Stabilizes fragile objects and designs preventive conservation protocols.</p>
+          <ul class="staff-meta">
+            <li>Email: <a href="mailto:mei.lin@example.edu">mei.lin@example.edu</a></li>
+            <li>Lab: Conservation Studio</li>
+          </ul>
+        </div>
+      </article>
+
+      <!-- Staff 4 -->
+      <article class="card staff">
+        <figure class="card-media">
+          <img src="../images/ancient-egypt-landscape.jpg"
+               alt="Scenic image standing in for Education Manager" loading="lazy">
+        </figure>
+        <div class="card-body">
+          <h2 class="staff-name">Riley Thompson</h2>
+          <p class="staff-role">Education Manager</p>
+          <p>Designs tours and learning kits that connect visitors with archeology & anthropology.</p>
+          <ul class="staff-meta">
+            <li>Email: <a href="mailto:riley.thompson@example.edu">riley.thompson@example.edu</a></li>
+            <li>Office: West Wing 104</li>
+          </ul>
+        </div>
+      </article>
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="site-footer" role="contentinfo">
     <p>© <span id="year"></span> Museum of Wonder</p>
   </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
+
 
