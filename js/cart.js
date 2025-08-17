@@ -1,166 +1,280 @@
-/* =========================
-   Cart – single render() pass
-   ========================= */
-const CART_KEY = 'museumCartV1';
+/* ==========================================================================
+   Museum of Wonder – Shared Cart Engine (card.js)
+   One lightweight, vanilla JS module for Shop + Cart pages.
+   Exposes API on window.MuseumCart (no bundlers needed).
+   ========================================================================== */
 
-let cart = [];                  // [{id,name,unitPrice,qty,image}]
-let member = false;             // member checkbox state
-let discountPref = null;        // 'member' or 'volume' if both could apply
+(() => {
+  'use strict';
 
-// ---------- Constants (UPPER_SNAKE_CASE)
-const TAX_RATE = 0.102;               // 10.2%
-const MEMBER_DISCOUNT_RATE = 0.15;
-const SHIPPING_RATE = 25.00;
-// Volume tiers: upper bound (inclusive), rate
-const VOLUME_DISCOUNT_TIERS = [
-  { max: 49.99, rate: 0.00 },
-  { max: 99.99, rate: 0.05 },
-  { max: 199.99, rate: 0.10 },
-  { max: Infinity, rate: 0.15 }
-];
+  /* --------------------------- Constants -------------------------------- */
+  const CART_KEY = 'museumCartV1';
 
-// Load persisted state
-try {
-  const raw = localStorage.getItem(CART_KEY);
-  if (raw) {
-    const saved = JSON.parse(raw);
-    cart = saved.cart || [];
-    member = !!saved.member;
-    discountPref = saved.discountPref ?? null;
-  }
-} catch(e){ /* ignore parse issues */ }
+  // Business rules
+  const TAX_RATE = 0.102;                  // 10.2%
+  const MEMBER_DISCOUNT_RATE = 0.15;       // 15%
+  const SHIPPING_RATE = 25.00;             // Flat fee
 
-// Money format (parentheses for negatives)
-function fmt(x){
-  const sign = x < 0 ? -1 : 1;
-  const v = Math.abs(x);
-  const s = `$${v.toFixed(2)}`;
-  return sign < 0 ? `(${s})` : s;
-}
+  // Volume tiers (min/max inclusive of min, exclusive of max)
+  const VOLUME_DISCOUNT_TIERS = [
+    { min: 0,     max: 49.99,  rate: 0.00 },
+    { min: 50,    max: 99.99,  rate: 0.05 },
+    { min: 100,   max: 199.99, rate: 0.10 },
+    { min: 200,   max: Infinity, rate: 0.15 }
+  ];
 
-// Save
-function persist(){
-  localStorage.setItem(CART_KEY, JSON.stringify({ cart, member, discountPref }));
-}
+  // Number formatter (money)
+  const fmt = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 
-// Single box: compute & paint UI
-function render(){
-  const root = document.getElementById('cart-root');
-  if(!root) return;
+  /* ------------------------ Utility helpers ----------------------------- */
 
-  // 1) Items subtotal (unrounded sum, round for display only)
-  let itemTotal = 0;
-  cart.forEach(it => { itemTotal += (it.unitPrice * it.qty); });
-
-  // 2) Determine volume discount rate by tiers
-  let volumeRate = 0;
-  for (const t of VOLUME_DISCOUNT_TIERS){
-    if (itemTotal <= t.max){ volumeRate = t.rate; break; }
+  function clampToMoney(n) {
+    // avoid -0.00, NaN etc.
+    const x = Number.isFinite(n) ? n : 0;
+    const r = Math.round(x * 100) / 100;
+    return r === 0 ? 0 : r;
   }
 
-  // 3) Member vs Volume (mutually exclusive)
-  let volumeDiscount = 0;
-  let memberDiscount = 0;
+  function formatMoney(n) {
+    return fmt.format(clampToMoney(n));
+  }
 
-  const volumeAvail = volumeRate > 0;
-  const memberAvail = member;
+  function formatPct(n) {
+    return `${(n * 100).toFixed(1)}%`;
+  }
 
-  if (memberAvail && volumeAvail){
-    // Require an explicit choice (remember preference)
-    if (!discountPref){
-      const ok = window.confirm(
-        `Both discounts could apply.\n\nOK = Use MEMBER 15%\nCancel = Use VOLUME ${(volumeRate*100).toFixed(0)}%`
-      );
-      discountPref = ok ? 'member' : 'volume';
-      persist();
+  function read() {
+    try {
+      const raw = localStorage.getItem(CART_KEY);
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
     }
   }
 
-  if (memberAvail && (!volumeAvail || discountPref === 'member')){
-    memberDiscount = itemTotal * MEMBER_DISCOUNT_RATE;
-  } else if (volumeAvail){
-    memberDiscount = 0;
-    volumeDiscount = itemTotal * volumeRate;
+  function write(cart) {
+    // drop invalid or free items
+    const clean = (cart || []).filter(it =>
+      it && it.id && Number(it.unitPrice) > 0 && Number(it.qty) > 0
+    );
+    localStorage.setItem(CART_KEY, JSON.stringify(clean));
+    return clean;
   }
 
-  // 4) Shipping (flat after discounts)
-  const discountTotal = volumeDiscount + memberDiscount;
-  const taxableBase = Math.max(0, itemTotal - discountTotal) + (cart.length ? SHIPPING_RATE : 0);
-
-  // 5) Tax + Invoice
-  const taxAmount = taxableBase * TAX_RATE;
-  const invoiceTotal = taxableBase + taxAmount;
-
-  // ---- Build HTML
-  const empty = cart.length === 0;
-  let itemsHtml = '';
-
-  if (empty){
-    itemsHtml = `
-      <p class="meta">Your cart is empty.</p>
-    `;
-  } else {
-    itemsHtml = `
-      <div class="cart-items">
-        ${cart.map((it, idx) => `
-          <div class="cart-item" data-index="${idx}">
-            <img src="${it.image}" alt="">
-            <div>
-              <div class="name">${it.name}</div>
-              <div class="meta">Qty ${it.qty} × ${fmt(it.unitPrice)}</div>
-            </div>
-            <button class="remove-btn" data-remove="${idx}">Remove</button>
-          </div>
-        `).join('')}
-      </div>
-    `;
+  function clear() {
+    localStorage.removeItem(CART_KEY);
+    // fire storage manually for same-tab listeners
+    try {
+      window.dispatchEvent(new StorageEvent('storage', { key: CART_KEY }));
+    } catch {}
   }
 
-  const summaryHtml = `
-    <div class="cart-summary">
-      <div class="summary-row"><div class="label">Subtotal of ItemTotals</div><div class="amt">${fmt(itemTotal)}</div></div>
-      <div class="summary-row"><div class="label">Volume Discount</div><div class="amt">${fmt(-volumeDiscount)}</div></div>
-      <div class="summary-row"><div class="label">Member Discount</div><div class="amt">${fmt(-memberDiscount)}</div></div>
-      <div class="summary-row"><div class="label">Shipping</div><div class="amt">${cart.length ? fmt(SHIPPING_RATE) : fmt(0)}</div></div>
-      <div class="summary-row"><div class="label">Subtotal (Taxable amount)</div><div class="amt">${fmt(taxableBase)}</div></div>
-      <div class="summary-row"><div class="label">Tax Rate %</div><div class="amt">${(TAX_RATE*100).toFixed(1)}%</div></div>
-      <div class="summary-row"><div class="label">Tax Amount $</div><div class="amt">${fmt(taxAmount)}</div></div>
-      <div class="summary-row"><div class="label"><strong>Invoice Total</strong></div><div class="amt"><strong>${fmt(invoiceTotal)}</strong></div></div>
-    </div>
-  `;
+  function find(cart, id) {
+    return (cart || []).find(it => it.id === id);
+  }
 
-  const controlsHtml = `
-    <div class="member-toggle">
-      <label><input id="memberBox" type="checkbox" ${member ? 'checked':''}> Member (15% off)</label>
-    </div>
-    <div class="cart-controls">
-      <button class="cart-btn" id="keepShoppingBtn">Keep Shopping</button>
-      <button class="cart-btn" id="clearBtn">Clear Cart</button>
-    </div>
-  `;
+  function setQty(id, qty) {
+    const cart = read();
+    const it = find(cart, id);
+    if (!it) return write(cart);
+    const q = Number(qty);
+    if (!Number.isFinite(q) || q <= 0) {
+      const next = cart.filter(x => x.id !== id);
+      return write(next);
+    }
+    it.qty = q;
+    return write(cart);
+  }
 
-  root.innerHTML = itemsHtml + summaryHtml + controlsHtml;
+  function remove(id) {
+    const cart = read().filter(it => it.id !== id);
+    return write(cart);
+  }
 
-  // --- Events (re-render after each)
-  const keep = document.getElementById('keepShoppingBtn');
-  if (keep) keep.onclick = () => { location.href = '/Museum/html/shop.html'; };
+  function add(item) {
+    // item: {id, name, unitPrice, image?, qty?}
+    if (!item || !item.id) return read();
 
-  const clear = document.getElementById('clearBtn');
-  if (clear) clear.onclick = () => { cart = []; persist(); render(); };
+    const price = Number(item.unitPrice);
+    if (!Number.isFinite(price) || price <= 0) return read();
 
-  const mb = document.getElementById('memberBox');
-  if (mb) mb.onchange = () => { member = mb.checked; discountPref = null; persist(); render(); };
+    const cart = read();
+    const existing = find(cart, item.id);
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + Number(item.qty || 1);
+    } else {
+      cart.push({
+        id: String(item.id),
+        name: String(item.name || 'Item'),
+        unitPrice: price,
+        qty: Number(item.qty || 1),
+        image: item.image || ''
+      });
+    }
+    return write(cart);
+  }
 
-  root.querySelectorAll('[data-remove]').forEach(btn => {
-    btn.onclick = (e) => {
-      const idx = +e.currentTarget.getAttribute('data-remove');
-      cart.splice(idx,1);
-      persist(); render();
+  function count(cart = read()) {
+    return cart.reduce((sum, it) => sum + Number(it.qty || 0), 0);
+  }
+
+  function itemTotal(cart = read()) {
+    return cart.reduce((sum, it) => {
+      const p = Number(it.unitPrice || 0);
+      const q = Number(it.qty || 0);
+      return sum + (p * q);
+    }, 0);
+  }
+
+  function volumeRateFor(total) {
+    for (const tier of VOLUME_DISCOUNT_TIERS) {
+      if (total >= tier.min && total < tier.max) return tier.rate;
+    }
+    return 0;
+  }
+
+  function calcVolumeDiscount(total) {
+    return total * volumeRateFor(total);
+  }
+
+  /**
+   * Compute summary numbers with discount choice.
+   * @param {Object} options
+   * @param {Array}  options.cart
+   * @param {boolean} options.isMember - true if member checkbox checked
+   * @param {'auto'|'member'|'volume'|'none'} options.discountMode
+   * @returns {Object} summary
+   */
+  function summarize({ cart = read(), isMember = false, discountMode = 'auto' } = {}) {
+    // 1) ItemTotal
+    const itemsTotal = itemTotal(cart);
+
+    // 2) Decide discounts
+    const volRate = volumeRateFor(itemsTotal);
+    const volDisc = itemsTotal * volRate;
+    const memDisc = isMember ? itemsTotal * MEMBER_DISCOUNT_RATE : 0;
+
+    let applyMember = false;
+    let applyVolume = false;
+    let needChoice = false;
+    let suggested = ''; // which gives bigger discount
+
+    if (discountMode === 'member') {
+      applyMember = !!isMember;
+    } else if (discountMode === 'volume') {
+      applyVolume = volRate > 0;
+    } else if (discountMode === 'none') {
+      // nothing
+    } else {
+      // auto
+      if (isMember && volRate > 0) {
+        needChoice = true;
+        suggested = (memDisc > volDisc) ? 'member' : 'volume';
+        // For auto mode we do NOT apply either so UI can prompt.
+      } else if (isMember) {
+        applyMember = true;
+      } else if (volRate > 0) {
+        applyVolume = true;
+      }
+    }
+
+    const memberDiscount  = applyMember ? memDisc : 0;
+    const volumeDiscount  = applyVolume ? volDisc : 0;
+    const discounts       = memberDiscount + volumeDiscount;
+
+    // 4) Shipping after discounts (flat if cart non-empty)
+    const shipping = cart.length > 0 ? SHIPPING_RATE : 0;
+
+    // 5) Subtotal (taxable)
+    const taxable = clampToMoney(itemsTotal - discounts + shipping);
+
+    // 6–8) Tax and total
+    const taxAmount = clampToMoney(taxable * TAX_RATE);
+    const invoiceTotal = clampToMoney(taxable + taxAmount);
+
+    return {
+      // inputs
+      cart,
+      isMember,
+      discountMode,
+      // key rows
+      itemsTotal: clampToMoney(itemsTotal),
+      volumeRate: volRate,
+      volumeDiscount: clampToMoney(volumeDiscount),
+      memberDiscount: clampToMoney(memberDiscount),
+      shipping: clampToMoney(shipping),
+      taxable,                          // subtotal (taxable amount)
+      taxRate: TAX_RATE,
+      taxAmount,
+      invoiceTotal,
+      // UX hints
+      needChoice,                       // true if both discounts possible
+      suggested                        // 'member' | 'volume' when needChoice
     };
-  });
-}
+  }
 
-// kick off
-document.addEventListener('DOMContentLoaded', render);
+  /* ------------------------ Header Count Helper -------------------------- */
+
+  function updateHeaderCount(selector = '#cartCount') {
+    const el = typeof selector === 'string' ? document.querySelector(selector) : selector;
+    if (!el) return;
+    el.textContent = String(count());
+  }
+
+  // Keep header count in sync across tabs
+  window.addEventListener('storage', (evt) => {
+    if (evt.key === CART_KEY) updateHeaderCount();
+  });
+
+  /* --------------------------- Public API -------------------------------- */
+
+  const API = {
+    // constants
+    CART_KEY,
+    TAX_RATE,
+    MEMBER_DISCOUNT_RATE,
+    SHIPPING_RATE,
+    VOLUME_DISCOUNT_TIERS,
+
+    // storage
+    read,
+    write,
+    clear,
+
+    // items
+    add,
+    remove,
+    setQty,
+    find: (id) => find(read(), id),
+    count,
+    itemTotal,
+
+    // discounts & summary
+    volumeRateFor,
+    calcVolumeDiscount,
+    summarize,
+
+    // formatting
+    formatMoney,
+    formatPct,
+
+    // small UI helper
+    updateHeaderCount
+  };
+
+  // Expose for global usage (no modules)
+  window.MuseumCart = API;
+
+  /* ---- Compatibility aliases (keeps earlier snippets working) ----------- */
+  window.CartAPI = API;                               // alias
+  window.addItemToCart = (item) => API.add(item);     // alias if someone calls addItemToCart()
+})();
+
 
 
