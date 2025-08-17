@@ -1,267 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Nataly Glushak" />
-  <title>Museum of Wonder — Collections</title>
-  <link rel="stylesheet" href="../css/style.css" />
+  <meta charset="utf-8">
+  <title>Museum — Collections</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="[Your Name]">
+  <link rel="stylesheet" href="../css/collections.css">
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header">
+  <h1>Collections</h1>
+  <p class="ai-note">The content in this gallery was entirely created by AI under human direction. It was then curated, reviewed and edited by a human before being published.</p>
 
-  <header class="site-header" role="banner">
-    <div class="brand">
-      <span aria-hidden="true">🏛️</span>
-      <a class="site-title" href="../index.html">Museum of Wonder</a>
+  <nav class="subnav" aria-label="Sub navigation">
+    <button class="tab-btn" data-tab="arch">Archaeology</button>
+    <button class="tab-btn" data-tab="anth">Anthropology</button>
+    <button class="tab-btn" data-tab="hist">Histories</button>
+  </nav>
+</header>
+
+<main>
+  <p class="hint">Tip: Click any image to open its Interpretation modal.</p>
+
+  <!-- Archaeology grid -->
+  <section id="arch" class="grid-section" aria-labelledby="arch-h">
+    <h2 id="arch-h">Archaeology</h2>
+    <div class="card-grid">
+      <!-- Item A1 -->
+      <figure class="card">
+        <img src="../images/collections/glyphstone.jpg"
+             alt="Basaltic glyphstone with shallow incisions"
+             class="open-modal"
+             data-modal-target="#modal-text-glyphstone">
+        <figcaption>Basaltic Glyphstone</figcaption>
+      </figure>
+
+      <!-- Item A2 -->
+      <figure class="card">
+        <img src="../images/collections/water-jar.jpg"
+             alt="Fired clay water jar with soot marks"
+             class="open-modal"
+             data-modal-target="#modal-text-waterjar">
+        <figcaption>Riverbank Water Jar</figcaption>
+      </figure>
+
+      <!-- Item A3 -->
+      <figure class="card">
+        <img src="../images/collections/copper-ring.jpg"
+             alt="Green-patinated copper trade ring"
+             class="open-modal"
+             data-modal-target="#modal-text-copperring">
+        <figcaption>Copper Trade Ring</figcaption>
+      </figure>
     </div>
+  </section>
 
-    <nav class="main-nav" aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="./staff.html">Staff</a></li>
-        <li><a href="./collections.html" aria-current="page">Collections</a></li>
-        <li><a href="./shop.html">Shop</a></li>
-      </ul>
-    </nav>
-  </header>
+  <!-- Anthropology grid -->
+  <section id="anth" class="grid-section" aria-labelledby="anth-h" hidden>
+    <h2 id="anth-h">Anthropology</h2>
+    <div class="card-grid">
+      <!-- Item B1 -->
+      <figure class="card">
+        <img src="../images/collections/ritual-mask.jpg"
+             alt="Carved wooden mask with fiber fringe"
+             class="open-modal"
+             data-modal-target="#modal-text-ritualmask">
+        <figcaption>Mask of the Harmattan</figcaption>
+      </figure>
 
-  <main id="main" class="container" role="main">
-    <h1>Collections</h1>
-    <p>Descriptive datasets for cultural analysis. Click a tab to view each category.</p>
+      <!-- Item B2 -->
+      <figure class="card">
+        <img src="../images/collections/loom-shuttle.jpg"
+             alt="Hardwood loom shuttle with polished ends"
+             class="open-modal"
+             data-modal-target="#modal-text-shuttle">
+        <figcaption>Weaver’s Shuttle</figcaption>
+      </figure>
 
-    <div class="subnav" role="tablist" aria-label="Collection categories">
-      <button class="button button--tab" role="tab" aria-selected="true" aria-controls="archeology" id="tab-arch" onclick="showSection('archeology')">Archeology</button>
-      <button class="button button--tab" role="tab" aria-selected="false" aria-controls="anthropology" id="tab-anth" onclick="showSection('anthropology')">Anthropology</button>
+      <!-- Item B3 -->
+      <figure class="card">
+        <img src="../images/collections/ngoni.jpg"
+             alt="Calabash-bodied n’goni lute"
+             class="open-modal"
+             data-modal-target="#modal-text-ngoni">
+        <figcaption>Griot’s N’goni</figcaption>
+      </figure>
     </div>
+  </section>
 
-    <!-- ========== ARCHEOLOGY ========== -->
-    <section id="archeology" class="collection-section" aria-labelledby="arch-title">
-      <h2 id="arch-title" class="section-title">Archeology</h2>
+  <!-- Histories (Phase 2) -->
+  <section id="hist" class="histories" aria-labelledby="hist-h" hidden>
+    <h2 id="hist-h">Histories</h2>
 
-      <!-- Item A1: Bronze Kohl Container -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/bronze-kohl-container.jpg"
-               alt="Bronze cylindrical container with engraved patterns"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Bronze Kohl Container</figcaption>
-        </figure>
+    <!-- Example completed Exhibit Label (≥400 words) -->
+    <article class="history">
+      <img src="../images/collections/ritual-mask.jpg" alt="Mask displayed on neutral mount">
+      <div>
+        <h3>Mask of the Harmattan — Exhibit Label</h3>
 
-        <div class="artifact-body">
-          <h3>Bronze Kohl Container (ID: A-001)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Bronze Kohl Container</dd>
-            <dt>Material</dt><dd>Cast bronze, residual pigment</dd>
-            <dt>Size/Weight/Shape</dt><dd>H 9.2 cm; Ø 6.1 cm; cylindrical; ~235 g</dd>
-            <dt>Estimated Age</dt><dd>~2nd–3rd c. CE (inferred by style)</dd>
-            <dt>Preservation State</dt><dd>Complete; stable patina; minor pitting</dd>
-            <dt>Location Found</dt><dd>Oasis market quarter, grid N4; depth 0.8 m</dd>
-            <dt>Likely Purpose</dt><dd>Cosmetic/kohl storage vessel</dd>
-            <dt>Evidence of Use</dt><dd>Dark residue inside; wear around rim</dd>
-            <dt>Manufacture Clues</dt><dd>Lathe marks; chased band motifs</dd>
-            <dt>Found With</dt><dd>Bead strands, small bone spatula</dd>
-            <dt>Burial or Habitat Context</dt><dd>Domestic refuse pit (midden)</dd>
-            <dt>Symbolism</dt><dd>Geometric bands; no overt iconography</dd>
-            <dt>Comparison</dt><dd>Similar to Levantine cosmetic tins of Roman period</dd>
-            <dt>Preservation Notes</dt><dd>Stable; store dry, low light; no abrasive cleaning</dd>
-          </dl>
-        </div>
-      </article>
+        <h4>Facts</h4>
+        <p>
+          Material: carved iroko wood; fiber fringe; mineral pigment.<br>
+          Approx. date: 17th–19th c. (oral chronologies).<br>
+          Region: Inland Sahel trade corridor.<br>
+          Dimensions: 36 × 22 × 14 cm. On display courtesy of the Diallo family archive.
+        </p>
 
-      <!-- Item A2: Faience Scarab Amulet -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/faience-scarab-amulet.jpg"
-               alt="Blue-green faience scarab amulet with suspension hole"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Faience Scarab Amulet</figcaption>
-        </figure>
+        <h4>Interpretation</h4>
+        <p>
+          The mask is associated with the season when the dry Harmattan wind arrives, blanching
+          sky and skin alike. Its slit eyes and jutting jaw exaggerate scarcity: breath is short,
+          water is counted, words are measured. During village processions that mark the first dust-laden
+          gusts, the wearer moves in staccato bursts, stopping to “drink” air through the maw while the
+          chorus rattles gourds—an auditory stand-in for sand against a calabash. The pigments are not
+          merely decorative: ochre and kaolin are rubbed in with oil at the end of each season, sealing
+          prayers for endurance into the wood. While outsiders often read such masks as fixed “spirits,”
+          the custodians insist the figure is relational: it becomes a person only when dust, song, dancer,
+          and witness meet.
+        </p>
 
-        <div class="artifact-body">
-          <h3>Faience Scarab Amulet (ID: A-002)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Faience Scarab Amulet</dd>
-            <dt>Material</dt><dd>Glazed faience</dd>
-            <dt>Size/Weight/Shape</dt><dd>L 2.7 cm; W 1.8 cm; ovoid; ~9 g</dd>
-            <dt>Estimated Age</dt><dd>Late Period style, ~664–332 BCE (stylistic)</dd>
-            <dt>Preservation State</dt><dd>Complete; glaze crazing; minor edge loss</dd>
-            <dt>Location Found</dt><dd>Shaft tomb debris, locus T3</dd>
-            <dt>Likely Purpose</dt><dd>Protective pendant/amulet</dd>
-            <dt>Evidence of Use</dt><dd>String polish at suspension hole</dd>
-            <dt>Manufacture Clues</dt><dd>Molded; turquoise glaze; incised base</dd>
-            <dt>Found With</dt><dd>Bead fragments, linen scraps</dd>
-            <dt>Burial or Habitat Context</dt><dd>Secondary burial redeposit</dd>
-            <dt>Symbolism</dt><dd>Rebirth; solar associations</dd>
-            <dt>Comparison</dt><dd>Comparable to amulets from Delta workshops</dd>
-            <dt>Preservation Notes</dt><dd>Avoid moisture; box mount; silica gel</dd>
-          </dl>
-        </div>
-      </article>
+        <h4>Comparative Notes</h4>
+        <p>
+          Masks from nearby riverine groups emphasize fish and fertility when the flooding pulses
+          northward; this face, by contrast, abstracts the wind. The fiber fringe recalls millet rootlets,
+          linking drought and sowing. A similar jawline appears in drought-year headdresses collected by
+          French officers in the 1890s; unlike those pieces, this mask retains soot traces from hearth
+          storage, suggesting it circulated between shrine and household rather than remaining a chiefly emblem.
+        </p>
 
-      <!-- Item A3: Bronze Kohl Container (Variant catalog) -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/bronze-kohl-container.jpg"
-               alt="Alternate view of a bronze cosmetic container"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Bronze Kohl Container (Variant)</figcaption>
-        </figure>
+        <h4>Cautionary Note on Interpretation</h4>
+        <p>
+          Much prior writing flattened seasonal observances into “secret societies.” Local
+          testimony describes more porous practice: women sing lead verses, children pelt the dancer with
+          puffed rice, and elders negotiate when to end the route—pragmatic decisions based on wind strength,
+          not occult timetable. Our reading privileges these living accounts and accepts disagreement between
+          narrators as part of the object’s truth.
+        </p>
 
-        <div class="artifact-body">
-          <h3>Bronze Kohl Container — Variant Catalog (ID: A-003)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Bronze Cosmetic Jar (Variant)</dd>
-            <dt>Material</dt><dd>Bronze alloy, patina</dd>
-            <dt>Size/Weight/Shape</dt><dd>H 8.8 cm; Ø 6.0 cm; cylindrical; ~228 g</dd>
-            <dt>Estimated Age</dt><dd>1st–3rd c. CE (contextual)</dd>
-            <dt>Preservation State</dt><dd>Complete; light corrosion at base</dd>
-            <dt>Location Found</dt><dd>Workshop scatter, trench W1</dd>
-            <dt>Likely Purpose</dt><dd>Cosmetic pigment storage</dd>
-            <dt>Evidence of Use</dt><dd>Residue film; lid abrasion</dd>
-            <dt>Manufacture Clues</dt><dd>Cast body; chased decoration; soldered base</dd>
-            <dt>Found With</dt><dd>Crucible slag; bronze offcuts</dd>
-            <dt>Burial or Habitat Context</dt><dd>Craft/production area</dd>
-            <dt>Symbolism</dt><dd>Abstract borders; possibly maker’s mark</dd>
-            <dt>Comparison</dt><dd>Parallels to Nabatean cosmetic containers</dd>
-            <dt>Preservation Notes</dt><dd>Monitor RH; microcrystalline wax barrier</dd>
-          </dl>
-        </div>
-      </article>
-    </section>
+        <p class="credit"><strong>On display, courtesy of</strong> the Diallo family and the Commune Council Cultural Office.</p>
+        <p class="backlink"><a href="#top" data-tab-return="arch">← Back to Collections</a></p>
+      </div>
+    </article>
 
-    <!-- ========== ANTHROPOLOGY ========== -->
-    <section id="anthropology" class="collection-section" style="display:none;" aria-labelledby="anth-title">
-      <h2 id="anth-title" class="section-title">Anthropology</h2>
+    <!-- Templates for the other 5 histories (fill to ≥400 words each) -->
+    <article class="history">
+      <img src="../images/collections/glyphstone.jpg" alt="Basaltic glyphstone on mount">
+      <div>
+        <h3>Basaltic Glyphstone — Exhibit Label</h3>
+        <h4>Facts</h4>
+        <p>Material, date, location, dimensions, accession/courtesy…</p>
+        <h4>Interpretation</h4>
+        <p>⇨ Write ≥400 words here.</p>
+        <h4>Comparative Notes</h4>
+        <p>⇨ Compare with 1–2 neighboring traditions.</p>
+        <h4>Cautionary Note on Interpretation</h4>
+        <p>⇨ What uncertainties or debates remain?</p>
+        <p class="credit"><strong>On display, courtesy of</strong> …</p>
+        <p class="backlink"><a href="#top" data-tab-return="arch">← Back to Collections</a></p>
+      </div>
+    </article>
 
-      <!-- Item N1: Cranial Vault Fragment -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/cranial-vault-fragment.jpg"
-               alt="Bone fragment from the cranial vault on a dark background"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Cranial Vault Fragment</figcaption>
-        </figure>
+    <!-- Duplicate the template article 4 more times for your remaining required items -->
+  </section>
+</main>
 
-        <div class="artifact-body">
-          <h3>Cranial Vault Fragment (ID: N-101)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Cranial Vault Fragment</dd>
-            <dt>Material</dt><dd>Human bone</dd>
-            <dt>Size/Weight/Shape</dt><dd>~7.5 × 5.2 cm; curved plate; ~12 g</dd>
-            <dt>Estimated Age</dt><dd>~2,000–2,300 BP (AMS dated)</dd>
-            <dt>Preservation State</dt><dd>Partial; edges weathered; cortical loss</dd>
-            <dt>Location Found</dt><dd>Rock-shelter burial, sector B</dd>
-            <dt>Likely Purpose</dt><dd>Human remains (no utilitarian function)</dd>
-            <dt>Evidence of Use</dt><dd>None applicable</dd>
-            <dt>Manufacture Clues</dt><dd>Not manufactured; natural anatomy</dd>
-            <dt>Found With</dt><dd>Long-bone shafts; ochre lenses</dd>
-            <dt>Burial or Habitat Context</dt><dd>Primary interment, flexed</dd>
-            <dt>Symbolism</dt><dd>Possible pigmenting ritual (ochre)</dd>
-            <dt>Comparison</dt><dd>Similar to cave burials in adjacent valley</dd>
-            <dt>Preservation Notes</dt><dd>Pack with inert foam; stable, low RH</dd>
-          </dl>
-        </div>
-      </article>
+<!-- Modal shell (no images inside) -->
+<div class="modal" id="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <button class="close-modal" aria-label="Close">×</button>
+    <div id="modal-body"></div>
+  </div>
+</div>
 
-      <!-- Item N2: Coprolite Sample -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/coprolite-sample.jpg"
-               alt="Coprolite sample showing layered mineralized textures"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Coprolite Sample</figcaption>
-        </figure>
+<!-- Hidden modal bodies (one per item) — ≥150 words each -->
+<div class="modal-item" id="modal-text-glyphstone" hidden>
+  <h3 id="modal-title">Basaltic Glyphstone — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Vesicular basalt with ochre residue</div>
+    <div><strong>Function:</strong> Boundary/wayfinding marker (probable)</div>
+    <div><strong>Location Found:</strong> Upland ridge above dried caravan spur</div>
+  </div>
+  <p>
+    The glyphstone carries shallow incisions that form a broken chevron and a bead-line border.
+    Unlike votive stones that sit in shrines, this block shows abrasion on two opposing edges, as if
+    dragged and re-set multiple times along a route. Ochre dust trapped inside the cuts suggests the
+    marks were periodically renewed with pigment so they could be seen at dawn or through Harmattan haze.
+    Oral accounts describe “talking stones” that told travelers which saddle to choose when the wind rose.
+    This piece likely worked as both instruction and reassurance: a human fingerprint on a hard landscape.
+    The chevron points toward a seasonal water notch, aligning with other markers found in 2023 by student
+    survey teams. If read together, they form a dotted path that snakes around dunes rather than crossing
+    them—evidence of a practical intelligence that favored endurance over speed.
+  </p>
+</div>
 
-        <div class="artifact-body">
-          <h3>Coprolite Sample (ID: N-102)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Coprolite Sample</dd>
-            <dt>Material</dt><dd>Mineralized fecal matter</dd>
-            <dt>Size/Weight/Shape</dt><dd>~3.5 × 2.1 × 1.8 cm; irregular; ~18 g</dd>
-            <dt>Estimated Age</dt><dd>~1,800 BP (stratigraphic)</dd>
-            <dt>Preservation State</dt><dd>Consolidated; micro-fractures present</dd>
-            <dt>Location Found</dt><dd>Midden deposit M2; unit 5</dd>
-            <dt>Likely Purpose</dt><dd>Not an artifact; biological remain</dd>
-            <dt>Evidence of Use</dt><dd>N/A</dd>
-            <dt>Manufacture Clues</dt><dd>N/A</dd>
-            <dt>Found With</dt><dd>Charcoal flecks; plant phytoliths</dd>
-            <dt>Burial or Habitat Context</dt><dd>Household refuse dump</dd>
-            <dt>Symbolism</dt><dd>None</dd>
-            <dt>Comparison</dt><dd>Comparable to samples from Layer III</dd>
-            <dt>Preservation Notes</dt><dd>Low-RH microclimate; handle minimally</dd>
-          </dl>
-        </div>
-      </article>
+<div class="modal-item" id="modal-text-waterjar" hidden>
+  <h3 id="modal-title">Riverbank Water Jar — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Low-fire clay with plant temper</div>
+    <div><strong>Function:</strong> Water storage & cooling</div>
+    <div><strong>Location Found:</strong> Collapsed riverbank kiln scatter</div>
+  </div>
+  <p>⇨ Paste your ≥150-word interpretation here (left-aligned). Include making, use, repair traces, and social context.</p>
+</div>
 
-      <!-- Item N3: Cranial Vault Fragment (Second specimen) -->
-      <article class="artifact">
-        <figure class="artifact-media">
-          <img src="../images/collections/cranial-vault-fragment.jpg"
-               alt="Another catalog specimen of a cranial bone plate"
-               loading="lazy" />
-          <figcaption class="visually-hidden">Cranial Vault Fragment (Second Specimen)</figcaption>
-        </figure>
+<div class="modal-item" id="modal-text-copperring" hidden>
+  <h3 id="modal-title">Copper Trade Ring — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Copper alloy, hammered & scarf-joined</div>
+    <div><strong>Function:</strong> Currency / bridewealth unit</div>
+    <div><strong>Location Found:</strong> Market midden, lower town</div>
+  </div>
+  <p>⇨ Paste your ≥150-word interpretation here.</p>
+</div>
 
-        <div class="artifact-body">
-          <h3>Cranial Vault Fragment — Specimen B (ID: N-103)</h3>
-          <dl class="artifact-dl">
-            <dt>Name</dt><dd>Cranial Vault Fragment (Specimen B)</dd>
-            <dt>Material</dt><dd>Human bone</dd>
-            <dt>Size/Weight/Shape</dt><dd>~6.9 × 4.6 cm; curved plate; ~10 g</dd>
-            <dt>Estimated Age</dt><dd>~2,150 BP (contextual)</dd>
-            <dt>Preservation State</dt><dd>Partial; eroded diploë exposure</dd>
-            <dt>Location Found</dt><dd>Same rock-shelter, sector C</dd>
-            <dt>Likely Purpose</dt><dd>Human remains (no utilitarian function)</dd>
-            <dt>Evidence of Use</dt><dd>N/A</dd>
-            <dt>Manufacture Clues</dt><dd>N/A</dd>
-            <dt>Found With</dt><dd>Dental enamel chips; small lithics</dd>
-            <dt>Burial or Habitat Context</dt><dd>Secondary deposition layer</dd>
-            <dt>Symbolism</dt><dd>Possible curated remains</dd>
-            <dt>Comparison</dt><dd>Consistent with Specimen A morphology</dd>
-            <dt>Preservation Notes</dt><dd>Buffer supports; limit handling</dd>
-          </dl>
-        </div>
-      </article>
-    </section>
+<div class="modal-item" id="modal-text-ritualmask" hidden>
+  <h3 id="modal-title">Mask of the Harmattan — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Carved hardwood, fiber fringe, mineral pigment</div>
+    <div><strong>Function:</strong> Seasonal procession / protection rite</div>
+    <div><strong>Location Found:</strong> Family shrine loft, inland Sahel</div>
+  </div>
+  <p>
+    This mask is danced when the dry wind first whitens the horizon. Its slit eyes narrow the field of
+    vision, helping the performer move by drum cues rather than distant landmarks. The jaw—oversized and
+    hollow—funnels breath; spectators describe hearing a low vessel-like hum when the dancer exhales through
+    it. Pigments are renewed annually with oil and ash from the communal hearth, so protection is literally
+    bound up with cooking and care. Children throw puffed rice as “soft stones,” symbolically pelting the
+    wind that scours gardens. Contrary to older catalogs that label such pieces “secret,” the rite is
+    permeable: women lead the call-and-response, and the route is negotiated each year depending on wind
+    strength. The mask therefore acts as a seasonal contract more than a fixed deity—an object that convenes
+    neighbors to admit hardship and promise mutual aid until the rains return.
+  </p>
+</div>
 
-    <!-- AI disclosure & sources -->
-    <section class="card" style="padding:1rem; margin-top:1rem;">
-      <h2>AI Involvement &amp; Sources</h2>
-      <p><strong>Disclosure:</strong> The content in this gallery was entirely created by AI under human direction, and then curated, reviewed, and edited by a human before publication.</p>
-      <ul>
-        <li><strong>Concept &amp; Content:</strong> Artifact descriptions drafted with ChatGPT; edited for descriptive neutrality.</li>
-        <li><strong>Images:</strong> All images loaded from <code>/images/collections</code>. Filenames used exactly as stored in the repository.</li>
-      </ul>
-    </section>
-  </main>
+<div class="modal-item" id="modal-text-shuttle" hidden>
+  <h3 id="modal-title">Weaver’s Shuttle — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Hardwood, burnished; cotton spool</div>
+    <div><strong>Function:</strong> Weft carrier for strip-weaving</div>
+    <div><strong>Location Found:</strong> Loom shed, riverside quarter</div>
+  </div>
+  <p>⇨ Paste your ≥150-word interpretation here.</p>
+</div>
 
-  <footer class="site-footer" role="contentinfo">
-    <p>© <span id="year"></span> Museum of Wonder</p>
-  </footer>
+<div class="modal-item" id="modal-text-ngoni" hidden>
+  <h3 id="modal-title">Griot’s N’goni — Collection Note</h3>
+  <div class="kv">
+    <div><strong>Material:</strong> Calabash, goatskin head, wooden neck</div>
+    <div><strong>Function:</strong> Lute for praise-songs/genealogies</div>
+    <div><strong>Location Found:</strong> Performer’s trunk, market ward</div>
+  </div>
+  <p>⇨ Paste your ≥150-word interpretation here.</p>
+</div>
 
-  <script>
-    // Footer year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Tab/section toggling
-    function showSection(sectionId) {
-      const sections = document.querySelectorAll('.collection-section');
-      const tabs = document.querySelectorAll('.button--tab');
-
-      sections.forEach(sec => sec.style.display = 'none');
-      document.getElementById(sectionId).style.display = 'block';
-
-      tabs.forEach(t => t.setAttribute('aria-selected', 'false'));
-      if (sectionId === 'archeology') {
-        document.getElementById('tab-arch').setAttribute('aria-selected', 'true');
-      } else {
-        document.getElementById('tab-anth').setAttribute('aria-selected', 'true');
-      }
-    }
-  </script>
+<script src="../js/collections.js"></script>
 </body>
 </html>
+
 
 
 
