@@ -1,95 +1,97 @@
-// /Museum/js/shop.js
-import { renderProductCard, formatMoney } from "./card.js";
+<script>
+/* ======================= Shop (shop.js) ======================= */
+(function () {
+  "use strict";
 
-/* ---------- Constants ---------- */
-const STORAGE_KEY = "museumCartV1";
+  // Use absolute paths for GitHub Pages
+  const IMG = "/Museum/images";
 
-/* ---------- Data: products for the shop ---------- */
-const PRODUCTS = [
-  {
-    id: "postcard-pack",
-    name: "Curios Postcard Pack",
-    short: "Postcard Pack",
-    desc: "Set of 10 matte postcards featuring highlights from the Museum of Wonder.",
-    price: 9.95,
-    image: "/Museum/images/shop/souvenir-shop.jpg",
-    alt: "Souvenir shop full of curios"
+  // Your shop items (match real image files)
+  const SHOP_ITEMS = [
+    {
+      id: "postcard-pack",
+      name: "Curios Postcard Pack",
+      unitPrice: 9.95,
+      image: `${IMG}/souvenir-shop.jpg`,
+      blurb: "Set of 10 matte postcards featuring highlights from the Museum of Wonder."
+    },
+    {
+      id: "celestial-inkstone",
+      name: "Celestial Inkstone",
+      unitPrice: 14.95,
+      image: `${IMG}/celestial-inkstone.jpg`,
+      blurb: "Pigment mixing platform—possibly astronomical in function."
+    },
+    {
+      id: "basaltic-glyphstone",
+      name: "Basaltic Glyphstone",
+      unitPrice: 31.55,
+      image: `${IMG}/marker-arch-fragment.jpg`,
+      blurb: "Boundary marker incised with shallow crossing lines."
+    },
+    {
+      id: "spiral-claw-fossil",
+      name: "Spiral Claw Fossil",
+      unitPrice: 24.25,
+      image: `${IMG}/spiral-claw-fossil.jpg`,
+      blurb: "Coiled mineralized talon; specimen box included."
+    }
+  ];
+
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
+
+  function cardHTML(item) {
+    const qty = MuseumCart.qtyFor(item.id);
+    return `
+      <article class="shop-card card">
+        <figure class="media-frame">
+          <img src="${item.image}" alt="${item.name}">
+        </figure>
+        <div class="content">
+          <h3>${item.name}</h3>
+          <p class="muted">${item.blurb}</p>
+          <div class="price-row">
+            <strong>${MuseumCart.toMoney(item.unitPrice)}</strong>
+            <button class="btn add-btn" data-id="${item.id}">Add to Cart</button>
+          </div>
+          <span class="qty-badge" aria-live="polite" id="q-${item.id}">${qty ? "Qty: " + qty : ""}</span>
+        </div>
+      </article>
+    `;
   }
-];
 
-/* ---------- Storage helpers ---------- */
-function readCart() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  } catch {
-    return [];
+  function renderShop() {
+    const host = document.getElementById("shop-list");
+    if (!host) return;
+    host.innerHTML = SHOP_ITEMS.map(cardHTML).join("");
+    wireButtons();
+    updateCartCount();
   }
-}
-function writeCart(cart) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
-}
-function cartCount(cart) {
-  return cart.reduce((sum, it) => sum + (it.qty || 0), 0);
-}
-function findIndex(cart, id) {
-  return cart.findIndex((x) => x.id === id);
-}
 
-/* ---------- UI: header count ---------- */
-function updateHeaderCount(count) {
-  const el = document.getElementById("cartCount");
-  if (el) el.textContent = String(count);
-}
-
-/* ---------- Add-to-cart ---------- */
-function addToCart(productId) {
-  const cart = readCart();
-  const i = findIndex(cart, productId);
-  if (i >= 0) cart[i].qty += 1;
-  else cart.push({ id: productId, qty: 1 });
-  writeCart(cart);
-
-  // Update header count
-  updateHeaderCount(cartCount(cart));
-
-  // Update this card’s badge
-  const badge = document.getElementById(`badge-${productId}`);
-  if (badge) {
-    const item = cart.find((x) => x.id === productId);
-    badge.hidden = false;
-    badge.textContent = `Qty: ${item.qty}`;
-  }
-}
-
-/* ---------- Render ---------- */
-function render() {
-  const grid = document.getElementById("shop-list");
-  if (!grid) return;
-
-  grid.textContent = ""; // clear
-
-  const cart = readCart();
-  const qtyById = Object.fromEntries(cart.map((c) => [c.id, c.qty]));
-
-  PRODUCTS.forEach((p) => {
-    const card = renderProductCard(p, {
-      onAdd: addToCart,
-      qty: qtyById[p.id] || 0
+  function wireButtons() {
+    $$(".add-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        const id = e.currentTarget.dataset.id;
+        const item = SHOP_ITEMS.find(x => x.id === id);
+        MuseumCart.addToCart(item);
+        // update qty badge and header count
+        const badge = document.getElementById("q-" + id);
+        if (badge) badge.textContent = "Qty: " + MuseumCart.qtyFor(id);
+        updateCartCount();
+      });
     });
-    grid.append(card);
-  });
+  }
 
-  updateHeaderCount(cartCount(cart));
+  function updateCartCount() {
+    const n = MuseumCart.cartCount();
+    const link = document.getElementById("cartLink");
+    if (link) link.textContent = "Cart " + n;
+  }
 
-  const vc = document.getElementById("viewCartBtn");
-  if (vc) vc.addEventListener("click", () => {
-    location.href = "/Museum/html/cart.html";
-  });
-}
-
-/* ---------- boot ---------- */
-document.addEventListener("DOMContentLoaded", render);
-
+  document.addEventListener("DOMContentLoaded", renderShop);
+})();
+</script>
 
 
 
