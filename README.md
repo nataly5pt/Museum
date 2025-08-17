@@ -28,13 +28,7 @@ Museum/
 │  └─ collections.js
 ├─ images/
 │  ├─ collections/
-│  │  ├─ glyphstone.jpg
-│  │  ├─ ritual-mask.jpg
-│  │  └─ ...your other images
-│  └─ validation/
-│     └─ (HTML validator screenshots)
-└─ doc/
-   └─ design-notes.md  (optional rationale if you right-align anything)
+
 │
 ├── index.html           # Main landing page
 ├── robots.txt           # Search engine crawler directives
