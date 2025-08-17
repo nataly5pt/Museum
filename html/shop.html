@@ -1,136 +1,101 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Souvenir Shop — Museum of Wonder</title>
 
-  <!-- Site styles -->
-  <link rel="stylesheet" href="/Museum/css/style.css" />
+  <!-- Site styles (brown–yellow theme) -->
+  <link rel="stylesheet" href="/Museum/css/style.css">
+
+  <!-- Preload optional external card template (if you keep card.html in its own file) -->
+  <link rel="preload" as="fetch" href="/Museum/html/card.html" crossorigin="anonymous">
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ===== Header / Nav ===== -->
+  <!-- ================= Header / Top Nav ================= -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a class="brand" href="/Museum/">Museum of Wonder</a>
+      <a href="/Museum/" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
+        <li><a href="/Museum/html/cart.html">Cart <span id="cartCount">0</span></a></li>
         <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
-        <li><a href="/Museum/html/cart.html">Cart</a></li>
       </ul>
+
+      <!-- View Cart button (spec asks to include it on the shop page) -->
+      <button id="viewCartBtn" class="btn chip" onclick="location.href='/Museum/html/cart.html'">
+        View Cart
+      </button>
     </nav>
   </header>
 
-  <!-- ===== Main ===== -->
+  <!-- ================= Main ================= -->
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Souvenir Shop</h1>
       <p class="ai-notice">
-        The content in this shop was entirely created by AI under human direction, then curated and edited by a human. Prices in USD.
+        The content in this shop was entirely created by AI under human direction, then curated,
+        reviewed, and edited by a human. Prices in USD.
       </p>
 
-      <!-- Optional View Cart button near the title (kept only on the shop page) -->
-      <p>
-        <button class="cart-btn" id="viewCartBtn" onclick="location.href='/Museum/html/cart.html'">View Cart</button>
-      </p>
+      <!-- Where cards will render -->
+      <section aria-label="Products">
+        <div id="shopGrid" class="cards-grid" aria-live="polite"></div>
+      </section>
 
-      <!-- Products grid -->
-      <section aria-labelledby="souvenir-title">
-        <h2 id="souvenir-title" class="visually-hidden">Shop Items</h2>
+      <!-- ============== Inline template (fallback if /html/card.html is not used) ============== -->
+      <template id="card-template">
+        <article class="souvenir-card"
+                 data-id=""
+                 data-name=""
+                 data-price=""
+                 data-image="">
+          <figure class="media-frame">
+            <img src="" alt="">
+          </figure>
 
-        <!-- Reuse your site’s responsive grid class -->
-        <div class="card-grid">
+          <div class="content">
+            <h3 class="item-title"></h3>
+            <p class="item-desc"></p>
+            <p class="price"><strong class="item-price"></strong></p>
 
-          <!-- 1) Curios Postcard Pack -->
+            <div class="actions">
+              <button class="add-btn" type="button">Add to Cart</button>
+              <span class="qty-badge" aria-live="polite"></span>
+            </div>
+          </div>
+        </article>
+      </template>
+
+      <!-- ========= No-JS fallback: one fully-wired card so users can still add to cart ========= -->
+      <noscript>
+        <div class="cards-grid">
           <article class="souvenir-card"
                    data-id="postcards"
                    data-name="Curios Postcard Pack"
                    data-price="9.95"
                    data-image="/Museum/images/souvenir-shop.jpg">
-            <figure class="media-frame" style="aspect-ratio: 16/9;">
+            <figure class="media-frame">
               <img src="/Museum/images/souvenir-shop.jpg"
-                   alt="A cozy souvenir shop interior filled with curios and lamps">
+                   alt="Shelves of colorful souvenirs in a cozy shop">
             </figure>
+
             <div class="content">
               <h3>Curios Postcard Pack</h3>
               <p>Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
               <p class="price"><strong>$9.95</strong></p>
               <div class="actions">
-                <button class="add-btn">Add Postcard Pack to Cart</button>
+                <button class="add-btn" type="button">Add Postcard Pack to Cart</button>
                 <span class="qty-badge" aria-live="polite"></span>
               </div>
             </div>
           </article>
-
-          <!-- 2) Celestial Inkstone -->
-          <article class="souvenir-card"
-                   data-id="inkstone"
-                   data-name="Celestial Inkstone"
-                   data-price="14.95"
-                   data-image="/Museum/images/celestial-inkstone.jpg">
-            <figure class="media-frame" style="aspect-ratio: 4/3;">
-              <img src="/Museum/images/celestial-inkstone.jpg"
-                   alt="Celestial inkstone with constellation-like flecks">
-            </figure>
-            <div class="content">
-              <h3>Celestial Inkstone</h3>
-              <p>Pigment-making platform, possibly astronomical in function.</p>
-              <p class="price"><strong>$14.95</strong></p>
-              <div class="actions">
-                <button class="add-btn">Add Inkstone to Cart</button>
-                <span class="qty-badge" aria-live="polite"></span>
-              </div>
-            </div>
-          </article>
-
-          <!-- 3) Spiral Claw Fossil -->
-          <article class="souvenir-card"
-                   data-id="fossil"
-                   data-name="Spiral Claw Fossil"
-                   data-price="21.25"
-                   data-image="/Museum/images/spiral-claw-fossil.jpg">
-            <figure class="media-frame" style="aspect-ratio: 4/3;">
-              <img src="/Museum/images/spiral-claw-fossil.jpg"
-                   alt="A fossil with spiral claw formations">
-            </figure>
-            <div class="content">
-              <h3>Spiral Claw Fossil</h3>
-              <p>Specimen with striking spiral growth; origin under study.</p>
-              <p class="price"><strong>$21.25</strong></p>
-              <div class="actions">
-                <button class="add-btn">Add Fossil to Cart</button>
-                <span class="qty-badge" aria-live="polite"></span>
-              </div>
-            </div>
-          </article>
-
-          <!-- 4) Marker Arch Fragment -->
-          <article class="souvenir-card"
-                   data-id="arch-fragment"
-                   data-name="Marker Arch Fragment"
-                   data-price="13.55"
-                   data-image="/Museum/images/marker-arch-fragment.jpg">
-            <figure class="media-frame" style="aspect-ratio: 4/3;">
-              <img src="/Museum/images/marker-arch-fragment.jpg"
-                   alt="A carved fragment from a ceremonial arch">
-            </figure>
-            <div class="content">
-              <h3>Marker Arch Fragment</h3>
-              <p>Purpose was ceremonial or calendrical; imagery in invocation tablet style.</p>
-              <p class="price"><strong>$13.55</strong></p>
-              <div class="actions">
-                <button class="add-btn">Add Arch Fragment to Cart</button>
-                <span class="qty-badge" aria-live="polite"></span>
-              </div>
-            </div>
-          </article>
-
         </div>
-      </section>
+      </noscript>
     </div>
   </main>
 
@@ -138,10 +103,15 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Shop behavior: increments qty and writes to localStorage (CART_KEY) -->
+  <!-- ================= Scripts =================
+       card.js = shared constants / helpers used by both shop and cart
+       shop.js = builds the product list, wires buttons, writes to localStorage
+  -->
+  <script src="/Museum/js/card.js" defer></script>
   <script src="/Museum/js/shop.js" defer></script>
 </body>
 </html>
+
 
 
 
