@@ -1,125 +1,213 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Natalia Glushak">
-  <title>Collections — Museum of Wonder</title>
+/* ==========================================================================
+   Museum · Collections Page Styles (Savanna palette)
+   File: css/collections.css
+   ========================================================================== */
 
-  <!-- Global + page CSS -->
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="../css/collections.css">
-</head>
-<body>
-  <a class="skip-link" href="#main">Skip to content</a>
+/* ---------- Theme tokens (browns & sands) ---------- */
+:root{
+  --sand-200: #FFEAA3;
+  --sand-300: #FFE38A;
+  --sand-400: #FFD972;
+  --amber-500:#C88924;
 
-  <!-- ===== Header / Nav ===== -->
-  <header class="site-header">
-    <nav class="top-nav" aria-label="Primary">
-      <a href="../index.html" class="brand">Museum of Wonder</a>
-      <ul class="top-nav__links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="staff.html">Staff</a></li>
-        <li><a aria-current="page" href="collections.html">Collections</a></li>
-        <li><a href="shop.html">Shop</a></li>
-      </ul>
-    </nav>
+  --brown-700:#2E2116;
+  --brown-650:#37271A;
+  --brown-600:#3B2B1F;
+  --brown-550:#453224;
+  --brown-500:#4D3827;
+  --brown-450:#5A402B;
+  --brown-400:#6B4B31;
 
-    <h1 class="page-title">Collections</h1>
-    <p class="ai-notice">
-      The content in this gallery was entirely created by AI under human direction.
-      It was then curated, reviewed and edited by a human before being published.
-    </p>
+  --ink-900: #0b0907;
+  --ink-800: #15110d;
 
-    <nav class="subnav" aria-label="Collections sections">
-      <a class="chip" href="#archaeology">Archaeology</a>
-      <a class="chip" href="#anthropology">Anthropology</a>
-      <a class="chip" href="#histories">Histories</a>
-    </nav>
-  </header>
+  --text-100: #FFF7D6;
+  --text-200: #FCEEC2;
+  --text-300: #E9D8A6;
+  --text-dim:#D9C89A;
 
-  <main id="main" class="content-area container">
-    <p class="hint">Tip: Click any image to open its Interpretation modal.</p>
+  --ring-focus: #F3C96B;
+  --shadow-0: 0 1px 1px rgba(0,0,0,.25);
+  --shadow-1: 0 8px 24px rgba(0,0,0,.25);
+  --shadow-2: 0 18px 40px rgba(0,0,0,.35);
+}
 
-    <!-- =================== Archaeology =================== -->
-    <section id="archaeology" class="collection-section" aria-labelledby="arch-title">
-      <h2 id="arch-title" class="section-title">Archaeology</h2>
+/* ---------- Media safety ---------- */
+img, picture, video, canvas, svg { display:block; max-width:100%; }
 
-      <div class="card-grid">
-        <!-- Obsidian Spearhead -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-obsidian" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/obsidian-spearhead.jpg"
-                   alt="Polished black obsidian spearhead with sharp edges">
-            </figure>
-          </a>
-          <h3 class="title">Obsidian Spearhead</h3>
-        </article>
+/* A reusable media frame with a controlled aspect ratio */
+.media-frame{
+  aspect-ratio: 4 / 3;            /* you can change to 16/9 if you prefer */
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: var(--brown-600);
+  box-shadow: var(--shadow-1);
+}
+.media-frame > img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;               /* center subject; crop overflow */
+}
 
-        <!-- Basaltic Glyphstone -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-glyphstone" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/basaltic-glyphstone.jpg"
-                   alt="Basalt stone bearing shallow intersecting incisions">
-            </figure>
-          </a>
-          <h3 class="title">Basaltic Glyphstone</h3>
-        </article>
+/* ---------- Container helpers (safe even if also in style.css) ---------- */
+.container{ max-width:1200px; margin-inline:auto; padding-inline:1rem; }
+.section-title{ margin: 2rem 0 1rem; color: var(--text-100); }
 
-        <!-- Coprolite Sample -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-coprolite" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/coprolite-sample.jpg"
-                   alt="Fossilized dung coprolite sample on tray">
-            </figure>
-          </a>
-          <h3 class="title">Coprolite Sample</h3>
-        </article>
-      </div>
-    </section>
+/* ---------- Page-specific small text ---------- */
+.hint{
+  margin: .25rem 0 1.5rem;
+  color: var(--text-200);
+  font-size: .95rem;
+}
 
-    <!-- =================== Anthropology =================== -->
-    <section id="anthropology" class="collection-section" aria-labelledby="anth-title">
-      <h2 id="anth-title" class="section-title">Anthropology</h2>
+/* ---------- Sub-navigation chips ---------- */
+.subnav{
+  display:flex; gap:.6rem; flex-wrap:wrap;
+  margin: .75rem 0 1.25rem;
+}
+.subnav .chip{
+  display:inline-block;
+  background: linear-gradient(180deg,var(--amber-500), #ad7324);
+  color:#fffbe6;
+  padding:.48rem .9rem;
+  border-radius: 999px;
+  text-decoration:none;
+  font-weight:700;
+  border:1px solid rgba(0,0,0,.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), var(--shadow-0);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+}
+.subnav .chip:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+.subnav .chip:focus-visible{
+  outline: 3px solid var(--ring-focus);
+  outline-offset: 2px;
+}
 
-      <div class="card-grid">
-        <!-- Bronze Kohl Container -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-kohl" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/bronze-kohl-container.jpg"
-                   alt="Small bronze cosmetic container for kohl">
-            </figure>
-          </a>
-          <h3 class="title">Bronze Kohl Container</h3>
-        </article>
+/* ---------- Card grid ---------- */
+.card-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
 
-        <!-- Cranial Vault Fragment -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-cranial" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/cranial-vault-fragment.jpg"
-                   alt="Curved fragment of human cranial vault">
-            </figure>
-          </a>
-          <h3 class="title">Cranial Vault Fragment</h3>
-        </article>
+/* ---------- Generic card ---------- */
+.card{
+  background: linear-gradient(180deg, rgba(255,238,170,.08), rgba(0,0,0,.25));
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 22px;
+  padding: 16px;
+  color: var(--text-100);
+  box-shadow: var(--shadow-1);
+  transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+  backdrop-filter: blur(2px);
+}
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(255,255,255,.10);
+}
+.card .title{
+  font-size: 1.06rem;
+  line-height: 1.35;
+  margin: .75rem 2px 0;
+  color: var(--text-100);
+}
 
-        <!-- Faience Scarab Amulet -->
-        <article class="card">
-          <a class="open-modal" data-modal-target="#modal-text-scarab" href="#">
-            <figure class="media-frame" aria-hidden="true">
-              <img src="../images/collections/faience-scarab-amulet.jpg"
-                   alt="Blue-green faience scarab amulet">
-            </figure>
-          </a>
-          <h3 class="title">Faience Scarab Amulet</h3>
-        </article>
-      </div>
-    </section>
+/* ---------- Sections ---------- */
+.collection-section{ margin-bottom: 2.5rem; }
+
+/* ---------- Histories (label layout) ---------- */
+.histories .history-item{
+  display:grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.25rem;
+  align-items:start;
+}
+.history-text h3{
+  margin: .25rem 0 .5rem;
+  color: var(--text-100);
+  font-size: 1.35rem;
+}
+.history-text h4{
+  margin: 1rem 0 .35rem;
+  color: var(--text-300);
+  font-size: 1rem;
+  letter-spacing:.01em;
+}
+.history-text p{ color: var(--text-200); line-height: 1.55; }
+.history-text .courtesy{ margin-top:.75rem; color: var(--text-dim); font-style: italic; }
+.history-text .back-link{ margin-top:.25rem; }
+.history-text .back-link a{
+  color: var(--sand-300);
+  text-decoration:none;
+  border-bottom: 1px dotted rgba(255,255,255,.35);
+}
+.history-text .back-link a:hover{ color: var(--sand-200); border-bottom-color: transparent; }
+
+/* ---------- Modal (reused from assignment variant) ---------- */
+.modal{
+  position: fixed; inset: 0; display:none;
+  background: rgba(10,8,6,.65);
+  z-index: 1000;
+}
+.modal[aria-hidden="false"]{ display:block; }
+
+.modal-content{
+  position: absolute; inset: 0;
+  margin: auto; width: min(92vw, 760px);
+  max-height: min(88vh, 880px);
+  overflow: auto;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--brown-650), var(--brown-600));
+  border: 1px solid rgba(255,255,255,.08);
+  color: var(--text-100);
+  box-shadow: var(--shadow-2);
+}
+.close-modal{
+  position: sticky; top: 0; float: right;
+  background: linear-gradient(180deg,var(--amber-500), #a86a1c);
+  color: #fff;
+  border: none; border-radius: 10px;
+  padding: .35rem .6rem;
+  box-shadow: var(--shadow-0);
+  cursor:pointer;
+}
+.close-modal:hover{ filter: brightness(1.06); }
+.close-modal:focus-visible{
+  outline: 3px solid var(--ring-focus);
+  outline-offset: 2px;
+}
+
+/* Content inside cloned modal body */
+#modal-body h2{ margin: .25rem 0 .5rem; color: var(--text-100); }
+#modal-body p{ color: var(--text-200); line-height: 1.6; }
+#modal-body strong{ color: var(--sand-300); }
+
+/* ---------- Accessibility focus rings for links & triggers ---------- */
+a.open-modal:focus-visible{
+  outline: 3px solid var(--ring-focus);
+  outline-offset: 3px;
+  border-radius: 18px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 980px){
+  .histories .history-item{
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce){
+  *{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 
     <!-- =================== Histories (Sample full label) =================== -->
     <section id="histories" class="histories" aria-labelledby="hist-title">
