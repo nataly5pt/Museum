@@ -4,325 +4,77 @@
    Scope: add class="collections-page" to <body> on collections.html
    ========================================================================== */
 
-/* ------------------------------
-   0) Base + Motion safety
-   ------------------------------ */
-.collections-page *,.collections-page *::before,.collections-page *::after{
-  box-sizing:border-box;
-}
-@media (prefers-reduced-motion: reduce){
-  .collections-page *{
-    animation-duration:0.01ms!important;
-    animation-iteration-count:1!important;
-    transition-duration:0.01ms!important;
-    scroll-behavior:auto!important;
-  }
-}
+/* ============================
+   Collections (polished)
+   ============================ */
 
-/* ------------------------------
-   1) Theme tokens (savanna)
-   ------------------------------ */
-.collections-page{
-  --sav-bg-deep:#0f0804;
-  --sav-bg-1:#24160d;
-  --sav-bg-2:#1a1109;
-
-  --sun-1:#f2b705;   /* warm yellow */
-  --sun-2:#dfa114;   /* ochre */
-  --sun-3:#d97706;   /* amber */
-  --clay:#8b5e34;    /* brown clay */
-  --leaf:#5f6f52;    /* muted olive */
-
-  --text:#f6edd3;
-  --text-strong:#fff7d6;
-  --text-muted:#e4d7ae;
-
-  --surface:rgba(255,244,214,.06);
-  --surface-2:rgba(255,244,214,.10);
-  --stroke:rgba(255,244,214,.18);
-  --shadow:0 10px 34px rgba(21,10,4,.55);
-
-  --link:#ffd166;
-  --focus:#ffd166;
-
-  --chip-bg:rgba(242,183,5,.18);
-  --chip-border:rgba(242,183,5,.35);
-
-  --radius-xl:18px;
-  --radius-lg:14px;
-  --radius-md:10px;
-  --container:1200px;
-
-  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
-  --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem;
+/* --- Theme tokens (fallbacks, safe if not in style.css) --- */
+:root{
+  --sand-200: #FFEAA3;
+  --sand-300: #FFE38A;
+  --sand-400: #FFD972;
+  --amber-500:#C88924;
+  --brown-900:#17100A;
+  --brown-850:#1E150E;
+  --brown-800:#24170E;
+  --brown-750:#2B1C12;
+  --brown-700:#3b2b1f;
+  --ink-100: #FFF3C7;
 }
 
-/* Background (page-only) */
-.collections-page{
-  color:var(--text);
-  background:
-    radial-gradient(1100px 800px at -10% -10%, var(--sun-1) 55%, transparent 45%),
-    radial-gradient(900px 700px at 110% 0%,  var(--sun-3) 60%, transparent 40%),
-    radial-gradient(900px 800px at 50% 120%, var(--clay) 44%, transparent 50%),
-    linear-gradient(180deg, var(--sav-bg-1), var(--sav-bg-2) 55%, var(--sav-bg-deep));
-  background-attachment: fixed;
-  min-height:100dvh;
+/* --- Global media safety (only keep once in your project; if already in style.css, remove here) --- */
+img, picture, video, canvas, svg { display:block; max-width:100%; }
+
+/* --- Reusable media frame with controlled aspect ratio --- */
+.media-frame {
+  --frame-ratio: 4 / 3;         /* change to 16/9 if you prefer widescreen */
+  aspect-ratio: var(--frame-ratio);
+  width: 100%;
+  overflow: hidden;
+  border-radius: 18px;
+  background: #3b2b1f;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+.media-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;             /* keep subject centered; crop overflow */
 }
 
-/* Subtle dust overlay */
-.collections-page::after{
-  content:""; position:fixed; inset:0; pointer-events:none;
-  background-image: radial-gradient(#ffd16622 1px, transparent 1px);
-  background-size:3px 3px; opacity:.08; mix-blend-mode:screen; z-index:0;
+/* --- Cards (gentle glass look) --- */
+.card {
+  background: linear-gradient(180deg, rgba(255,238,170,.08), rgba(0,0,0,.25));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: 14px;
+  backdrop-filter: blur(2px);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,.35),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
-/* Container helper (local to page) */
-.collections-page .container{
-  width:min(100%, var(--container));
-  margin-inline:auto;
-  padding-inline:var(--space-4);
-  position:relative; z-index:1;
+/* --- Grid for collections --- */
+.collection-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-block: .5rem 2.5rem;
 }
 
-/* Links + focus */
-.collections-page a{ color:var(--link); text-decoration:none; }
-.collections-page a:hover{ text-decoration:underline; }
-.collections-page :focus-visible{
-  outline:3px solid var(--focus); outline-offset:3px;
-}
-
-/* ------------------------------
-   2) Page header + tip
-   ------------------------------ */
-.collections-page h1{
-  margin: var(--space-8) 0 var(--space-3);
-  font-size: clamp(2rem, 3vw + 1rem, 3rem);
-  color:var(--text-strong);
-  letter-spacing:.02em;
-}
-.collections-page .banner{
-  background: rgba(255, 244, 214, .06);
-  border:1px dashed var(--stroke);
-  padding:.6rem .8rem;
-  border-radius:var(--radius-md);
-  color:var(--text-muted);
-}
-.collections-page .tip{
-  margin: var(--space-6) 0 var(--space-4);
-  color:var(--text-muted);
-  font-size:.95rem;
-}
-
-/* ------------------------------
-   3) Sub-navigation tabs
-   ------------------------------ */
-.collections-page .subnav{
-  display:flex; gap:.6rem; align-items:center;
-  margin: var(--space-4) 0 var(--space-3);
-  flex-wrap: wrap;
-}
-.collections-page .tab{
-  padding:.55rem .9rem; border-radius:999px;
-  border:1px solid var(--chip-border);
-  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
-  color:var(--text-strong);
-  cursor:pointer; user-select:none;
-  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
-}
-.collections-page .tab:hover{ transform:translateY(-1px); border-color:#ffd166; }
-.collections-page .tab[aria-current="page"],
-.collections-page .tab.is-active{
-  background: linear-gradient(180deg, rgba(242,183,5,.32), rgba(242,183,5,.15));
-  border-color:#ffd166;
-}
-
-/* ------------------------------
-   4) Section headings
-   ------------------------------ */
-.collections-page h2{
-  margin: var(--space-6) 0 var(--space-2);
-  font-size: clamp(1.5rem, 2vw + .75rem, 2.125rem);
-  color:var(--text-strong);
-}
-
-/* ------------------------------
-   5) Collections grid + cards
-   ------------------------------ */
-.collections-page .collection-grid{
-  display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(14px, 2.4vw, 22px);
-  margin: var(--space-6) 0 var(--space-8);
-}
-
-.collections-page .collection-card{
-  position:relative;
-  background:var(--surface);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius-xl);
-  box-shadow:var(--shadow);
-  min-height:340px; overflow:hidden;
-  display:flex; flex-direction:column; justify-content:flex-end;
-  transition:border-color .25s ease, transform .25s ease;
-}
-.collections-page .collection-card:hover{
-  transform: translateY(-2px);
-  border-color:#ffd166aa;
-}
-
-/* Images fill the card */
-.collections-page .collection-card img{
+/* --- Individual collection card --- */
+.collection-card .media-frame{ border-radius:16px; }
+.collection-card .media-frame::after{
+  /* gold hover ring (like Staff) */
+  content:"";
   position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  filter: saturate(.9) contrast(1.05) brightness(.9);
-  transition: transform .35s ease, filter .35s ease;
+  border-radius:16px;
+  box-shadow: inset 0 0 0 0 rgba(255,216,120,.55);
+  transition: box-shadow .25s ease;
+  pointer-events:none;
 }
-.collections-page .collection-card:hover img{
-  transform: scale(1.04);
-  filter: saturate(1.05) contrast(1.1) brightness(.95);
+.collection-card:hover .media-frame::after{
+  box-shadow: inset 0 0 0 3px rgba(255,216,120,.55);
 }
-
-/* Title overlay */
-.collections-page .collection-card .title{
-  position:relative; z-index:1;
-  background: linear-gradient(0deg, rgba(18,11,7,.85), rgba(18,11,7,0));
-  padding: 90px var(--space-5) var(--space-5);
-  color:var(--text-strong);
-  font-weight:600;
-}
-
-/* Make clickable tiles clearly interactive */
-.collections-page .collection-card [data-modal-target],
-.collections-page .collection-card a{
-  cursor:pointer;
-}
-
-/* ------------------------------
-   6) Modal (text-only)
-   ------------------------------ */
-.collections-page .modal{
-  position:fixed; inset:0; display:none;
-  background: rgba(5,3,2,.65);
-  padding: clamp(12px, 3vw, 24px);
-  z-index: 999;
-}
-.collections-page .modal-content{
-  position:relative;
-  width:min(880px, 100%); margin:auto;
-  background: linear-gradient(180deg, rgba(25,16,10,.96), rgba(19,12,8,.96));
-  color:var(--text);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius-xl);
-  box-shadow:var(--shadow);
-  padding: clamp(18px, 3.5vw, 28px);
-}
-.collections-page .close-modal{
-  position:absolute; top:10px; right:10px;
-  width:38px; height:38px; border-radius:999px;
-  display:grid; place-items:center;
-  border:1px solid var(--chip-border);
-  background:var(--chip-bg);
-  color:var(--text-strong);
-  cursor:pointer;
-}
-.collections-page .close-modal:hover{ border-color:#ffd166; }
-.collections-page #modal-body h2,
-.collections-page #modal-body h3{ margin-top:.25rem; color:var(--text-strong); }
-.collections-page #modal-body p{ margin:.6rem 0 1rem; text-align:left; }
-.collections-page #modal-body .meta{ font-size:.95rem; color:var(--text-muted); }
-
-/* Handy “spec list” for Material, Function, etc. */
-.collections-page .spec-list{
-  display:grid; gap:.35rem;
-  grid-template-columns: 160px 1fr;
-  margin:.75rem 0 1rem;
-}
-.collections-page .spec-list dt{ color:var(--text-muted); }
-.collections-page .spec-list dd{ margin:0; color:var(--text); }
-
-/* ------------------------------
-   7) Histories section
-   ------------------------------ */
-.collections-page .histories{ margin-top: var(--space-8); }
-.collections-page .history-block{
-  display:grid; gap: var(--space-6);
-  grid-template-columns: minmax(260px, 480px) 1fr;
-  align-items:start;
-  background:var(--surface-2);
-  border:1px solid var(--stroke);
-  border-radius:var(--radius-xl);
-  box-shadow:var(--shadow);
-  padding: var(--space-6);
-}
-.collections-page .history-block img{
-  border-radius:var(--radius-lg);
-  border:1px solid var(--stroke);
-  box-shadow:0 12px 24px rgba(0,0,0,.35);
-}
-.collections-page .history-block p,
-.collections-page .history-block li{
-  text-align:left;
-}
-.collections-page .fact-title{
-  margin-top:var(--space-4);
-  color:var(--text-strong);
-  font-weight:700;
-}
-.collections-page .facts p{ margin:.35rem 0; }
-
-/* Back link under Histories list */
-.collections-page .back-link{
-  display:inline-block; margin-top:var(--space-6);
-  color:var(--link);
-}
-
-/* ------------------------------
-   8) Buttons / Chips
-   ------------------------------ */
-.collections-page .btn{
-  display:inline-flex; align-items:center; gap:.6ch;
-  padding:.6rem 1rem; border-radius:var(--radius-md);
-  border:1px solid var(--chip-border);
-  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
-  color:var(--text-strong);
-  text-decoration:none; cursor:pointer;
-  transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
-}
-.collections-page .btn:hover{ transform: translateY(-1px); border-color:#ffd166; }
-.collections-page .btn.secondary{
-  background: linear-gradient(180deg, rgba(139,94,52,.24), rgba(139,94,52,.12));
-  border-color: rgba(139,94,52,.45);
-}
-
-/* ------------------------------
-   9) Utilities
-   ------------------------------ */
-.collections-page .center{ text-align:center; }
-.collections-page .muted{ color:var(--text-muted); }
-.collections-page .flow > * + *{ margin-top:var(--space-4); }
-.collections-page .hidden{ display:none !important; }
-
-/* ------------------------------
-   10) Accessibility
-   ------------------------------ */
-/* Skip link (if you include one on this page) */
-.collections-page .skip-link{
-  position:absolute; left:-9999px; top:0;
-}
-.collections-page .skip-link:focus{
-  left:1rem; top:1rem;
-  background:#1b120b; color:var(--text-strong);
-  border:2px solid var(--focus); border-radius:8px;
-  padding:.4rem .6rem; z-index:10000;
-}
-
-/* ------------------------------
-   11) Responsive tweaks
-   ------------------------------ */
-@media (max-width: 860px){
-  .collections-page .history-block{ grid-template-columns:1fr; }
-  .collections-page .collection-card{ min-height:300px; }
-}
-
-
+.collection-card .title{
+  ma
