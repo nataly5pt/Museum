@@ -1,88 +1,148 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Shop — Museum of Wonder</title>
-  <link rel="stylesheet" href="/Museum/css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Souvenir Shop — Museum of Wonder</title>
+
+  <!-- Site styles -->
+  <link rel="stylesheet" href="/Museum/css/style.css" />
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ===== Header / Nav ===== -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a href="/Museum/" class="brand">Museum of Wonder</a>
+      <a class="brand" href="/Museum/">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
         <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
+        <li><a href="/Museum/html/cart.html">Cart</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- ===== Main ===== -->
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Souvenir Shop</h1>
-      <p class="ai-notice">The content in this shop was entirely created by AI under human direction, then curated and edited by a human. Prices in USD.</p>
+      <p class="ai-notice">
+        The content in this shop was entirely created by AI under human direction, then curated and edited by a human. Prices in USD.
+      </p>
 
-      <article class="product card">
-        <figure class="media-frame">
-          <img src="/Museum/images/shop/souvenir-shop.jpg" alt="Warm-toned vintage shop interior full of curios">
-        </figure>
-        <div>
-          <h2>Curios Postcard Pack</h2>
-          <p>Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
-          <p class="price">$9.95</p>
-          <button class="buy" type="button">Add Postcard Pack to Cart</button>
+      <!-- Optional View Cart button near the title (kept only on the shop page) -->
+      <p>
+        <button class="cart-btn" id="viewCartBtn" onclick="location.href='/Museum/html/cart.html'">View Cart</button>
+      </p>
+
+      <!-- Products grid -->
+      <section aria-labelledby="souvenir-title">
+        <h2 id="souvenir-title" class="visually-hidden">Shop Items</h2>
+
+        <!-- Reuse your site’s responsive grid class -->
+        <div class="card-grid">
+
+          <!-- 1) Curios Postcard Pack -->
+          <article class="souvenir-card"
+                   data-id="postcards"
+                   data-name="Curios Postcard Pack"
+                   data-price="9.95"
+                   data-image="/Museum/images/souvenir-shop.jpg">
+            <figure class="media-frame" style="aspect-ratio: 16/9;">
+              <img src="/Museum/images/souvenir-shop.jpg"
+                   alt="A cozy souvenir shop interior filled with curios and lamps">
+            </figure>
+            <div class="content">
+              <h3>Curios Postcard Pack</h3>
+              <p>Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
+              <p class="price"><strong>$9.95</strong></p>
+              <div class="actions">
+                <button class="add-btn">Add Postcard Pack to Cart</button>
+                <span class="qty-badge" aria-live="polite"></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 2) Celestial Inkstone -->
+          <article class="souvenir-card"
+                   data-id="inkstone"
+                   data-name="Celestial Inkstone"
+                   data-price="14.95"
+                   data-image="/Museum/images/celestial-inkstone.jpg">
+            <figure class="media-frame" style="aspect-ratio: 4/3;">
+              <img src="/Museum/images/celestial-inkstone.jpg"
+                   alt="Celestial inkstone with constellation-like flecks">
+            </figure>
+            <div class="content">
+              <h3>Celestial Inkstone</h3>
+              <p>Pigment-making platform, possibly astronomical in function.</p>
+              <p class="price"><strong>$14.95</strong></p>
+              <div class="actions">
+                <button class="add-btn">Add Inkstone to Cart</button>
+                <span class="qty-badge" aria-live="polite"></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 3) Spiral Claw Fossil -->
+          <article class="souvenir-card"
+                   data-id="fossil"
+                   data-name="Spiral Claw Fossil"
+                   data-price="21.25"
+                   data-image="/Museum/images/spiral-claw-fossil.jpg">
+            <figure class="media-frame" style="aspect-ratio: 4/3;">
+              <img src="/Museum/images/spiral-claw-fossil.jpg"
+                   alt="A fossil with spiral claw formations">
+            </figure>
+            <div class="content">
+              <h3>Spiral Claw Fossil</h3>
+              <p>Specimen with striking spiral growth; origin under study.</p>
+              <p class="price"><strong>$21.25</strong></p>
+              <div class="actions">
+                <button class="add-btn">Add Fossil to Cart</button>
+                <span class="qty-badge" aria-live="polite"></span>
+              </div>
+            </div>
+          </article>
+
+          <!-- 4) Marker Arch Fragment -->
+          <article class="souvenir-card"
+                   data-id="arch-fragment"
+                   data-name="Marker Arch Fragment"
+                   data-price="13.55"
+                   data-image="/Museum/images/marker-arch-fragment.jpg">
+            <figure class="media-frame" style="aspect-ratio: 4/3;">
+              <img src="/Museum/images/marker-arch-fragment.jpg"
+                   alt="A carved fragment from a ceremonial arch">
+            </figure>
+            <div class="content">
+              <h3>Marker Arch Fragment</h3>
+              <p>Purpose was ceremonial or calendrical; imagery in invocation tablet style.</p>
+              <p class="price"><strong>$13.55</strong></p>
+              <div class="actions">
+                <button class="add-btn">Add Arch Fragment to Cart</button>
+                <span class="qty-badge" aria-live="polite"></span>
+              </div>
+            </div>
+          </article>
+
         </div>
-      </article>
-
-      <article class="product card">
-        <figure class="media-frame">
-          <img src="/Museum/images/celestial-inkstone.jpg" alt="Celestial themed inkstone">
-        </figure>
-        <div>
-          <h2>Celestial Inkstone</h2>
-          <p>Stone ink dish etched with star paths—functional and beautiful.</p>
-          <p class="price">$18.00</p>
-          <button class="buy" type="button">Add Celestial Inkstone to Cart</button>
-        </div>
-      </article>
-
-      <article class="product card">
-        <figure class="media-frame">
-          <img src="/Museum/images/marker-arch-fragment.jpg" alt="Marker arch fragment replica">
-        </figure>
-        <div>
-          <h2>Marker Arch Fragment</h2>
-          <p>Resin replica of a field marker fragment—great on a bookshelf.</p>
-          <p class="price">$24.00</p>
-          <button class="buy" type="button">Add Marker Arch Fragment to Cart</button>
-        </div>
-      </article>
-
-      <article class="product card">
-        <figure class="media-frame">
-          <img src="/Museum/images/spiral-claw-fossil.jpg" alt="Spiral claw fossil replica">
-        </figure>
-        <div>
-          <h2>Spiral Claw Fossil</h2>
-          <p>Stone spiral replica cast from an original impression.</p>
-          <p class="price">$22.25</p>
-          <button class="buy" type="button">Add Spiral Claw Fossil to Cart</button>
-        </div>
-      </article>
-
-      <p class="back-link"><a href="/Museum/">← Back to Home</a></p>
+      </section>
     </div>
   </main>
 
   <footer class="site-footer container">
     <p>© Museum of Wonder</p>
   </footer>
+
+  <!-- Shop behavior: increments qty and writes to localStorage (CART_KEY) -->
+  <script src="/Museum/js/shop.js" defer></script>
 </body>
 </html>
+
 
 
 
