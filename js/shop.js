@@ -1,84 +1,78 @@
-/* shop.js — renders products and wires Add to Cart */
+/* shop.js — buttons with data-* attrs call addToCart(this) */
 "use strict";
 
-// Try to load from ../data/products.json, but fall back to this list if not found.
-// You can change titles/prices/images freely.
-const FALLBACK_PRODUCTS = [
-  {
-    id: 1,
-    title: "Celestial Inkstone",
-    price: 24.00,
-    image: "../images/celestial-inkstone.jpg"
-  },
-  {
-    id: 2,
-    title: "Marker Arch Fragment",
-    price: 18.50,
-    image: "../images/marker-arch-fragment.jpg"
-  },
-  {
-    id: 3,
-    title: "Spiral Claw Fossil",
-    price: 32.00,
-    image: "../images/spiral-claw-fossil.jpg"
-  }
-  // Add more later if you like
-];
+const CART_KEY = "museumCartV1";
 
-const $ = (sel, root=document) => root.querySelector(sel);
-
-async function getProducts() {
-  // If you create /Museum/data/products.json later, it will auto-load.
-  // Example JSON structure:
-  // [{ "id": 1, "title": "Name", "price": 19.99, "image": "../images/xxx.jpg" }, ...]
-  try {
-    const res = await fetch("../data/products.json", { cache: "no-store" });
-    if (!res.ok) throw new Error("No products.json");
-    const data = await res.json();
-    if (!Array.isArray(data) || !data.length) throw new Error("Empty list");
-    return data;
-  } catch {
-    return FALLBACK_PRODUCTS;
-  }
+// read/write cart
+function readCart() {
+  try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+  catch { return []; }
+}
+function writeCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
-function renderProducts(products) {
-  const grid = $("#product-grid");
-  if (!grid) return;
+// navbar count
+function updateCartCount() {
+  const countEl = document.querySelector("#cart-count");
+  if (!countEl) return;
+  const total = readCart().reduce((n, it) => n + it.qty, 0);
+  countEl.textContent = total;
+}
 
-  grid.innerHTML = products.map(p => `
-    <article class="card product" data-id="${p.id}">
-      <div class="img-wrap">
-        <img src="${p.image}" alt="${p.title}">
-      </div>
-      <div class="body">
-        <h3 class="title">${p.title}</h3>
-        <p class="price">$${Number(p.price).toFixed(2)}</p>
-        <button class="btn-add">Add to Cart</button>
-      </div>
-    </article>
-  `).join("");
+// called from the button: onclick="addToCart(this)"
+function addToCart(btn) {
+  const id = String(btn.dataset.id);
+  const name = btn.dataset.name;
+  const unitPrice = Number(btn.dataset.price);
+  const image = btn.dataset.image;
 
-  grid.addEventListener("click", (e) => {
-    const card = e.target.closest(".product");
+  let cart = readCart();
+  const idx = cart.findIndex(it => String(it.id) === id);
+  if (idx >= 0) {
+    cart[idx].qty += 1;
+  } else {
+    cart.push({ id, name, unitPrice, qty: 1, image });
+  }
+  writeCart(cart);
+
+  // update this card's qty badge
+  const card = btn.closest(".souvenir-item, .product, .card");
+  if (card) {
+    const badge = card.querySelector(".qty-badge");
+    if (badge) {
+      const item = cart.find(it => String(it.id) === id);
+      badge.textContent = item ? `Qty: ${item.qty}` : "";
+      badge.setAttribute("aria-live", "polite");
+    }
+  }
+
+  updateCartCount();
+  // optional tiny feedback
+  btn.disabled = true;
+  const old = btn.textContent;
+  btn.textContent = "Added!";
+  setTimeout(() => { btn.textContent = old; btn.disabled = false; }, 700);
+}
+
+// On load, sync all qty badges (in case user returns from cart)
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = readCart();
+  document.querySelectorAll("[data-id]").forEach(btn => {
+    const id = String(btn.dataset.id);
+    const item = cart.find(it => String(it.id) === id);
+    if (!item) return;
+    const card = btn.closest(".souvenir-item, .product, .card");
     if (!card) return;
-    if (!e.target.matches(".btn-add")) return;
-
-    const id = Number(card.dataset.id);
-    const p = products.find(x => x.id === id);
-    if (!p) return;
-
-    window.Cart.add(p, 1);
-    // Optional: little confirmation
-    e.target.textContent = "Added!";
-    setTimeout(() => (e.target.textContent = "Add to Cart"), 800);
+    const badge = card.querySelector(".qty-badge");
+    if (badge) badge.textContent = `Qty: ${item.qty}`;
   });
-}
-
-document.addEventListener("DOMContentLoaded", async () => {
-  const products = await getProducts();
-  renderProducts(products);
+  updateCartCount();
 });
+
+// Make addToCart global for inline onclick
+window.addToCart = addToCart;
+
 
 
 
