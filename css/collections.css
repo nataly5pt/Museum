@@ -1,258 +1,328 @@
-/* =========================================================
-   Museum — Collections + Histories
-   Colorful gradient background + glass cards + clean modal
-   ========================================================= */
+/* ==========================================================================
+   Museum · Collections Page Styles (Savanna palette)
+   File: css/collections.css
+   Scope: add class="collections-page" to <body> on collections.html
+   ========================================================================== */
 
-/* ---------- Theme tokens ---------- */
-:root{
-  /* Core colors */
-  --bg-deep: #0b0f1b;
-  --bg-1: #1a1446;      /* violet midnight */
-  --bg-2: #0d2136;      /* deep blue */
-  --blob-1: #7c3aed;    /* purple */
-  --blob-2: #22d3ee;    /* cyan */
-  --blob-3: #06b6d4;    /* teal */
-
-  --text-strong: #f5f7ff;
-  --text: #e6e8f2;
-  --text-muted: #b8bed2;
-
-  --card-bg: rgba(255,255,255,0.06);
-  --card-stroke: rgba(255,255,255,0.18);
-  --card-shadow: 0 10px 30px rgba(0,0,0,.45);
-
-  --accent: #82ffe2;       /* for focus/hover rings */
-  --pill-bg: rgba(255,255,255,0.10);
-  --pill-hover: rgba(255,255,255,0.18);
-
-  --radius-lg: 18px;
-  --radius-md: 14px;
-
-  --space-1: .5rem;
-  --space-2: .75rem;
-  --space-3: 1rem;
-  --space-4: 1.25rem;
-  --space-6: 2rem;
-
-  --max-text: 70ch;       /* readability line length */
+/* ------------------------------
+   0) Base + Motion safety
+   ------------------------------ */
+.collections-page *,.collections-page *::before,.collections-page *::after{
+  box-sizing:border-box;
 }
-
-/* ---------- Global background ---------- */
-html, body{
-  height: 100%;
-  background:
-    radial-gradient(1200px 900px at -10% -20%, var(--blob-1) 0%, transparent 45%),
-    radial-gradient(900px 800px at 110% 10%, var(--blob-2) 0%, transparent 38%),
-    radial-gradient(1000px 900px at 50% 120%, var(--blob-3) 0%, transparent 45%),
-    linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-deep));
-  background-attachment: fixed;
-  color: var(--text);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* soft “stars/noise” overlay */
-body::after{
-  content:"";
-  position: fixed; inset: 0;
-  pointer-events: none;
-  background-image:
-    radial-gradient(#ffffff10 1px, transparent 1px);
-  background-size: 3px 3px;
-  opacity: .07;
-  mix-blend-mode: screen;
-}
-
-/* ---------- Typography & layout helpers ---------- */
-main{
-  width: min(1200px, 92vw);
-  margin-inline: auto;
-  padding: var(--space-6) 0 var(--space-6);
-}
-
-h1,h2,h3{
-  color: var(--text-strong);
-  letter-spacing: .2px;
-}
-
-p, li { max-width: var(--max-text); }
-
-/* Tip line under subnav */
-.tip{
-  color: var(--text-muted);
-  margin: var(--space-3) 0 var(--space-2);
-}
-
-/* ---------- Sub-navigation pills (Archaeology / Anthropology / Histories) ---------- */
-.subnav,
-.subnav * { box-sizing: border-box; }
-
-.subnav{
-  display: flex;
-  gap: .6rem;
-  flex-wrap: wrap;
-  margin: .25rem 0 1rem;
-}
-
-.subnav button,
-.subnav a{
-  appearance: none;
-  border: 1px solid var(--card-stroke);
-  background: var(--pill-bg);
-  color: var(--text);
-  padding: .45rem .9rem;
-  border-radius: 999px;
-  font-weight: 600;
-  letter-spacing: .2px;
-  cursor: pointer;
-  transition: background .25s ease, transform .04s ease;
-  text-decoration: none;
-}
-
-.subnav button:hover,
-.subnav a:hover{ background: var(--pill-hover); }
-.subnav .active{ outline: 2px solid var(--accent); outline-offset: 2px; }
-
-/* ---------- Collection cards grid ---------- */
-.collections-grid{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 1.25rem;
-  margin-block: 1.25rem 2.25rem;
-}
-
-.card{
-  background: var(--card-bg);
-  border: 1px solid var(--card-stroke);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--card-shadow);
-  overflow: hidden;
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 16px 44px rgba(0,0,0,.55);
-  border-color: rgba(255,255,255,.28);
-}
-
-/* Images inside cards */
-.card img{
-  width: 100%;
-  height: 240px;
-  object-fit: cover;
-  display: block;
-  filter: saturate(.98) contrast(1.05);
-  background: #0b0f1b;
-}
-
-/* Caption under image */
-.card .caption{
-  padding: .85rem 1rem 1rem;
-  color: var(--text-muted);
-  font-weight: 600;
-}
-
-/* ---------- “Click images…” helper text ---------- */
-.collections-lead{
-  color: var(--text-muted);
-  margin: .5rem 0 1.5rem;
-}
-
-/* ---------- Modal (text only) ---------- */
-.modal{
-  position: fixed; inset: 0;
-  display: none;                  /* opened via JS */
-  background: linear-gradient(0deg, rgba(3,5,13,.9), rgba(3,5,13,.75));
-  z-index: 1000;
-}
-.modal:focus{ outline: none; }
-
-.modal .modal-content{
-  width: min(760px, 92vw);
-  margin: 8vh auto;
-  background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--card-stroke);
-  border-radius: 20px;
-  box-shadow: 0 24px 80px rgba(0,0,0,.65);
-  padding: 1.25rem 1.25rem 1.4rem;
-  color: var(--text);
-}
-
-.close-modal{
-  border: 1px solid var(--card-stroke);
-  background: var(--pill-bg);
-  color: var(--text);
-  border-radius: 10px;
-  padding: .35rem .6rem;
-  cursor: pointer;
-  float: right;
-  transition: background .2s ease, transform .04s ease;
-}
-.close-modal:hover{ background: var(--pill-hover); }
-
-#modal-body h2, #modal-body h3{ margin-top: .25rem; }
-#modal-body p{ color: var(--text); }
-
-/* ---------- Histories section ---------- */
-#histories{
-  margin-top: 2.25rem;
-}
-
-.history-block{
-  display: grid;
-  grid-template-columns: 1.1fr 1.6fr;
-  gap: 1.25rem;
-  background: var(--card-bg);
-  border: 1px solid var(--card-stroke);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--card-shadow);
-  padding: 1rem;
-}
-
-.history-block + .history-block{ margin-top: 1.25rem; }
-
-.history-block img{
-  width: 100%;
-  height: 360px;
-  object-fit: cover;
-  border-radius: var(--radius-md);
-  background: #0b0f1b;
-}
-
-.history-copy h3{ margin: .25rem 0 .75rem; }
-.history-copy h4{ margin: 1rem 0 .25rem; color: var(--text-strong); }
-.history-copy p{ color: var(--text); line-height: 1.6; }
-
-/* ---------- Buttons/links in content ---------- */
-.btn,
-.history-copy a.button{
-  display: inline-block;
-  border: 1px solid var(--card-stroke);
-  background: var(--pill-bg);
-  color: var(--text);
-  padding: .55rem .95rem;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  margin-top: .75rem;
-  transition: background .2s ease, transform .04s ease;
-}
-.btn:hover,
-.history-copy a.button:hover{ background: var(--pill-hover); }
-
-/* ---------- Accessibility: focus ring ---------- */
-a:focus, button:focus, .close-modal:focus{
-  outline: 2px solid var(--accent);
-  outline-offset: 2px;
-}
-
-/* ---------- Motion preference ---------- */
 @media (prefers-reduced-motion: reduce){
-  * { transition: none !important; }
+  .collections-page *{
+    animation-duration:0.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:0.01ms!important;
+    scroll-behavior:auto!important;
+  }
 }
+
+/* ------------------------------
+   1) Theme tokens (savanna)
+   ------------------------------ */
+.collections-page{
+  --sav-bg-deep:#0f0804;
+  --sav-bg-1:#24160d;
+  --sav-bg-2:#1a1109;
+
+  --sun-1:#f2b705;   /* warm yellow */
+  --sun-2:#dfa114;   /* ochre */
+  --sun-3:#d97706;   /* amber */
+  --clay:#8b5e34;    /* brown clay */
+  --leaf:#5f6f52;    /* muted olive */
+
+  --text:#f6edd3;
+  --text-strong:#fff7d6;
+  --text-muted:#e4d7ae;
+
+  --surface:rgba(255,244,214,.06);
+  --surface-2:rgba(255,244,214,.10);
+  --stroke:rgba(255,244,214,.18);
+  --shadow:0 10px 34px rgba(21,10,4,.55);
+
+  --link:#ffd166;
+  --focus:#ffd166;
+
+  --chip-bg:rgba(242,183,5,.18);
+  --chip-border:rgba(242,183,5,.35);
+
+  --radius-xl:18px;
+  --radius-lg:14px;
+  --radius-md:10px;
+  --container:1200px;
+
+  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+  --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem;
+}
+
+/* Background (page-only) */
+.collections-page{
+  color:var(--text);
+  background:
+    radial-gradient(1100px 800px at -10% -10%, var(--sun-1) 55%, transparent 45%),
+    radial-gradient(900px 700px at 110% 0%,  var(--sun-3) 60%, transparent 40%),
+    radial-gradient(900px 800px at 50% 120%, var(--clay) 44%, transparent 50%),
+    linear-gradient(180deg, var(--sav-bg-1), var(--sav-bg-2) 55%, var(--sav-bg-deep));
+  background-attachment: fixed;
+  min-height:100dvh;
+}
+
+/* Subtle dust overlay */
+.collections-page::after{
+  content:""; position:fixed; inset:0; pointer-events:none;
+  background-image: radial-gradient(#ffd16622 1px, transparent 1px);
+  background-size:3px 3px; opacity:.08; mix-blend-mode:screen; z-index:0;
+}
+
+/* Container helper (local to page) */
+.collections-page .container{
+  width:min(100%, var(--container));
+  margin-inline:auto;
+  padding-inline:var(--space-4);
+  position:relative; z-index:1;
+}
+
+/* Links + focus */
+.collections-page a{ color:var(--link); text-decoration:none; }
+.collections-page a:hover{ text-decoration:underline; }
+.collections-page :focus-visible{
+  outline:3px solid var(--focus); outline-offset:3px;
+}
+
+/* ------------------------------
+   2) Page header + tip
+   ------------------------------ */
+.collections-page h1{
+  margin: var(--space-8) 0 var(--space-3);
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+  color:var(--text-strong);
+  letter-spacing:.02em;
+}
+.collections-page .banner{
+  background: rgba(255, 244, 214, .06);
+  border:1px dashed var(--stroke);
+  padding:.6rem .8rem;
+  border-radius:var(--radius-md);
+  color:var(--text-muted);
+}
+.collections-page .tip{
+  margin: var(--space-6) 0 var(--space-4);
+  color:var(--text-muted);
+  font-size:.95rem;
+}
+
+/* ------------------------------
+   3) Sub-navigation tabs
+   ------------------------------ */
+.collections-page .subnav{
+  display:flex; gap:.6rem; align-items:center;
+  margin: var(--space-4) 0 var(--space-3);
+  flex-wrap: wrap;
+}
+.collections-page .tab{
+  padding:.55rem .9rem; border-radius:999px;
+  border:1px solid var(--chip-border);
+  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
+  color:var(--text-strong);
+  cursor:pointer; user-select:none;
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.collections-page .tab:hover{ transform:translateY(-1px); border-color:#ffd166; }
+.collections-page .tab[aria-current="page"],
+.collections-page .tab.is-active{
+  background: linear-gradient(180deg, rgba(242,183,5,.32), rgba(242,183,5,.15));
+  border-color:#ffd166;
+}
+
+/* ------------------------------
+   4) Section headings
+   ------------------------------ */
+.collections-page h2{
+  margin: var(--space-6) 0 var(--space-2);
+  font-size: clamp(1.5rem, 2vw + .75rem, 2.125rem);
+  color:var(--text-strong);
+}
+
+/* ------------------------------
+   5) Collections grid + cards
+   ------------------------------ */
+.collections-page .collection-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(14px, 2.4vw, 22px);
+  margin: var(--space-6) 0 var(--space-8);
+}
+
+.collections-page .collection-card{
+  position:relative;
+  background:var(--surface);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  min-height:340px; overflow:hidden;
+  display:flex; flex-direction:column; justify-content:flex-end;
+  transition:border-color .25s ease, transform .25s ease;
+}
+.collections-page .collection-card:hover{
+  transform: translateY(-2px);
+  border-color:#ffd166aa;
+}
+
+/* Images fill the card */
+.collections-page .collection-card img{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  filter: saturate(.9) contrast(1.05) brightness(.9);
+  transition: transform .35s ease, filter .35s ease;
+}
+.collections-page .collection-card:hover img{
+  transform: scale(1.04);
+  filter: saturate(1.05) contrast(1.1) brightness(.95);
+}
+
+/* Title overlay */
+.collections-page .collection-card .title{
+  position:relative; z-index:1;
+  background: linear-gradient(0deg, rgba(18,11,7,.85), rgba(18,11,7,0));
+  padding: 90px var(--space-5) var(--space-5);
+  color:var(--text-strong);
+  font-weight:600;
+}
+
+/* Make clickable tiles clearly interactive */
+.collections-page .collection-card [data-modal-target],
+.collections-page .collection-card a{
+  cursor:pointer;
+}
+
+/* ------------------------------
+   6) Modal (text-only)
+   ------------------------------ */
+.collections-page .modal{
+  position:fixed; inset:0; display:none;
+  background: rgba(5,3,2,.65);
+  padding: clamp(12px, 3vw, 24px);
+  z-index: 999;
+}
+.collections-page .modal-content{
+  position:relative;
+  width:min(880px, 100%); margin:auto;
+  background: linear-gradient(180deg, rgba(25,16,10,.96), rgba(19,12,8,.96));
+  color:var(--text);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  padding: clamp(18px, 3.5vw, 28px);
+}
+.collections-page .close-modal{
+  position:absolute; top:10px; right:10px;
+  width:38px; height:38px; border-radius:999px;
+  display:grid; place-items:center;
+  border:1px solid var(--chip-border);
+  background:var(--chip-bg);
+  color:var(--text-strong);
+  cursor:pointer;
+}
+.collections-page .close-modal:hover{ border-color:#ffd166; }
+.collections-page #modal-body h2,
+.collections-page #modal-body h3{ margin-top:.25rem; color:var(--text-strong); }
+.collections-page #modal-body p{ margin:.6rem 0 1rem; text-align:left; }
+.collections-page #modal-body .meta{ font-size:.95rem; color:var(--text-muted); }
+
+/* Handy “spec list” for Material, Function, etc. */
+.collections-page .spec-list{
+  display:grid; gap:.35rem;
+  grid-template-columns: 160px 1fr;
+  margin:.75rem 0 1rem;
+}
+.collections-page .spec-list dt{ color:var(--text-muted); }
+.collections-page .spec-list dd{ margin:0; color:var(--text); }
+
+/* ------------------------------
+   7) Histories section
+   ------------------------------ */
+.collections-page .histories{ margin-top: var(--space-8); }
+.collections-page .history-block{
+  display:grid; gap: var(--space-6);
+  grid-template-columns: minmax(260px, 480px) 1fr;
+  align-items:start;
+  background:var(--surface-2);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius-xl);
+  box-shadow:var(--shadow);
+  padding: var(--space-6);
+}
+.collections-page .history-block img{
+  border-radius:var(--radius-lg);
+  border:1px solid var(--stroke);
+  box-shadow:0 12px 24px rgba(0,0,0,.35);
+}
+.collections-page .history-block p,
+.collections-page .history-block li{
+  text-align:left;
+}
+.collections-page .fact-title{
+  margin-top:var(--space-4);
+  color:var(--text-strong);
+  font-weight:700;
+}
+.collections-page .facts p{ margin:.35rem 0; }
+
+/* Back link under Histories list */
+.collections-page .back-link{
+  display:inline-block; margin-top:var(--space-6);
+  color:var(--link);
+}
+
+/* ------------------------------
+   8) Buttons / Chips
+   ------------------------------ */
+.collections-page .btn{
+  display:inline-flex; align-items:center; gap:.6ch;
+  padding:.6rem 1rem; border-radius:var(--radius-md);
+  border:1px solid var(--chip-border);
+  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
+  color:var(--text-strong);
+  text-decoration:none; cursor:pointer;
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+}
+.collections-page .btn:hover{ transform: translateY(-1px); border-color:#ffd166; }
+.collections-page .btn.secondary{
+  background: linear-gradient(180deg, rgba(139,94,52,.24), rgba(139,94,52,.12));
+  border-color: rgba(139,94,52,.45);
+}
+
+/* ------------------------------
+   9) Utilities
+   ------------------------------ */
+.collections-page .center{ text-align:center; }
+.collections-page .muted{ color:var(--text-muted); }
+.collections-page .flow > * + *{ margin-top:var(--space-4); }
+.collections-page .hidden{ display:none !important; }
+
+/* ------------------------------
+   10) Accessibility
+   ------------------------------ */
+/* Skip link (if you include one on this page) */
+.collections-page .skip-link{
+  position:absolute; left:-9999px; top:0;
+}
+.collections-page .skip-link:focus{
+  left:1rem; top:1rem;
+  background:#1b120b; color:var(--text-strong);
+  border:2px solid var(--focus); border-radius:8px;
+  padding:.4rem .6rem; z-index:10000;
+}
+
+/* ------------------------------
+   11) Responsive tweaks
+   ------------------------------ */
+@media (max-width: 860px){
+  .collections-page .history-block{ grid-template-columns:1fr; }
+  .collections-page .collection-card{ min-height:300px; }
+}
+
 
