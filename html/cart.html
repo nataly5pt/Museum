@@ -1,12 +1,11 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>Your Cart — Museum of Wonder</title>
-  <link rel="stylesheet" href="/Museum/css/style.css" />
+  <link rel="stylesheet" href="/Museum/css/style.css"/>
 </head>
-
 <body class="cart-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -17,8 +16,12 @@
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li><a aria-current="page" href="/Museum/html/cart.html">Cart</a></li>
         <li><a href="/Museum/html/shop.html">Shop</a></li>
+        <li>
+          <a href="/Museum/html/cart.html" class="pill" aria-current="page">
+            Cart <span id="cart-count">0</span>
+          </a>
+        </li>
       </ul>
     </nav>
   </header>
@@ -26,9 +29,7 @@
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Your Cart</h1>
-
-      <!-- Single render target -->
-      <div id="cartRoot" class="card"></div>
+      <div id="cart-view" class="card"></div>
     </div>
   </main>
 
@@ -36,10 +37,10 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Non-module JS -->
-  <script src="/Museum/js/cart.js" defer></script>
+  <script src="/Museum/js/cart.js"></script>
 </body>
 </html>
+
 
 
 
