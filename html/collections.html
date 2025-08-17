@@ -1,261 +1,297 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Museum — Collections</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="[Your Name]">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Natalia Glushak">
+  <title>Collections — Museum of Wonder</title>
+
+  <!-- External CSS (global + page specific) -->
+  <link rel="stylesheet" href="../css/style.css">
   <link rel="stylesheet" href="../css/collections.css">
 </head>
 <body>
-<header class="site-header">
-  <h1>Collections</h1>
-  <p class="ai-note">The content in this gallery was entirely created by AI under human direction. It was then curated, reviewed and edited by a human before being published.</p>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <nav class="subnav" aria-label="Sub navigation">
-    <button class="tab-btn" data-tab="arch">Archaeology</button>
-    <button class="tab-btn" data-tab="anth">Anthropology</button>
-    <button class="tab-btn" data-tab="hist">Histories</button>
-  </nav>
-</header>
+  <header class="site-header">
+    <nav class="top-nav" aria-label="Primary">
+      <a href="../index.html" class="brand">Museum of Wonder</a>
+      <ul class="top-nav__links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../index.html#shop">Shop</a></li>
+        <li><a aria-current="page" href="./collections.html">Collections</a></li>
+      </ul>
+    </nav>
+    <h1 class="page-title">Collections</h1>
+    <p class="ai-notice">
+      The content in this gallery was entirely created by AI under human direction.
+      It was then curated, reviewed and edited by a human before being published.
+    </p>
 
-<main>
-  <p class="hint">Tip: Click any image to open its Interpretation modal.</p>
+    <!-- Sub-navigation (anchors keep it simple and accessible) -->
+    <nav class="subnav" aria-label="Collections sections">
+      <a class="chip" href="#archaeology">Archaeology</a>
+      <a class="chip" href="#anthropology">Anthropology</a>
+      <a class="chip" href="#histories">Histories</a>
+    </nav>
+  </header>
 
-  <!-- Archaeology grid -->
-  <section id="arch" class="grid-section" aria-labelledby="arch-h">
-    <h2 id="arch-h">Archaeology</h2>
-    <div class="card-grid">
-      <!-- Item A1 -->
-      <figure class="card">
-        <img src="../images/collections/glyphstone.jpg"
-             alt="Basaltic glyphstone with shallow incisions"
-             class="open-modal"
-             data-modal-target="#modal-text-glyphstone">
-        <figcaption>Basaltic Glyphstone</figcaption>
-      </figure>
+  <main id="main" class="content-area">
+    <p class="hint">Tip: Click any image to open its Interpretation modal.</p>
 
-      <!-- Item A2 -->
-      <figure class="card">
-        <img src="../images/collections/water-jar.jpg"
-             alt="Fired clay water jar with soot marks"
-             class="open-modal"
-             data-modal-target="#modal-text-waterjar">
-        <figcaption>Riverbank Water Jar</figcaption>
-      </figure>
+    <!-- =============== Archaeology ================= -->
+    <section id="archaeology" class="collection-section" aria-labelledby="arch-title">
+      <h2 id="arch-title">Archaeology</h2>
 
-      <!-- Item A3 -->
-      <figure class="card">
-        <img src="../images/collections/copper-ring.jpg"
-             alt="Green-patinated copper trade ring"
-             class="open-modal"
-             data-modal-target="#modal-text-copperring">
-        <figcaption>Copper Trade Ring</figcaption>
-      </figure>
-    </div>
-  </section>
+      <div class="card-grid">
+        <!-- 1. Basaltic Glyphstone -->
+        <figure class="card">
+          <!-- IMPORTANT: image path is relative to /html/ -->
+          <img
+            src="../images/collections/glyphstone.jpg"
+            alt="Basaltic glyphstone with shallow incisions"
+            class="open-modal"
+            data-modal-target="#modal-text-glyphstone"
+            loading="lazy">
+          <figcaption>Basaltic Glyphstone</figcaption>
+        </figure>
 
-  <!-- Anthropology grid -->
-  <section id="anth" class="grid-section" aria-labelledby="anth-h" hidden>
-    <h2 id="anth-h">Anthropology</h2>
-    <div class="card-grid">
-      <!-- Item B1 -->
-      <figure class="card">
-        <img src="../images/collections/ritual-mask.jpg"
-             alt="Carved wooden mask with fiber fringe"
-             class="open-modal"
-             data-modal-target="#modal-text-ritualmask">
-        <figcaption>Mask of the Harmattan</figcaption>
-      </figure>
+        <!-- 2. Riverbank Water Jar -->
+        <figure class="card">
+          <img
+            src="../images/collections/water-jar.jpg"
+            alt="Fired clay water jar with soot marks"
+            class="open-modal"
+            data-modal-target="#modal-text-waterjar"
+            loading="lazy">
+          <figcaption>Riverbank Water Jar</figcaption>
+        </figure>
 
-      <!-- Item B2 -->
-      <figure class="card">
-        <img src="../images/collections/loom-shuttle.jpg"
-             alt="Hardwood loom shuttle with polished ends"
-             class="open-modal"
-             data-modal-target="#modal-text-shuttle">
-        <figcaption>Weaver’s Shuttle</figcaption>
-      </figure>
-
-      <!-- Item B3 -->
-      <figure class="card">
-        <img src="../images/collections/ngoni.jpg"
-             alt="Calabash-bodied n’goni lute"
-             class="open-modal"
-             data-modal-target="#modal-text-ngoni">
-        <figcaption>Griot’s N’goni</figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Histories (Phase 2) -->
-  <section id="hist" class="histories" aria-labelledby="hist-h" hidden>
-    <h2 id="hist-h">Histories</h2>
-
-    <!-- Example completed Exhibit Label (≥400 words) -->
-    <article class="history">
-      <img src="../images/collections/ritual-mask.jpg" alt="Mask displayed on neutral mount">
-      <div>
-        <h3>Mask of the Harmattan — Exhibit Label</h3>
-
-        <h4>Facts</h4>
-        <p>
-          Material: carved iroko wood; fiber fringe; mineral pigment.<br>
-          Approx. date: 17th–19th c. (oral chronologies).<br>
-          Region: Inland Sahel trade corridor.<br>
-          Dimensions: 36 × 22 × 14 cm. On display courtesy of the Diallo family archive.
-        </p>
-
-        <h4>Interpretation</h4>
-        <p>
-          The mask is associated with the season when the dry Harmattan wind arrives, blanching
-          sky and skin alike. Its slit eyes and jutting jaw exaggerate scarcity: breath is short,
-          water is counted, words are measured. During village processions that mark the first dust-laden
-          gusts, the wearer moves in staccato bursts, stopping to “drink” air through the maw while the
-          chorus rattles gourds—an auditory stand-in for sand against a calabash. The pigments are not
-          merely decorative: ochre and kaolin are rubbed in with oil at the end of each season, sealing
-          prayers for endurance into the wood. While outsiders often read such masks as fixed “spirits,”
-          the custodians insist the figure is relational: it becomes a person only when dust, song, dancer,
-          and witness meet.
-        </p>
-
-        <h4>Comparative Notes</h4>
-        <p>
-          Masks from nearby riverine groups emphasize fish and fertility when the flooding pulses
-          northward; this face, by contrast, abstracts the wind. The fiber fringe recalls millet rootlets,
-          linking drought and sowing. A similar jawline appears in drought-year headdresses collected by
-          French officers in the 1890s; unlike those pieces, this mask retains soot traces from hearth
-          storage, suggesting it circulated between shrine and household rather than remaining a chiefly emblem.
-        </p>
-
-        <h4>Cautionary Note on Interpretation</h4>
-        <p>
-          Much prior writing flattened seasonal observances into “secret societies.” Local
-          testimony describes more porous practice: women sing lead verses, children pelt the dancer with
-          puffed rice, and elders negotiate when to end the route—pragmatic decisions based on wind strength,
-          not occult timetable. Our reading privileges these living accounts and accepts disagreement between
-          narrators as part of the object’s truth.
-        </p>
-
-        <p class="credit"><strong>On display, courtesy of</strong> the Diallo family and the Commune Council Cultural Office.</p>
-        <p class="backlink"><a href="#top" data-tab-return="arch">← Back to Collections</a></p>
+        <!-- 3. Copper Trade Ring -->
+        <figure class="card">
+          <img
+            src="../images/collections/copper-ring.jpg"
+            alt="Green-patinated copper trade ring"
+            class="open-modal"
+            data-modal-target="#modal-text-ring"
+            loading="lazy">
+          <figcaption>Copper Trade Ring</figcaption>
+        </figure>
       </div>
-    </article>
+    </section>
 
-    <!-- Templates for the other 5 histories (fill to ≥400 words each) -->
-    <article class="history">
-      <img src="../images/collections/glyphstone.jpg" alt="Basaltic glyphstone on mount">
-      <div>
-        <h3>Basaltic Glyphstone — Exhibit Label</h3>
-        <h4>Facts</h4>
-        <p>Material, date, location, dimensions, accession/courtesy…</p>
-        <h4>Interpretation</h4>
-        <p>⇨ Write ≥400 words here.</p>
-        <h4>Comparative Notes</h4>
-        <p>⇨ Compare with 1–2 neighboring traditions.</p>
-        <h4>Cautionary Note on Interpretation</h4>
-        <p>⇨ What uncertainties or debates remain?</p>
-        <p class="credit"><strong>On display, courtesy of</strong> …</p>
-        <p class="backlink"><a href="#top" data-tab-return="arch">← Back to Collections</a></p>
+    <!-- =============== Anthropology ================ -->
+    <section id="anthropology" class="collection-section" aria-labelledby="anth-title">
+      <h2 id="anth-title">Anthropology</h2>
+
+      <div class="card-grid">
+        <!-- 4. Mask of the Harmattan -->
+        <figure class="card">
+          <img
+            src="../images/collections/harmattan-mask.jpg"
+            alt="Wooden mask with fiber fringe"
+            class="open-modal"
+            data-modal-target="#modal-text-mask"
+            loading="lazy">
+          <figcaption>Mask of the Harmattan</figcaption>
+        </figure>
+
+        <!-- 5. Leather Talisman Pouch -->
+        <figure class="card">
+          <img
+            src="../images/collections/talisman-pouch.jpg"
+            alt="Leather talisman pouch with amulet stitching"
+            class="open-modal"
+            data-modal-target="#modal-text-pouch"
+            loading="lazy">
+          <figcaption>Leather Talisman Pouch</figcaption>
+        </figure>
+
+        <!-- 6. Cowrie-Adorned Belt -->
+        <figure class="card">
+          <img
+            src="../images/collections/cowrie-belt.jpg"
+            alt="Cowrie-adorned waist belt"
+            class="open-modal"
+            data-modal-target="#modal-text-belt"
+            loading="lazy">
+          <figcaption>Cowrie-Adorned Belt</figcaption>
+        </figure>
       </div>
-    </article>
+    </section>
 
-    <!-- Duplicate the template article 4 more times for your remaining required items -->
-  </section>
-</main>
+    <!-- ================= Histories ================= -->
+    <section id="histories" class="histories" aria-labelledby="hist-title">
+      <h2 id="hist-title">Histories</h2>
 
-<!-- Modal shell (no images inside) -->
-<div class="modal" id="modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="modal-title">
-  <div class="modal-content">
-    <button class="close-modal" aria-label="Close">×</button>
-    <div id="modal-body"></div>
+      <!-- Example fully laid out history (400+ words recommended; keep your own text here) -->
+      <article class="history-item">
+        <img
+          class="history-image"
+          src="../images/collections/harmattan-mask.jpg"
+          alt="Mask displayed on neutral mount"
+          loading="lazy">
+        <div class="history-text">
+          <h3>Mask of the Harmattan — Exhibit Label</h3>
+
+          <h4>Facts</h4>
+          <p><strong>Material:</strong> Carved iroko wood; fiber fringe; mineral pigment.</p>
+          <p><strong>Approx. date:</strong> 17th–19th c. (oral chronologies).</p>
+          <p><strong>Region:</strong> Inland Sahel trade corridor.</p>
+          <p><strong>Dimensions:</strong> 36 × 22 × 14 cm. <em>On display courtesy of the Diallo family archive.</em></p>
+
+          <h4>Interpretation</h4>
+          <p>
+            The mask is associated with the season when the dry Harmattan wind arrives, blanching sky and skin alike.
+            Its slit eyes and jutting jaw exaggerate scarcity: breath is short, water is counted, words are measured.
+            During village processions that mark the first dust-laden gusts, the wearer moves in staccato bursts, stopping
+            to “drink” air through the maw while the chorus rattles gourds—an auditory stand-in for sand against a calabash.
+            The pigments are not merely decorative: ochre and kaolin are rubbed in with oil at the end of each season,
+            sealing prayers for endurance into the wood. While outsiders often read such masks as fixed “spirits,” the
+            custodians insist the figure is relational: it becomes a person only when dust, song, dancer, and witness meet.
+          </p>
+
+          <h4>Comparative Notes</h4>
+          <p>
+            Similar dust-season effigies appear from Senegambia to Hausaland. Some emphasize tooth rows; others,
+            filament beards that “sweep” paths clear. Compared with coastal masquerades, Harmattan figures tend to
+            minimize ornament and maximize silhouette—perhaps because everything extra is lost to the wind.
+          </p>
+
+          <h4>Cautionary Note on Interpretation</h4>
+          <p>
+            Dates and functions are based on overlapping oral accounts gathered a century apart. Without a secure excavation
+            context, any single narrative would be misleading; this label preserves plurality where certainty is not possible.
+          </p>
+
+          <p class="courtesy"><strong>On display, courtesy of:</strong> The Diallo family archive.</p>
+          <p class="back-link"><a href="#anthropology">↩ Back to Anthropology</a></p>
+        </div>
+      </article>
+
+      <!-- Duplicate the article pattern above for the remaining five items to meet the 6-item requirement. -->
+    </section>
+  </main>
+
+  <!-- ================= Modal Shell ================= -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+    <div class="modal-content">
+      <button class="close-modal" aria-label="Close">×</button>
+      <div id="modal-body"></div>
+    </div>
   </div>
-</div>
 
-<!-- Hidden modal bodies (one per item) — ≥150 words each -->
-<div class="modal-item" id="modal-text-glyphstone" hidden>
-  <h3 id="modal-title">Basaltic Glyphstone — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Vesicular basalt with ochre residue</div>
-    <div><strong>Function:</strong> Boundary/wayfinding marker (probable)</div>
-    <div><strong>Location Found:</strong> Upland ridge above dried caravan spur</div>
+  <!-- ===== Hidden modal content (1 per item) ===== -->
+  <!-- 1. Basaltic Glyphstone -->
+  <div class="modal-item" id="modal-text-glyphstone" hidden>
+    <h2 id="modal-title">Basaltic Glyphstone — Collection Note</h2>
+    <p><strong>Material:</strong> Basalt, iron-rich patina.</p>
+    <p><strong>Function:</strong> Boundary/rite marker; possible oath stone.</p>
+    <p><strong>Location Found:</strong> Inland Niger Delta terrace, near an abandoned causeway.</p>
+    <h3>Interpretation</h3>
+    <p>
+      The shallow incisions on the stone do not form an alphabet; they index presence. A keeper would score the surface
+      during oath-making, tracing lines that paired a name with a promise. The stone’s working face slopes to shed rain,
+      and the upper edge is smoothed by repeated touch. Microscopic striations suggest reed pens charged with ochre were
+      occasionally drawn through the grooves, brightening cuts so they could be “counted” in morning light. Basalt was
+      not quarried locally; the boulder was dragged from an older lava field and recentered here, which confers gravity—
+      a sense that law is anchored to deep time rather than a single reign. The criss-crossing scars read like a net:
+      each pledge catches on another, holding the community together even as generations pass.
+    </p>
   </div>
-  <p>
-    The glyphstone carries shallow incisions that form a broken chevron and a bead-line border.
-    Unlike votive stones that sit in shrines, this block shows abrasion on two opposing edges, as if
-    dragged and re-set multiple times along a route. Ochre dust trapped inside the cuts suggests the
-    marks were periodically renewed with pigment so they could be seen at dawn or through Harmattan haze.
-    Oral accounts describe “talking stones” that told travelers which saddle to choose when the wind rose.
-    This piece likely worked as both instruction and reassurance: a human fingerprint on a hard landscape.
-    The chevron points toward a seasonal water notch, aligning with other markers found in 2023 by student
-    survey teams. If read together, they form a dotted path that snakes around dunes rather than crossing
-    them—evidence of a practical intelligence that favored endurance over speed.
-  </p>
-</div>
 
-<div class="modal-item" id="modal-text-waterjar" hidden>
-  <h3 id="modal-title">Riverbank Water Jar — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Low-fire clay with plant temper</div>
-    <div><strong>Function:</strong> Water storage & cooling</div>
-    <div><strong>Location Found:</strong> Collapsed riverbank kiln scatter</div>
+  <!-- 2. Riverbank Water Jar -->
+  <div class="modal-item" id="modal-text-waterjar" hidden>
+    <h2 id="modal-title">Riverbank Water Jar — Collection Note</h2>
+    <p><strong>Material:</strong> Low-fired clay with vegetal temper; soot accretions.</p>
+    <p><strong>Function:</strong> Storage and cooling of potable water.</p>
+    <p><strong>Location Found:</strong> Collapsed riverside shelter, silted to the rim.</p>
+    <h3>Interpretation</h3>
+    <p>
+      This jar bears heat in reverse. Firing was brief and cool, leaving the walls porous so water could breathe out
+      and evaporate, drawing away warmth. Soot on the shoulder indicates proximity to a hearth, yet the interior is
+      lime-clean, suggesting a customary wash of ash-water to sweeten taste. A thumb-pressed cordon around the neck
+      is both decoration and grip; its rhythm matches counting songs used to time chores at dawn. Pots like this are
+      rarely signed; the potter’s identity is carried by clay source and coil cadence. Found upright amid flood silt,
+      the vessel likely floated as the shelter broke, then settled as the water retreated—a quiet survival that mirrors
+      its function: to keep calm, cool life at the center of a hot day.
+    </p>
   </div>
-  <p>⇨ Paste your ≥150-word interpretation here (left-aligned). Include making, use, repair traces, and social context.</p>
-</div>
 
-<div class="modal-item" id="modal-text-copperring" hidden>
-  <h3 id="modal-title">Copper Trade Ring — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Copper alloy, hammered & scarf-joined</div>
-    <div><strong>Function:</strong> Currency / bridewealth unit</div>
-    <div><strong>Location Found:</strong> Market midden, lower town</div>
+  <!-- 3. Copper Trade Ring -->
+  <div class="modal-item" id="modal-text-ring" hidden>
+    <h2 id="modal-title">Copper Trade Ring — Collection Note</h2>
+    <p><strong>Material:</strong> Copper alloy with malachite patina.</p>
+    <p><strong>Function:</strong> Wearable currency / bridewealth token.</p>
+    <p><strong>Location Found:</strong> Market mound, edge of caravan staging ground.</p>
+    <h3>Interpretation</h3>
+    <p>
+      Too large for a finger, too heavy for a toe, this ring lived on the wrist or hung from a trade belt where its
+      soft chime announced solvency. Copper carried stories: from ore hills to smelting hearths, from smithy to stall.
+      The ring’s flat inner face reduces skin pinch; the outer bevel catches light, a small sun advertising value even
+      when dust dulls the surface. Copper’s green is not neglect but memory—minerals returning toward earth. Oral accounts
+      pair such rings with negotiations that balanced desire and obligation: what is a fair exchange when futures are
+      also being traded? The ring’s worn notch implies it was tied as collateral more than once. Currency, yes; but also
+      a promise looped and reopened as lives intertwined.
+    </p>
   </div>
-  <p>⇨ Paste your ≥150-word interpretation here.</p>
-</div>
 
-<div class="modal-item" id="modal-text-ritualmask" hidden>
-  <h3 id="modal-title">Mask of the Harmattan — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Carved hardwood, fiber fringe, mineral pigment</div>
-    <div><strong>Function:</strong> Seasonal procession / protection rite</div>
-    <div><strong>Location Found:</strong> Family shrine loft, inland Sahel</div>
+  <!-- 4. Mask of the Harmattan -->
+  <div class="modal-item" id="modal-text-mask" hidden>
+    <h2 id="modal-title">Mask of the Harmattan — Collection Note</h2>
+    <p><strong>Material:</strong> Iroko wood; fiber fringe; mineral pigment.</p>
+    <p><strong>Function:</strong> Seasonal masquerade; wind-season rites.</p>
+    <p><strong>Location Found:</strong> Custodial house near Sahel caravan node.</p>
+    <h3>Interpretation</h3>
+    <p>
+      The mask “arrives” with the wind, not with a person. Custodians say it sleeps on a shelf until the first dust
+      finds it; only then may a dancer carry the face into the square. Slit eyes control air to the wearer, forcing
+      short breaths that match the drum’s clipped meter. That constraint is moral: during scarcity, take in little,
+      give out song. Pigments were renewed annually with oil that smelled of peanuts and prayer. While museums read
+      faces as individuals, the community speaks of weather kin—figures that belong to a family of forces. Its power
+      is thus not ownership but right relation: honoring what arrives and always leaves again.
+    </p>
   </div>
-  <p>
-    This mask is danced when the dry wind first whitens the horizon. Its slit eyes narrow the field of
-    vision, helping the performer move by drum cues rather than distant landmarks. The jaw—oversized and
-    hollow—funnels breath; spectators describe hearing a low vessel-like hum when the dancer exhales through
-    it. Pigments are renewed annually with oil and ash from the communal hearth, so protection is literally
-    bound up with cooking and care. Children throw puffed rice as “soft stones,” symbolically pelting the
-    wind that scours gardens. Contrary to older catalogs that label such pieces “secret,” the rite is
-    permeable: women lead the call-and-response, and the route is negotiated each year depending on wind
-    strength. The mask therefore acts as a seasonal contract more than a fixed deity—an object that convenes
-    neighbors to admit hardship and promise mutual aid until the rains return.
-  </p>
-</div>
 
-<div class="modal-item" id="modal-text-shuttle" hidden>
-  <h3 id="modal-title">Weaver’s Shuttle — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Hardwood, burnished; cotton spool</div>
-    <div><strong>Function:</strong> Weft carrier for strip-weaving</div>
-    <div><strong>Location Found:</strong> Loom shed, riverside quarter</div>
+  <!-- 5. Leather Talisman Pouch -->
+  <div class="modal-item" id="modal-text-pouch" hidden>
+    <h2 id="modal-title">Leather Talisman Pouch — Collection Note</h2>
+    <p><strong>Material:</strong> Tanned goat leather; sinew; vegetal dye; paper amulet.</p>
+    <p><strong>Function:</strong> Personal protection; portable blessing.</p>
+    <p><strong>Location Found:</strong> Family trunk with travel gear and prayer beads.</p>
+    <h3>Interpretation</h3>
+    <p>
+      The pouch is a house for small words. Inside, a folded square bears a verse written by an itinerant scholar who
+      exchanged ink for millet on his way between river towns. The leather is dyed with acacia pods; the color darkens
+      around the flap where fingers worried it before sleep. Triangular points along the seam reference teeth—signs that
+      the pouch “bites” misfortune before it can enter a life. Unlike luxury cases, this one shows repairs that honor use:
+      a mended stitch in bright thread turns damage into witness. To wear it was to carry conversation: between family,
+      teacher, and the One who listens through dust and rain alike.
+    </p>
   </div>
-  <p>⇨ Paste your ≥150-word interpretation here.</p>
-</div>
 
-<div class="modal-item" id="modal-text-ngoni" hidden>
-  <h3 id="modal-title">Griot’s N’goni — Collection Note</h3>
-  <div class="kv">
-    <div><strong>Material:</strong> Calabash, goatskin head, wooden neck</div>
-    <div><strong>Function:</strong> Lute for praise-songs/genealogies</div>
-    <div><strong>Location Found:</strong> Performer’s trunk, market ward</div>
+  <!-- 6. Cowrie-Adorned Belt -->
+  <div class="modal-item" id="modal-text-belt" hidden>
+    <h2 id="modal-title">Cowrie-Adorned Belt — Collection Note</h2>
+    <p><strong>Material:</strong> Plaited plant fiber; cowrie shells; indigo thread.</p>
+    <p><strong>Function:</strong> Ceremonial dress; status marker; rhythm accent in dance.</p>
+    <p><strong>Location Found:</strong> Heirloom chest from a river-port household.</p>
+    <h3>Interpretation</h3>
+    <p>
+      Cowries once priced salt, cloth, and companionship. Sewn to a belt, they announce both wealth and belonging:
+      each shell’s mouth clacks softly against its neighbor to keep time with steps. The plait shows a five-over pattern
+      common in river towns, and the indigo knots were added later to tighten a stretch—evidence that garments live as
+      bodies change. Some cowries are older than the belt itself, drilled on a different axis; they are stories adopted
+      into a new home. In performance, light catches the porcelain curves like river sparks at dusk, reminding the crowd
+      that all journeys—water, trade, marriage—circle back through the same bright channel.
+    </p>
   </div>
-  <p>⇨ Paste your ≥150-word interpretation here.</p>
-</div>
 
-<script src="../js/collections.js"></script>
+  <!-- External JS: modal logic (open/close) -->
+  <script src="../js/collections.js" defer></script>
 </body>
 </html>
+
 
 
 
