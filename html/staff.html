@@ -2,19 +2,127 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="YOUR NAME">
-  <title>Our Staff — Museum of Wonder</title>
-  <!-- Your global site styles -->
-  <link rel="stylesheet" href="/Museum/css/style.css">
-  <!-- Optional: a page-specific stylesheet if you keep one -->
-  <link rel="stylesheet" href="/Museum/css/staff.css">
+  <title>Museum — Staff</title>
+
+  <style>
+    /* ========= Base tokens & utilities (dark theme) ========= */
+    :root{
+      --bg:#0e0f12; --card:#151821; --ink:#e9edf1; --muted:#a9b3c1; --accent:#f5c15c;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font:16px/1.6 system-ui, Segoe UI, Roboto, Arial; background:var(--bg); color:var(--ink)}
+    .wrap{width:min(1100px, 92%); margin:auto; padding:2rem 0}
+    .small{font-size:.9rem; color:var(--muted)}
+    h1,h2,h3{margin:.2em 0 .4em}
+    .badge{font-size:.8rem; font-weight:600; background:color-mix(in srgb, var(--accent) 25%, transparent); color:var(--accent); padding:.15rem .5rem; border:1px solid var(--accent); border-radius:.5rem; margin-left:.5rem}
+    .disclaimer{color:var(--muted); margin-top:.25rem}
+    .sr-only{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0}
+
+    /* Minimal site header/nav so this page looks decent standalone */
+    .site-header{background:linear-gradient(180deg,#1a120a,#120c07 60%, transparent); border-bottom:1px solid rgba(0,0,0,.4)}
+    .top-nav{display:flex; align-items:center; justify-content:space-between; gap:1rem}
+    .brand{font-weight:800; color:#ffe7a8; text-decoration:none; letter-spacing:.2px}
+    .top-nav__links{list-style:none; margin:0; padding:0; display:flex; gap:.5rem}
+    .top-nav__links a{display:inline-block; padding:.45rem .8rem; border-radius:999px; text-decoration:none; color:#ffe7a8; border:1px solid rgba(0,0,0,.25); background:rgba(255,255,255,.04)}
+    .top-nav__links a:hover{background:rgba(255,255,255,.1)}
+    .page-title{font-size:clamp(2rem, 2.8vw + 1rem, 3rem);}
+
+    /* =============== Staff page — Sand palette =============== */
+    :root{
+      --sand-25:#fff9e6;
+      --sand-50:#fff3cc;
+      --sand-100:#fbe5a4;
+      --sand-200:#f5cd6b;
+      --sand-300:#e8b245;
+      --sand-400:#d89a2e;
+      --sand-700:#6a4824;
+      --ink:#22160f;
+      --panel: #3f2c20;
+      --ring: rgba(0,0,0,.18);
+    }
+
+    /* Warm, lighter background just for this page */
+    .theme-sand{
+      color: var(--sand-50);
+      background:
+        radial-gradient(1200px 1200px at -15% -12%, var(--sand-300) 0%, transparent 60%),
+        radial-gradient(900px 900px at 115% -8%,  #d17910 0%, transparent 60%),
+        #1f150d;
+      background-attachment: fixed;
+    }
+
+    /* Header tweaks on sand theme */
+    .page-title{ color:var(--sand-25); text-shadow:0 2px 0 rgba(0,0,0,.25); margin-bottom:.25rem; }
+    .intro{ color:#ffefc7; max-width:62ch; }
+
+    /* Nav chip highlight for this page */
+    .top-nav__links a[aria-current="page"]{
+      background: linear-gradient(180deg, var(--sand-200), var(--sand-300));
+      color:#1b120a;
+      border:1px solid rgba(0,0,0,.25);
+      box-shadow:0 2px 0 rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.18);
+    }
+
+    /* Grid: cap card width so portraits don’t get huge */
+    .team-grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 320px));
+      gap:1rem;
+      justify-content:center;
+      margin-block:1rem 3rem;
+    }
+
+    /* Card */
+    .card{
+      background: linear-gradient(180deg, rgba(255,238,170,.08), rgba(0,0,0,.28));
+      border:1px solid var(--ring);
+      border-radius:20px;
+      padding:.9rem;
+      box-shadow:0 10px 28px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.05);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover{
+      transform: translateY(-3px);
+      box-shadow:0 16px 36px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    /* Portrait: consistent 3:4; image covers without stretching */
+    .portrait-frame{
+      aspect-ratio:3/4;
+      width:100%;
+      overflow:hidden;
+      border-radius:16px;
+      background:#3b2b1f;
+      box-shadow:0 8px 20px rgba(0,0,0,.25);
+      margin-bottom:.65rem;
+    }
+    .portrait-frame>img{
+      width:100%; height:100%;
+      object-fit:cover; object-position:center;
+      display:block;
+    }
+
+    /* Text */
+    .name{ font-size:1.12rem; font-weight:800; color:#ffe6a0; margin:0 0 .1rem; }
+    .role{ color:#fff0c4; font-weight:600; margin:0 0 .4rem; }
+    .bio{  color:#f9e8bf; line-height:1.48; margin:0; }
+
+    /* Footer */
+    .site-footer{ border-top:1px solid var(--ring); padding-block:1.1rem 2.2rem; }
+    .site-footer .tiny{ color:#f6e4b6; }
+
+    /* Media safety */
+    img,picture,video,canvas,svg{ display:block; max-width:100%; }
+  </style>
 </head>
-<body class="staff-page">
-  <a class="skip-link" href="#main">Skip to content</a>
+
+<body class="theme-sand">
+  <a class="sr-only" href="#main">Skip to content</a>
 
   <header class="site-header">
-    <nav class="top-nav container" aria-label="Primary">
+    <div class="top-nav wrap" aria-label="Primary">
       <a href="/Museum/" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
@@ -22,110 +130,92 @@
         <li><a href="/Museum/html/collections.html">Collections</a></li>
         <li><a href="/Museum/html/shop.html">Shop</a></li>
       </ul>
-    </nav>
+    </div>
   </header>
 
-  <main id="main" class="content-area">
-    <div class="container">
-      <h1 class="page-title">Our Staff</h1>
-      <p class="ai-notice">Meet the team behind the exhibits, fieldwork, and preservation efforts.</p>
+  <main id="main" class="wrap" aria-labelledby="team-title">
+    <h1 class="page-title">Our Staff</h1>
+    <p class="intro">Meet the team behind the exhibits, fieldwork, and preservation efforts.</p>
+    <p class="disclaimer small">The images and some biography content were created with AI and curated, reviewed, and edited by a human.</p>
 
-      <section class="staff-grid wrap" aria-labelledby="team-title">
-        <h2 id="team-title" class="sr-only">Museum Staff Profiles</h2>
+    <h2 id="team-title" class="sr-only">Museum Staff Profiles</h2>
 
-        <!-- Amina Selim — Archaeologist (Group A) -->
-        <article class="card staff-card">
-          <figure class="media-frame card-media">
-            <img src="/Museum/images/staff/amina-selim.jpg"
-                 alt="Dr. Amina Selim, field archaeologist in desert regalia with pyramids behind.">
-            <figcaption>Dr. Amina Selim — Archaeologist</figcaption>
-          </figure>
-          <div class="content card-body">
-            <h3>Dr. Amina Selim <span class="badge">Archaeologist</span></h3>
-            <p class="role">Chief Curator &amp; Field Director</p>
-            <p class="expertise"><strong>Expertise:</strong> funerary architecture, ceramic typology, LIDAR/photogrammetry.</p>
-            <p class="bio">Dr. Selim earned her BA at Cairo University and a PhD at the University of Chicago focusing on funerary landscapes.
-              She directs drone and LIDAR surveys to map eroded foundations and is known for meticulous ceramic reconstruction and pigment analysis.
-              Her tool belt mixes field notebooks, a total station, and open-source GIS. Colleagues describe her as precise and relentlessly curious.
-              She publishes in open journals and trains local students in non-destructive methods.</p>
-            <p><strong>Museum role:</strong> Lead curator for <em>River to Sand</em>; field director for the Sahara Corridor Project.</p>
-            <p><strong>Special:</strong> Arabic/English; repatriation &amp; community co-curation; open dig diaries.</p>
-          </div>
-        </article>
+    <section class="team-grid" aria-label="Museum Staff Profiles">
+      <!-- Amina Selim — Archaeologist (Group A) -->
+      <article class="card">
+        <figure class="portrait-frame">
+          <img src="/Museum/images/staff/dr-amina-selim.jpg"
+               alt="Dr. Amina Selim, field archaeologist in desert regalia with pyramids behind.">
+        </figure>
+        <h3 class="name">Dr. Amina Selim</h3>
+        <p class="role">Archaeologist · Chief Curator &amp; Field Director</p>
+        <p class="bio">
+          BA Cairo University; PhD University of Chicago (funerary landscapes). Leads drone/LIDAR surveys to map eroded foundations,
+          known for meticulous ceramic reconstruction and pigment analysis. Blends field notebooks, total station, and open-source GIS.
+          Publishes open access and trains local students in non-destructive methods. Museum role: lead curator for <em>River to Sand</em>;
+          field director, Sahara Corridor Project.
+        </p>
+      </article>
 
-        <!-- Luis Ortega — Anthropologist (Group A) -->
-        <article class="card staff-card">
-          <figure class="media-frame card-media">
-            <img src="/Museum/images/staff/luis-ortega.jpg"
-                 alt="Dr. Luis Ortega, physical anthropologist in suit, city skyline in background.">
-            <figcaption>Dr. Luis Ortega — Physical Anthropologist</figcaption>
-          </figure>
-          <div class="content card-body">
-            <h3>Dr. Luis Ortega <span class="badge">Physical Anthropologist</span></h3>
-            <p class="role">Objects Conservator</p>
-            <p class="expertise"><strong>Expertise:</strong> osteology, trauma/stress markers, isotopic diet analysis; micro-CT.</p>
-            <p class="bio">Dr. Ortega (UNAM; UCLA) studies how migration, diet, and labor leave traces on bone.
-              He pairs micro-CT with stable-isotope sampling to reconstruct life histories ethically.
-              A careful cataloger and thoughtful mentor, he foregrounds descendant consultation and clear public communication.</p>
-            <p><strong>Museum role:</strong> Human Remains Stewardship Lead; repatriation liaison; co-curator of <em>Bodies of Evidence</em>.</p>
-            <p><strong>Special:</strong> Spanish/English bilingual; caption-first lab practices; plain-language labels.</p>
-          </div>
-        </article>
+      <!-- Luis Ortega — Physical Anthropologist (Group A) -->
+      <article class="card">
+        <figure class="portrait-frame">
+          <img src="/Museum/images/staff/luis-ortega.jpg"
+               alt="Dr. Luis Ortega, physical anthropologist in suit, city skyline behind.">
+        </figure>
+        <h3 class="name">Dr. Luis Ortega</h3>
+        <p class="role">Physical Anthropologist · Human Remains Stewardship Lead</p>
+        <p class="bio">
+          UNAM; UCLA — studies how migration, diet, and labor leave traces on bone. Pairs micro-CT with stable-isotope sampling
+          to ethically reconstruct life histories. Careful cataloger and mentor; foregrounds descendant consultation and clear public communication.
+          Co-curator of <em>Bodies of Evidence</em>; repatriation liaison. Spanish/English bilingual; caption-first lab practices.
+        </p>
+      </article>
 
-        <!-- Mei-Lin Zhao — Interpreter (Group B) -->
-        <article class="card staff-card">
-          <figure class="media-frame card-media">
-            <img src="/Museum/images/staff/mei-lin-zhao.jpg"
-                 alt="Prof. Mei-Lin Zhao, mythographer in ceremonial attire with lanterns.">
-            <figcaption>Prof. Mei-Lin Zhao — Mythographer &amp; Cultural Semiotician</figcaption>
-          </figure>
-          <div class="content card-body">
-            <h3>Prof. Mei-Lin Zhao <span class="badge">Interpreter</span></h3>
-            <p class="role">Registrar</p>
-            <p class="expertise"><strong>Discipline:</strong> Mythography &amp; Cultural Semiotics ·
-              <strong>Lens:</strong> Decolonial Museology &amp; Indigenous Storywork.</p>
-            <p class="bio">Zhao holds an MA in Folklore (Taipei) and a DPhil in Museum Studies (Oxford). She collaborates with linguists,
-              weavers, and ritual artists to build exhibitions where objects speak through pattern and gesture.
-              A generous skeptic, she challenges spectacle while protecting wonder.</p>
-            <p><strong>Method:</strong> Cross-reference oral histories/archives; compare motifs; prototype immersive labels;
-              carefully documented AI ritual modeling.</p>
-            <p><strong>Special:</strong> Shared-authority labels; teaches “holding uncertainty”; community review can overturn her drafts—and she welcomes it.</p>
-          </div>
-        </article>
+      <!-- Mei-Lin Zhao — Interpreter (Group B) -->
+      <article class="card">
+        <figure class="portrait-frame">
+          <img src="/Museum/images/staff/mei-lin.jpg"
+               alt="Prof. Mei-Lin Zhao, mythographer in ceremonial attire among lanterns.">
+        </figure>
+        <h3 class="name">Prof. Mei-Lin Zhao</h3>
+        <p class="role">Interpreter · Mythography &amp; Cultural Semiotics</p>
+        <p class="bio">
+          MA Folklore (Taipei); DPhil Museum Studies (Oxford). Collaborates with linguists, weavers, and ritual artists to build
+          exhibitions where objects speak through pattern and gesture. A generous skeptic—challenges spectacle while protecting wonder.
+          Method: cross-reference oral histories and archives, compare motifs, prototype immersive labels, document AI ritual modeling.
+          Special: shared-authority labels; community review can overturn her drafts (welcomed).
+        </p>
+      </article>
 
-        <!-- Optional: Riley Thompson — Community Storyweaver -->
-        <article class="card staff-card">
-          <figure class="media-frame card-media">
-            <img src="/Museum/images/staff/riley-thompson.jpg"
-                 alt="Riley Thompson, digital storyteller against colorful graphic background.">
-            <figcaption>Riley Thompson — Community Storyweaver</figcaption>
-          </figure>
-          <div class="content card-body">
-            <h3>Riley Thompson <span class="badge">Community Storyweaver</span></h3>
-            <p class="role">Learning &amp; Public Programs</p>
-            <p class="expertise"><strong>Expertise:</strong> Data-viz for heritage, accessible interaction design, WebGL maps.</p>
-            <p class="bio">Designer-developer who turns field data into interactive maps and captioned media.
-              Partners with curators to ensure high-contrast palettes, transcripts, and screen-reader-friendly labels.
-              Builds bridges between research, stories, and visitors.</p>
-            <p><strong>Method:</strong> Co-design with artists; builds alt-text libraries; A/B tests readability.</p>
-            <p><strong>Special:</strong> First-gen college grad; open-source advocate.</p>
-          </div>
-        </article>
-      </section>
+      <!-- Riley Thompson — Community Storyweaver -->
+      <article class="card">
+        <figure class="portrait-frame">
+          <img src="/Museum/images/staff/riley-thompson.jpg"
+               alt="Riley Thompson, digital storyteller against vibrant graphic backdrop.">
+        </figure>
+        <h3 class="name">Riley Thompson</h3>
+        <p class="role">Community Storyweaver · Learning &amp; Public Programs</p>
+        <p class="bio">
+          Designer-developer who turns field data into interactive maps and captioned media. Partners with curators to ensure
+          high-contrast palettes, transcripts, and screen-reader-friendly labels. Methods: co-design with artists, alt-text libraries,
+          and A/B readability tests. First-gen college grad; open-source advocate.
+        </p>
+      </article>
+    </section>
 
-      <p class="back-link"><a href="/Museum/">← Back to Home</a></p>
-
-      <p class="disclaimer small">
-        The images and some biography content were created with AI and curated, reviewed, and edited by a human.
-      </p>
-    </div>
+    <p class="small"><a href="/Museum/">← Back to Home</a></p>
   </main>
 
-  <footer class="site-footer container">
-    <p>© Museum of Wonder</p>
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="tiny">“The content on this site was conceived by a human and created with AI under human direction. It was curated, reviewed, and edited by a human before publication.”</p>
+      <p class="tiny">© Museum of Wonder</p>
+    </div>
   </footer>
 </body>
 </html>
+
 
 
 
