@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cart — Museum of Wonder</title>
+  <title>Your Cart — Museum of Wonder</title>
   <link rel="stylesheet" href="/Museum/css/style.css" />
-  <link rel="stylesheet" href="/Museum/css/cart.css" />
 </head>
+
 <body class="cart-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a class="brand" href="/Museum/">Museum of Wonder</a>
+      <a href="/Museum/" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
@@ -23,19 +23,23 @@
     </nav>
   </header>
 
-  <main id="main" class="content-area container">
-    <h1 class="page-title">Your Cart</h1>
+  <main id="main" class="content-area">
+    <div class="container">
+      <h1 class="page-title">Your Cart</h1>
 
-    <!-- cart output goes into this single container via render() -->
-    <div id="cart-root" class="cart-root" aria-live="polite"></div>
+      <!-- Single render target -->
+      <div id="cartRoot" class="card"></div>
+    </div>
   </main>
 
   <footer class="site-footer container">
     <p>© Museum of Wonder</p>
   </footer>
 
+  <!-- Non-module JS -->
   <script src="/Museum/js/cart.js" defer></script>
 </body>
 </html>
+
 
 
