@@ -4,11 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Cart — Museum of Wonder</title>
+
+  <!-- Global site theme -->
   <link rel="stylesheet" href="/Museum/css/style.css">
+  <!-- Page-specific cart styles -->
+  <link rel="stylesheet" href="/Museum/css/cart.css">
 </head>
-<body class="cart-page" onload="render()">
+<body class="cart-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Header / Nav (consistent with site) -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
       <a href="/Museum/" class="brand">Museum of Wonder</a>
@@ -23,12 +28,37 @@
 
   <main id="main" class="content-area">
     <div class="container">
-      <h1 class="page-title">Your Cart</h1>
-      <div id="cartApp" aria-live="polite"></div>
+
+      <div class="cart-header">
+        <h1 class="page-title">Your Cart</h1>
+
+        <!-- Actions -->
+        <div class="cart-actions">
+          <a class="btn" href="/Museum/html/shop.html" id="keepShopping">Keep Shopping</a>
+          <button class="btn btn-ghost" id="clearCart" type="button">Clear Cart</button>
+        </div>
+      </div>
+
+      <!-- Member toggle -->
+      <label class="member-toggle">
+        <input type="checkbox" id="memberCheck" />
+        <span>Apply Member Discount (15%)</span>
+      </label>
+
+      <!-- Live updates for screen readers -->
+      <div class="sr-live" aria-live="polite" aria-atomic="true" id="cartLive"></div>
+
+      <!-- Render target -->
+      <div id="cartMount"></div>
+
     </div>
   </main>
 
-  <footer class="site-footer container"><p>© Museum of Wonder</p></footer>
-  <script src="/Museum/js/cart.js"></script>
+  <footer class="site-footer container">
+    <p>© Museum of Wonder · <a href="/Museum/">Back to Home</a></p>
+  </footer>
+
+  <script src="/Museum/js/cart.js" defer></script>
 </body>
 </html>
+
