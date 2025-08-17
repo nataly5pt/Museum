@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="YOUR NAME">
   <title>Our Staff — Museum of Wonder</title>
+  <!-- Your global site styles -->
   <link rel="stylesheet" href="/Museum/css/style.css">
+  <!-- Optional: a page-specific stylesheet if you keep one -->
+  <link rel="stylesheet" href="/Museum/css/staff.css">
 </head>
 <body class="staff-page">
   <a class="skip-link" href="#main">Skip to content</a>
@@ -26,53 +30,94 @@
       <h1 class="page-title">Our Staff</h1>
       <p class="ai-notice">Meet the team behind the exhibits, fieldwork, and preservation efforts.</p>
 
-      <section class="staff-grid">
+      <section class="staff-grid wrap" aria-labelledby="team-title">
+        <h2 id="team-title" class="sr-only">Museum Staff Profiles</h2>
+
+        <!-- Amina Selim — Archaeologist (Group A) -->
         <article class="card staff-card">
-          <figure class="media-frame">
-            <img src="/Museum/images/staff/dr-amina-selim.jpg" alt="Dr. Amina Selim portrait">
+          <figure class="media-frame card-media">
+            <img src="/Museum/images/staff/amina-selim.jpg"
+                 alt="Dr. Amina Selim, field archaeologist in desert regalia with pyramids behind.">
+            <figcaption>Dr. Amina Selim — Archaeologist</figcaption>
           </figure>
-          <div class="content">
-            <h3>Dr. Amina Selim</h3>
+          <div class="content card-body">
+            <h3>Dr. Amina Selim <span class="badge">Archaeologist</span></h3>
             <p class="role">Chief Curator &amp; Field Director</p>
-            <p class="bio">Oversees acquisitions and leads seasonal surveys along the inland Sahel corridor. Amina champions community-first conservation and open access to findings.</p>
+            <p class="expertise"><strong>Expertise:</strong> funerary architecture, ceramic typology, LIDAR/photogrammetry.</p>
+            <p class="bio">Dr. Selim earned her BA at Cairo University and a PhD at the University of Chicago focusing on funerary landscapes.
+              She directs drone and LIDAR surveys to map eroded foundations and is known for meticulous ceramic reconstruction and pigment analysis.
+              Her tool belt mixes field notebooks, a total station, and open-source GIS. Colleagues describe her as precise and relentlessly curious.
+              She publishes in open journals and trains local students in non-destructive methods.</p>
+            <p><strong>Museum role:</strong> Lead curator for <em>River to Sand</em>; field director for the Sahara Corridor Project.</p>
+            <p><strong>Special:</strong> Arabic/English; repatriation &amp; community co-curation; open dig diaries.</p>
           </div>
         </article>
 
+        <!-- Luis Ortega — Anthropologist (Group A) -->
         <article class="card staff-card">
-          <figure class="media-frame">
-            <img src="/Museum/images/staff/luis-ortega.jpg" alt="Luis Ortega portrait">
+          <figure class="media-frame card-media">
+            <img src="/Museum/images/staff/luis-ortega.jpg"
+                 alt="Dr. Luis Ortega, physical anthropologist in suit, city skyline in background.">
+            <figcaption>Dr. Luis Ortega — Physical Anthropologist</figcaption>
           </figure>
-          <div class="content">
-            <h3>Luis Ortega</h3>
+          <div class="content card-body">
+            <h3>Dr. Luis Ortega <span class="badge">Physical Anthropologist</span></h3>
             <p class="role">Objects Conservator</p>
-            <p class="bio">Specializes in copper alloys, pigments, and stabilized organics. Leads the preventive care program and exhibition mount design.</p>
+            <p class="expertise"><strong>Expertise:</strong> osteology, trauma/stress markers, isotopic diet analysis; micro-CT.</p>
+            <p class="bio">Dr. Ortega (UNAM; UCLA) studies how migration, diet, and labor leave traces on bone.
+              He pairs micro-CT with stable-isotope sampling to reconstruct life histories ethically.
+              A careful cataloger and thoughtful mentor, he foregrounds descendant consultation and clear public communication.</p>
+            <p><strong>Museum role:</strong> Human Remains Stewardship Lead; repatriation liaison; co-curator of <em>Bodies of Evidence</em>.</p>
+            <p><strong>Special:</strong> Spanish/English bilingual; caption-first lab practices; plain-language labels.</p>
           </div>
         </article>
 
+        <!-- Mei-Lin Zhao — Interpreter (Group B) -->
         <article class="card staff-card">
-          <figure class="media-frame">
-            <img src="/Museum/images/staff/mei-lin.jpg" alt="Mei Lin portrait">
+          <figure class="media-frame card-media">
+            <img src="/Museum/images/staff/mei-lin-zhao.jpg"
+                 alt="Prof. Mei-Lin Zhao, mythographer in ceremonial attire with lanterns.">
+            <figcaption>Prof. Mei-Lin Zhao — Mythographer &amp; Cultural Semiotician</figcaption>
           </figure>
-          <div class="content">
-            <h3>Mei Lin</h3>
+          <div class="content card-body">
+            <h3>Prof. Mei-Lin Zhao <span class="badge">Interpreter</span></h3>
             <p class="role">Registrar</p>
-            <p class="bio">Manages records, rights &amp; reproductions, and transit logistics. If it’s cataloged and findable, Mei made sure of it.</p>
+            <p class="expertise"><strong>Discipline:</strong> Mythography &amp; Cultural Semiotics ·
+              <strong>Lens:</strong> Decolonial Museology &amp; Indigenous Storywork.</p>
+            <p class="bio">Zhao holds an MA in Folklore (Taipei) and a DPhil in Museum Studies (Oxford). She collaborates with linguists,
+              weavers, and ritual artists to build exhibitions where objects speak through pattern and gesture.
+              A generous skeptic, she challenges spectacle while protecting wonder.</p>
+            <p><strong>Method:</strong> Cross-reference oral histories/archives; compare motifs; prototype immersive labels;
+              carefully documented AI ritual modeling.</p>
+            <p><strong>Special:</strong> Shared-authority labels; teaches “holding uncertainty”; community review can overturn her drafts—and she welcomes it.</p>
           </div>
         </article>
 
+        <!-- Optional: Riley Thompson — Community Storyweaver -->
         <article class="card staff-card">
-          <figure class="media-frame">
-            <img src="/Museum/images/staff/riley-thompson.jpg" alt="Riley Thompson portrait">
+          <figure class="media-frame card-media">
+            <img src="/Museum/images/staff/riley-thompson.jpg"
+                 alt="Riley Thompson, digital storyteller against colorful graphic background.">
+            <figcaption>Riley Thompson — Community Storyweaver</figcaption>
           </figure>
-          <div class="content">
-            <h3>Riley Thompson</h3>
+          <div class="content card-body">
+            <h3>Riley Thompson <span class="badge">Community Storyweaver</span></h3>
             <p class="role">Learning &amp; Public Programs</p>
-            <p class="bio">Designs curriculum, gallery talks, and hands-on labs for all ages. Builds bridges between research, stories, and visitors.</p>
+            <p class="expertise"><strong>Expertise:</strong> Data-viz for heritage, accessible interaction design, WebGL maps.</p>
+            <p class="bio">Designer-developer who turns field data into interactive maps and captioned media.
+              Partners with curators to ensure high-contrast palettes, transcripts, and screen-reader-friendly labels.
+              Builds bridges between research, stories, and visitors.</p>
+            <p><strong>Method:</strong> Co-design with artists; builds alt-text libraries; A/B tests readability.</p>
+            <p><strong>Special:</strong> First-gen college grad; open-source advocate.</p>
           </div>
         </article>
       </section>
 
       <p class="back-link"><a href="/Museum/">← Back to Home</a></p>
+
+      <p class="disclaimer small">
+        The images and some biography content were created with AI and curated, reviewed, and edited by a human.
+      </p>
     </div>
   </main>
 
@@ -81,6 +126,7 @@
   </footer>
 </body>
 </html>
+
 
 
 
