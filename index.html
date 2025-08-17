@@ -1,61 +1,89 @@
 <!doctype html>
-<html lang="en" class="home-page">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="Natalia Glushak">
-  <title>Museum of Wonder — Home</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <title>Museum of Wonder</title>
+
+  <!-- IMPORTANT: paths are from the site root (no ../ here) -->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- optional: if you created a home-specific css, keep this; otherwise remove -->
+  <!-- <link rel="stylesheet" href="css/home.css"> -->
 </head>
-<body>
+<body class="home-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header container">
     <nav class="top-nav" aria-label="Primary">
-      <a href="./index.html" class="brand">Museum of Wonder</a>
+      <a href="./" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
-        <li><a aria-current="page" href="./index.html">Home</a></li>
-        <li><a href="./staff.html">Staff</a></li>
-        <li><a href="./collections.html">Collections</a></li>
-        <li><a href="./shop.html">Shop</a></li>
+        <li><a aria-current="page" href="./">Home</a></li>
+        <li><a href="html/staff.html">Staff</a></li>
+        <li><a href="html/collections.html">Collections</a></li>
+        <li><a href="html/shop.html">Shop</a></li>
       </ul>
     </nav>
 
     <h1 class="page-title">Welcome to the Museum of Wonder</h1>
-    <p class="eyebrow">
-      A fictitious museum for coursework. Explore staff profiles and our archaeology & anthropology collections.
-      Some content/images were generated with AI and edited by a human.
+    <p class="ai-notice">
+      A fictitious museum for coursework. Explore staff profiles and our
+      archaeology &amp; anthropology collections. Some content/images were
+      generated with AI and edited by a human.
     </p>
   </header>
 
   <main id="main" class="container">
     <h2 class="section-title">Featured Highlights</h2>
 
-    <section class="card-grid" aria-label="Homepage highlights">
+    <section class="card-grid" aria-label="Featured images">
       <figure class="card">
-        <div class="media-frame" style="aspect-ratio: 16/9">
-          <img src="../images/home/ancient-egypt-landscape.jpg" alt="Sunlit desert valley with ancient temples">
+        <div class="media-frame">
+          <!-- PATH FIX: images/home/... -->
+          <img
+            src="images/home/ancient-egypt-landscape.jpg"
+            alt="Sunlit desert valley with ancient temples"
+            loading="lazy">
         </div>
-        <figcaption>Sun Over the Valley</figcaption>
+        <figcaption>Desert Valley — Old Kingdom Route</figcaption>
       </figure>
 
       <figure class="card">
-        <div class="media-frame" style="aspect-ratio: 16/9">
-          <img src="../images/home/ancient-egypt-portalgate.jpg" alt="Monumental doorway and relief carvings">
+        <div class="media-frame">
+          <img
+            src="images/home/ancient-egypt-portalgate.jpg"
+            alt="Stone portal gate with desert beyond"
+            loading="lazy">
         </div>
-        <figcaption>Gateway Reliefs</figcaption>
+        <figcaption>Caravan Gate — Oasis Approach</figcaption>
       </figure>
 
       <figure class="card">
-        <div class="media-frame" style="aspect-ratio: 16/9">
-          <img src="../images/home/pyramids-giza.jpg" alt="Pyramids on the horizon at dusk">
+        <div class="media-frame">
+          <img
+            src="images/home/pyramids-giza.jpg"
+            alt="Pyramids with long evening shadows"
+            loading="lazy">
         </div>
-        <figcaption>Pyramids at Dusk</figcaption>
+        <figcaption>Giza Pyramid Fields at Dusk</figcaption>
       </figure>
     </section>
+
+    <section class="cta card">
+      <h2 class="section-title">Plan Your Visit</h2>
+      <p class="eyebrow">
+        Peek behind the scenes: meet the team on our <a href="html/staff.html">Staff</a> page
+        and browse highlights in the <a href="html/collections.html">Collections</a>.
+      </p>
+    </section>
   </main>
+
+  <footer class="site-footer container">
+    <p>© Museum of Wonder · Coursework project</p>
+  </footer>
 </body>
 </html>
+
 
 
 
