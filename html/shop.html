@@ -1,129 +1,182 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Souvenir Shop — Museum of Wonder</title>
 
-  <!-- IMPORTANT: use a RELATIVE path from /html/ to /css/ -->
+  <!-- CSS: update to ../css/styles.css if your file name is plural -->
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- Header / Nav -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a class="brand" href="/Museum/">Museum of Wonder</a>
+      <a class="brand" href="../index.html">Museum of Wonder</a>
       <ul class="top-nav__links">
-        <li><a href="/Museum/">Home</a></li>
-        <li><a href="/Museum/html/staff.html">Staff</a></li>
-        <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li><a id="navCartLink" href="/Museum/html/cart.html">Cart <span class="cart-count">0</span></a></li>
-        <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="staff.html">Staff</a></li>
+        <li><a href="collections.html">Collections</a></li>
+        <li>
+          <a id="navCartLink" href="cart.html">
+            Cart <span id="cart-count" class="cart-count">0</span>
+          </a>
+        </li>
+        <li><a aria-current="page" href="shop.html" class="active">Shop</a></li>
       </ul>
-      <button class="btn pill" onclick="location.href='/Museum/html/cart.html'">View Cart</button>
+
+      <!-- View Cart button (per instructor example) -->
+      <button class="btn pill" onclick="location.href='cart.html'">View Cart</button>
     </nav>
+
+    <div class="container hero">
+      <h1 class="page-title">Souvenir Shop</h1>
+      <p class="ai-notice">
+        The content in this shop was created under human direction, then curated, reviewed, and edited by a human.
+        Prices in USD.
+      </p>
+      <figure class="banner media-frame" style="aspect-ratio:16/9;">
+        <img src="../images/souvenir-shop.jpg" alt="Warm, golden-lit museum souvenir shop" />
+      </figure>
+    </div>
   </header>
 
   <main id="main" class="content-area">
     <div class="container">
-      <h1 class="page-title">Souvenir Shop</h1>
-      <p class="ai-notice">
-        The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.
-      </p>
+      <!-- Helpful details -->
+      <aside class="shop-notes" aria-label="How checkout works">
+        <p><strong>Checkout math:</strong> volume discount <em>or</em> member discount (not both), then flat shipping,
+        then 10.2% tax on the subtotal. See your totals on the Cart page.</p>
+      </aside>
 
       <h2 class="section-title">Items</h2>
 
-      <!-- Shop grid -->
+      <!-- Products Grid -->
       <section class="shop-grid" aria-label="Shop Items">
-        <!-- Item 1 -->
+
+        <!-- Item 1: Celestial Inkstone -->
         <article class="card shop-card souvenir-item" id="item001">
-          <figure class="media-frame">
-            <img src="../images/celestial-inkstone.jpg" alt="Celestial inkstone on reddish soil" />
+          <figure class="media-frame" style="aspect-ratio:4/3;">
+            <img src="../images/celestial-inkstone.jpg" alt="Celestial inkstone with subtle mineral flecks" />
           </figure>
-          <h3>Celestial Inkstone</h3>
-          <p class="muted">From the Archaeological Collection. Basalt dish with mineral inlay.</p>
-          <div class="price-row">
-            <strong>$14.95</strong>
-            <button class="btn"
-              onclick="addToCart(this)"
-              data-id="item001"
-              data-name="Celestial Inkstone"
-              data-price="14.95"
-              data-image="/Museum/images/celestial-inkstone.jpg">Add to Cart</button>
-          </div>
+          <header>
+            <h3>Celestial Inkstone</h3>
+            <p class="muted">
+              Basalt dish with iridescent inlay, inspired by astronomical pigment trays.
+            </p>
+          </header>
+          <p class="price-row"><strong>$14.95</strong></p>
+
+          <!-- qty badge required by assignment -->
           <span class="qty-badge" aria-live="polite"></span>
+
+          <!-- Add button with data-* for cart -->
+          <button class="btn"
+            onclick="addToCart(this)"
+            data-id="item001"
+            data-name="Celestial Inkstone"
+            data-price="14.95"
+            data-image="../images/celestial-inkstone.jpg">
+            Add Celestial Inkstone to Cart
+          </button>
         </article>
 
-        <!-- Item 2 -->
+        <!-- Item 2: Spiral Claw Fossil -->
         <article class="card shop-card souvenir-item" id="item002">
-          <figure class="media-frame">
-            <img src="../images/spiral-claw-fossil.jpg" alt="Spiral claw fossil close-up" />
+          <figure class="media-frame" style="aspect-ratio:4/3;">
+            <img src="../images/spiral-claw-fossil.jpg" alt="Curled claw fossil replica on dark sand" />
           </figure>
-          <h3>Spiral Claw Fossil</h3>
-          <p class="muted">Spiraled talon from an ancient predator; display mount not included.</p>
-          <div class="price-row">
-            <strong>$22.95</strong>
-            <button class="btn"
-              onclick="addToCart(this)"
-              data-id="item002"
-              data-name="Spiral Claw Fossil"
-              data-price="22.95"
-              data-image="/Museum/images/spiral-claw-fossil.jpg">Add to Cart</button>
-          </div>
+          <header>
+            <h3>Spiral Claw Fossil</h3>
+            <p class="muted">
+              Coiled talon replica from a prehistoric predator; classroom-friendly display piece.
+            </p>
+          </header>
+          <p class="price-row"><strong>$22.95</strong></p>
+
           <span class="qty-badge" aria-live="polite"></span>
+
+          <button class="btn"
+            onclick="addToCart(this)"
+            data-id="item002"
+            data-name="Spiral Claw Fossil"
+            data-price="22.95"
+            data-image="../images/spiral-claw-fossil.jpg">
+            Add Spiral Claw Fossil to Cart
+          </button>
         </article>
 
-        <!-- Item 3 -->
+        <!-- Item 3: Basaltic Glyphstone -->
         <article class="card shop-card souvenir-item" id="item003">
-          <figure class="media-frame">
-            <img src="../images/archaeology/basaltic-glyphstone.jpg" alt="Basaltic glyphstone with shallow crossing incisions" />
+          <figure class="media-frame" style="aspect-ratio:4/3;">
+            <img src="../images/archaeology/basaltic-glyphstone.jpg" alt="Basaltic glyphstone with crossing incisions" />
           </figure>
-          <h3>Basaltic Glyphstone</h3>
-          <p class="muted">Boundary/oath marker replica with shallow crossing incisions.</p>
-          <div class="price-row">
-            <strong>$15.95</strong>
-            <button class="btn"
-              onclick="addToCart(this)"
-              data-id="item003"
-              data-name="Basaltic Glyphstone"
-              data-price="15.95"
-              data-image="/Museum/images/archaeology/basaltic-glyphstone.jpg">Add to Cart</button>
-          </div>
+          <header>
+            <h3>Basaltic Glyphstone</h3>
+            <p class="muted">
+              Replica boundary marker with shallow cross-incisions—great on a bookshelf.
+            </p>
+          </header>
+          <p class="price-row"><strong>$15.95</strong></p>
+
           <span class="qty-badge" aria-live="polite"></span>
+
+          <button class="btn"
+            onclick="addToCart(this)"
+            data-id="item003"
+            data-name="Basaltic Glyphstone"
+            data-price="15.95"
+            data-image="../images/archaeology/basaltic-glyphstone.jpg">
+            Add Basaltic Glyphstone to Cart
+          </button>
         </article>
 
-        <!-- Item 4 -->
+        <!-- Item 4: Marker Arch Fragment -->
         <article class="card shop-card souvenir-item" id="item004">
-          <figure class="media-frame">
-            <img src="../images/marker-arch-fragment.jpg" alt="Sandstone fragment from a market arch" />
+          <figure class="media-frame" style="aspect-ratio:4/3;">
+            <img src="../images/marker-arch-fragment.jpg" alt="Weathered fragment from a carved arch" />
           </figure>
-          <h3>Market Arch Fragment</h3>
-          <p class="muted">Sandstone fragment cast from a bustling river market archway.</p>
-          <div class="price-row">
-            <strong>$17.80</strong>
-            <button class="btn"
-              onclick="addToCart(this)"
-              data-id="item004"
-              data-name="Market Arch Fragment"
-              data-price="17.80"
-              data-image="/Museum/images/marker-arch-fragment.jpg">Add to Cart</button>
-          </div>
+          <header>
+            <h3>Marker Arch Fragment</h3>
+            <p class="muted">
+              Resin cast of a carved market arch fragment; warm ochre finish.
+            </p>
+          </header>
+          <p class="price-row"><strong>$17.80</strong></p>
+
           <span class="qty-badge" aria-live="polite"></span>
+
+          <button class="btn"
+            onclick="addToCart(this)"
+            data-id="item004"
+            data-name="Marker Arch Fragment"
+            data-price="17.80"
+            data-image="../images/marker-arch-fragment.jpg">
+            Add Marker Arch Fragment to Cart
+          </button>
         </article>
+
       </section>
     </div>
   </main>
 
   <footer class="site-footer container">
+    <hr />
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- IMPORTANT: use RELATIVE paths from /html/ to /js/ -->
-  <script src="../js/cart.js" defer></script>
+  <!-- Scripts (relative from /html/) -->
   <script src="../js/shop.js" defer></script>
+  <script src="../js/cart.js" defer></script>
+
+  <noscript>
+    <p class="container">JavaScript is required to use the shopping cart.</p>
+  </noscript>
 </body>
 </html>
+
 
 
 
