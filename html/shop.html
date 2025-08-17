@@ -6,31 +6,34 @@
   <title>Souvenir Shop — Museum of Wonder</title>
   <link rel="stylesheet" href="/Museum/css/style.css" />
 </head>
+
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a class="brand" href="/Museum/">Museum of Wonder</a>
+      <a href="/Museum/" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <!-- cartLink id used by shop.js to show Cart N -->
-        <li><a id="cartLink" href="/Museum/html/cart.html">Cart 0</a></li>
         <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
+        <li><a id="navCartLink" href="/Museum/html/cart.html">Cart <span id="navCartCount">0</span></a></li>
       </ul>
-      <button class="btn" onclick="location.href='/Museum/html/cart.html'">View Cart</button>
+      <button id="viewCartBtn" class="btn btn-amber">View Cart</button>
     </nav>
   </header>
 
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Souvenir Shop</h1>
-      <p class="muted">The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.</p>
+      <p class="ai-notice">The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.</p>
 
-      <!-- where shop.js will inject product cards -->
-      <div id="shop-list" class="shop-grid"></div>
+      <!-- SHOP GRID GOES HERE -->
+      <section aria-labelledby="shop-title">
+        <h2 id="shop-title" class="sr-only">Items</h2>
+        <div id="shopGrid" class="shop-grid"></div>
+      </section>
     </div>
   </main>
 
@@ -38,11 +41,11 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Scripts: core first, then page script. Use ABSOLUTE paths on GH Pages -->
-  <script src="/Museum/js/card.js"></script>
-  <script src="/Museum/js/shop.js"></script>
+  <!-- Non-module JS so it runs on GitHub Pages without CORS quirks -->
+  <script src="/Museum/js/shop.js" defer></script>
 </body>
 </html>
+
 
 
 
