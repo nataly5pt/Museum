@@ -1,223 +1,265 @@
-/* =========================================================
-   Museum of Wonder — Global Styles (Yellow/Brown Sahara theme)
-   ========================================================= */
+/* ==========================================================================
+   Museum of Wonder – Global Styles (Savanna brown–yellow theme)
+   File: /Museum/css/style.css
+   --------------------------------------------------------------------------
+   Notes
+   - Paths are root-relative so they work anywhere on GitHub Pages.
+   - Page banners (".hero--*") connect to your real images below.
+   ========================================================================== */
 
-/* -------------------- Theme Tokens -------------------- */
+/* --------------------------- 0) Base reset ------------------------------- */
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+
 :root{
-  /* Palette */
-  --sand-50:  #fff8dc;
-  --sand-100: #fff3c7;
-  --sand-200: #ffeaa0;
-  --sand-300: #ffd36b;
-  --gold-500:#f2b31a;
-  --amber-600:#d47a12;
-  --amber-700:#c0882e;
-  --clay-400:#9d6b28;
-  --brown-600:#4a3628;
-  --brown-700:#3b2b1f;
-  --brown-800:#2b2119;
-  --brown-900:#18110c;
-  --ink-900:  #0d0b09;
-  --text-900:#1b130d;
-  --text-100:#f6edd1;
+  /* Sands & ambers */
+  --sand-100: #FFF7D6;
+  --sand-200: #FFEAA3;
+  --sand-300: #FFE38A;
+  --sand-400: #FFD972;
+  --amber-500:#C88924;
+  --amber-600:#a86a1c;
 
-  /* Shadows / radii / spacing */
-  --radius-lg: 22px;
-  --radius-md: 18px;
-  --shadow-1: 0 10px 30px rgba(0,0,0,.25);
-  --shadow-2: 0 30px 80px rgba(0,0,0,.55);
+  /* Browns / ink */
+  --brown-700:#2E2116;
+  --brown-650:#37271A;
+  --brown-600:#3B2B1F;
+  --brown-550:#453224;
+  --brown-500:#4D3827;
+  --brown-450:#5A402B;
+  --brown-400:#6B4B31;
+  --ink-900: #0b0907;
+  --ink-800: #15110d;
 
-  /* Max width */
-  --wrap: 1200px;
+  /* Text */
+  --text-100: #FFF7D6;
+  --text-200: #FCEEC2;
+  --text-300: #E9D8A6;
+  --text-dim: #D9C89A;
+
+  /* Effects */
+  --ring-focus: #F3C96B;
+  --shadow-0: 0 1px 1px rgba(0,0,0,.25);
+  --shadow-1: 0 8px 24px rgba(0,0,0,.25);
+  --shadow-2: 0 18px 40px rgba(0,0,0,.35);
+
+  /* Layout widths */
+  --container: 1200px;
 }
 
-/* -------------------- Reset & Base -------------------- */
-*,
-*::before,
-*::after{ box-sizing: border-box; }
-
-html{
-  -webkit-text-size-adjust: 100%;
-  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
-  color-scheme: light dark;
-  scroll-behavior: smooth;
-
-  /* Sahara backdrop with “sun” corners */
-  background:
-    radial-gradient(1200px 1200px at -200px -200px, #f4c21f 0%, #f0b316 20%, rgba(0,0,0,0) 40%),
-    radial-gradient(1200px 1200px at 110% -80px, #cf6f10 0%, #b85e0c 25%, rgba(0,0,0,0) 45%),
-    radial-gradient(1600px 800px at 50% 120%, rgba(198,134,85,.45) 0%, rgba(0,0,0,0) 60%),
-    linear-gradient(180deg, var(--brown-900) 0%, var(--brown-800) 100%);
-}
-
+html, body { height: 100%; }
 body{
   margin: 0;
-  color: var(--sand-100);
-  line-height: 1.6;
+  color: var(--text-100);
+  background:
+    radial-gradient(1200px 600px at -10% -10%, #F1B52C33 0 60%, transparent 60%),
+    radial-gradient(900px 600px at 110% -10%, #C86C1233 0 60%, transparent 60%),
+    radial-gradient(900px 600px at 110% 110%, #C86C1233 0 55%, transparent 55%),
+    linear-gradient(180deg, var(--brown-650), var(--ink-900));
+  font: 16px/1.5 "Inter", "Segoe UI", "Noto Sans", system-ui, -apple-system, Arial, sans-serif;
 }
 
-/* -------------------- Accessibility -------------------- */
-.skip-link{
-  position:absolute; left:-9999px; top:0;
-}
-.skip-link:focus{
-  left:1rem; top:1rem;
-  background:#fff;
-  color:#000;
-  padding:.5rem .75rem;
-  border-radius:.5rem;
-  z-index:9999;
-}
+/* -------------------- 1) Media safety & reusable frames ------------------ */
+img, picture, video, canvas, svg { display:block; max-width:100%; }
 
-/* -------------------- Typography -------------------- */
-h1,h2,h3,h4{ margin:0 0 .6rem; line-height:1.2; }
-h1{ font-size: clamp(2rem, 1.5rem + 2.5vw, 3.25rem); color: var(--sand-200); }
-h2{ font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.2rem);  color: var(--sand-200); }
-h3{ font-size: clamp(1.1rem, 1rem + .6vw, 1.35rem);   color: var(--sand-100); }
-p{ margin:0 0 1rem; }
-
-.eyebrow{
-  color: #e7d9a6;
-  opacity:.95;
-  font-size:.98rem;
-}
-
-/* Links */
-a{ color: var(--sand-200); text-underline-offset: 2px; }
-a:hover{ color: var(--sand-300); }
-
-/* -------------------- Layout Helpers -------------------- */
-.container{
-  max-width: var(--wrap);
-  margin-inline: auto;
-  padding-inline: 1rem;
-}
-.section-title{ margin: 2rem 0 1rem; }
-
-/* -------------------- Nav / Breadcrumb -------------------- */
-nav[aria-label="breadcrumb"]{
-  display:grid;
-  gap:.5rem;
-  align-items:center;
-  margin-top:.75rem;
-}
-nav[aria-label="breadcrumb"] > a{
-  font-weight: 800;
-  text-decoration:none;
-  color: var(--sand-200);
-}
-nav[aria-label="breadcrumb"] ul{
-  list-style:none; padding:0; margin:0;
-  display:flex; gap:.8rem; flex-wrap: wrap;
-}
-nav[aria-label="breadcrumb"] li a{
-  color: var(--sand-100);
-  text-decoration:none;
-  padding:.25rem .55rem;
-  border-radius:999px;
-  background: rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.08);
-}
-nav[aria-label="breadcrumb"] li a[aria-current="page"]{
-  background: var(--amber-700);
-  color: #20140b;
-  border-color: rgba(0,0,0,.25);
-}
-
-/* -------------------- Buttons -------------------- */
-.btn{
-  display:inline-flex; align-items:center; gap:.5rem;
-  padding:.55rem .9rem;
-  background: var(--clay-400);
-  color:#fff3c7; border:1px solid rgba(0,0,0,.25);
-  border-radius: 999px; text-decoration:none; font-weight:700;
-}
-.btn:hover{ background: var(--amber-700); }
-
-/* -------------------- Cards / Frames / Media -------------------- */
-/* --- Global media safety --- */
-img, picture, video, canvas, svg {
-  display:block;
-  max-width:100%;
-}
-
-/* A reusable media frame with a controlled aspect ratio */
-.media-frame {
-  aspect-ratio: 16 / 9;        /* change to 4/3 if you prefer */
+.media-frame{
+  aspect-ratio: 16/9;
   width: 100%;
   overflow: hidden;
   border-radius: 18px;
+  background: var(--brown-600);
   box-shadow: var(--shadow-1);
-  background: var(--brown-700);
 }
-.media-frame > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;            /* keeps subject centered, crops overflow */
+.media-frame > img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
 }
 
-/* A generic card you can reuse everywhere */
-.card {
-  background: linear-gradient(180deg, rgba(255,238,170,.08), rgba(0,0,0,.25));
+/* ------------------------------ 2) Helpers -------------------------------- */
+.container{ max-width: var(--container); margin-inline: auto; padding-inline: 1rem; }
+.content-area{ padding-block: clamp(14px, 2vw, 20px) 56px; }
+.section-block{ margin-top: 2rem; }
+.section-title{
+  margin: 2rem 0 1rem;
+  font-size: clamp(1.6rem, 3.8vw, 2.4rem);
+  line-height:1.1;
+  color: var(--sand-100);
+}
+.eyebrow{ color: var(--text-200); margin:.25rem 0 1rem; }
+
+/* Skip to content */
+.skip-link{
+  position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;
+}
+.skip-link:focus{
+  position:fixed; left:1rem; top:1rem; width:auto; height:auto; padding:.5rem .75rem;
+  background: var(--amber-500); color:#1b120b; border-radius:10px; z-index:9999;
+}
+
+/* --------------------------- 3) Header / Nav ------------------------------ */
+.site-header{ position: relative; z-index: 2; }
+.top-nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap: 1rem; padding: 16px 1rem;
+  background: linear-gradient(180deg, #0000, #00000020);
+}
+.brand{
+  color: var(--sand-100); font-weight:800; text-decoration:none; letter-spacing:.2px;
+  padding:.35rem .5rem; border-radius:12px;
+}
+.top-nav__links{
+  display:flex; gap:.5rem; list-style:none; margin:0; padding:0;
+}
+.top-nav__links a{
+  display:inline-block; text-decoration:none; font-weight:700;
+  color: var(--sand-100);
+  padding: .45rem .85rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #00000020, #00000035);
   border: 1px solid rgba(255,255,255,.08);
-  border-radius: var(--radius-lg);
-  padding: 14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.top-nav__links a[aria-current="page"]{
+  background: linear-gradient(180deg, var(--amber-500), var(--amber-600));
+  color:#fffbe6; border-color:#00000040;
+}
+.top-nav__links a:focus-visible{
+  outline: 3px solid var(--ring-focus);
+  outline-offset: 2px;
+}
+
+/* ----------------------------- 4) Home Hero ------------------------------- */
+/* Generic hero shell; supply an image via a modifier class below */
+.hero{
+  position: relative; isolation:isolate;
+  height: clamp(260px, 40vw, 520px);
+  border-radius: 28px; overflow: hidden;
+  box-shadow: var(--shadow-2);
+}
+.hero::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background-size: cover; background-position:center;
+  filter: saturate(1.05) contrast(1.02);
+  transform: scale(1.04);
+}
+.hero::after{
+  content:""; position:absolute; inset:0;
+  background: linear-gradient(180deg, #00000055, #00000077);
+}
+.hero__inner{
+  display:flex; flex-direction:column; justify-content:center;
+  height:100%; padding: clamp(1rem, 4vw, 3rem);
+  color: var(--sand-100);
+}
+.hero__title{ font-size: clamp(2rem, 6vw, 3.25rem); line-height:1.05; margin:0 0 .5rem; }
+.hero__sub{ max-width: 70ch; color: var(--text-200); }
+
+/* Connect images to hero (use on the section: class="hero hero--home") */
+.hero--home::before{
+  background-image: url("/Museum/images/home/ancient-egypt-landscape.jpg");
+}
+.hero--staff::before{
+  background-image: url("/Museum/images/staff/dr-amina-selim.jpg");
+}
+.hero--collections::before{
+  background-image: url("/Museum/images/archaeology/obsidian-spearhead.jpg");
+}
+.hero--shop::before{
+  background-image: url("/Museum/images/shop/souvenir-shop.jpg");
+}
+
+/* Call-to-action chips (also reused on other pages) */
+.home-actions{ display:flex; gap:.6rem; flex-wrap:wrap; margin-top:1rem; }
+.chip{
+  display:inline-block;
+  background: linear-gradient(180deg,var(--amber-500), var(--amber-600));
+  color:#fffbe6;
+  padding:.55rem .95rem;
+  border-radius:999px;
+  text-decoration:none; font-weight:700;
+  border:1px solid rgba(0,0,0,.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.2), var(--shadow-1);
+}
+.chip:hover{ filter: brightness(1.06); transform: translateY(-1px); }
+.chip:focus-visible{ outline:3px solid var(--ring-focus); outline-offset:2px; }
+
+/* ----------------------- 5) Cards / Grids (reusable) --------------------- */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+.card{
+  background: linear-gradient(180deg, rgba(255,238,170,.08), rgba(0,0,0,.25));
+  border: 1px solid rgba(255,255,255,.05);
+  border-radius: 22px;
+  padding: 16px;
+  color: var(--text-100);
+  box-shadow: var(--shadow-1);
+  transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
   backdrop-filter: blur(2px);
 }
-
-/* Tip text */
-.tip{
-  color:#e7d9a6;
-  margin:.75rem 0 1.25rem;
+.card:hover{
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+  border-color: rgba(255,255,255,.10);
+}
+.card .title{
+  font-size: 1.06rem;
+  line-height: 1.35;
+  margin: .75rem 2px 0;
+  color: var(--text-100);
 }
 
-/* -------------------- Sub-navigation (Collections) -------------------- */
-.subnav {
-  display: flex;
-  gap: .6rem;
-  flex-wrap: wrap;
-  margin: .75rem 0 1.25rem;
+/* -------------------- 6) Collections subnav / chips ---------------------- */
+.subnav{ display:flex; gap:.6rem; flex-wrap:wrap; margin:.75rem 0 1.25rem; }
+.subnav a{
+  background: linear-gradient(180deg,var(--amber-500), var(--amber-600));
+  color:#fffbe6; padding:.48rem .9rem; border-radius:999px; text-decoration:none;
+  font-weight:700; border:1px solid rgba(0,0,0,.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.18), var(--shadow-0);
 }
-.subnav a {
-  background: var(--clay-400);
-  color: #fff3c7;
-  padding: .45rem .8rem;
-  border-radius: 999px;
-  text-decoration: none;
-  font-weight: 600;
-  border: 1px solid rgba(0,0,0,.25);
-}
-.subnav a[aria-current="true"] {
-  background: var(--amber-700);
-  color:#1a120b;
+.subnav a[aria-current="true"]{ filter: brightness(1.08); }
+.subnav a:focus-visible{ outline:3px solid var(--ring-focus); outline-offset:2px; }
+
+/* --------------------------- 7) Footer ----------------------------------- */
+.site-footer{
+  border-top: 1px solid rgba(255,255,255,.08);
+  padding: 28px 1rem;
+  color: var(--text-dim);
 }
 
-/* -------------------- Footer -------------------- */
-footer{
-  margin-top:3rem; padding:1.25rem 0 2rem;
-  border-top:1px solid rgba(255,255,255,.08);
-  color:#e7d9a6; font-size:.95rem;
+/* ----------------------- 8) Page wrappers (optional) --------------------- */
+.home-page .content-area{ padding-top: 20px; }
+.staff-page .content-area,
+.collections-page .content-area,
+.shop-page .content-area{ padding-top: 14px; }
+
+/* --------------------------- 9) Responsive -------------------------------- */
+@media (max-width: 720px){
+  .top-nav{ flex-wrap: wrap; gap:.75rem; }
+  .top-nav__links{ flex-wrap: wrap; }
 }
 
-/* -------------------- Utilities -------------------- */
-.hr{
-  height:1px; background: rgba(255,255,255,.08);
-  border:0; margin: 1.25rem 0;
-}
-.center{ text-align:center; }
-.m0{ margin:0!important; }
-.mt1{ margin-top:.5rem!important; }
-.mt2{ margin-top:1rem!important; }
-.mt3{ margin-top:1.5rem!important; }
-.mb0{ margin-bottom:0!important; }
-
-/* -------------------- Responsive Tweaks -------------------- */
-@media (max-width: 900px){
-  h1{ font-size: clamp(1.85rem, 1.5rem + 2vw, 2.4rem); }
-  .container{ padding-inline: .9rem; }
-}
+/* -------------------------- 10) Reduced motion ---------------------------- */
 @media (prefers-reduced-motion: reduce){
-  html{ scroll-behavior: auto; }
+  *{
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
+
+/* ==========================================================================
+   OPTIONAL: quick visual helpers to ensure image connections exist.
+   Add these classes to sections if you want banner images on those pages:
+     <section class="hero hero--home">         // Home banner
+     <section class="hero hero--staff">        // Staff banner (Amina)
+     <section class="hero hero--collections">  // Collections banner (Obsidian)
+     <section class="hero hero--shop">         // Shop banner
+   ========================================================================== */
+
 
 
