@@ -1,0 +1,44 @@
+:root {
+  --bg: #0f0f10;
+  --ink: #f2efe7;
+  --muted: #bfbab0;
+  --accent: #c1a76f;
+}
+
+* { box-sizing: border-box; }
+html, body { margin:0; background:var(--bg); color:var(--ink); font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Arial; }
+
+.site-header { padding:1.5rem 1rem 0.5rem; border-bottom:1px solid #222; }
+.site-header h1 { margin:0 0 .25rem; font-weight:700; }
+.ai-note { margin:.25rem 0 1rem; color:var(--muted); font-size:.9rem; }
+
+.subnav { display:flex; gap:.5rem; margin-bottom:1rem; }
+.tab-btn { background:#1d1d20; color:var(--ink); border:1px solid #2a2a2f; padding:.5rem .75rem; border-radius:.5rem; cursor:pointer; }
+.tab-btn[aria-current="page"], .tab-btn:hover { border-color:var(--accent); }
+
+.hint { margin:1rem; color:var(--muted); }
+
+.grid-section { padding:0 1rem 2rem; }
+.card-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:1rem; }
+.card { background:#141417; border:1px solid #232328; border-radius:.75rem; overflow:hidden; }
+.card img { width:100%; display:block; aspect-ratio:4/3; object-fit:cover; cursor:pointer; }
+.card figcaption { padding:.5rem .75rem; color:var(--muted); }
+
+.histories { padding:1rem; display:grid; gap:2rem; }
+.history { display:grid; grid-template-columns:minmax(280px,38%) 1fr; gap:1rem; align-items:start; background:#141417; border:1px solid #232328; border-radius:1rem; padding:1rem; }
+.history img { width:100%; height:auto; border-radius:.5rem; }
+.history h3 { margin:.25rem 0 .5rem; }
+.history h4 { margin:.75rem 0 .25rem; color:var(--accent); }
+.history .credit { color:var(--muted); }
+.backlink a { color:var(--muted); text-decoration:none; }
+.backlink a:hover { color:var(--ink); text-decoration:underline; }
+
+/* Key-value row inside modals */
+.kv { display:grid; gap:.35rem; margin:.5rem 0 .75rem; color:var(--muted); }
+
+/* Modal styling */
+.modal { position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; z-index:1000; }
+.modal-content { position:relative; margin:6vh auto; width:min(900px,92vw); background:#121214; border:1px solid #2c2c31; border-radius:1rem; padding:1rem 1.25rem; }
+.close-modal { position:absolute; right:.75rem; top:.5rem; background:none; color:var(--muted); border:0; font-size:1.25rem; cursor:pointer; }
+#modal-body h3 { margin:.25rem 0 .5rem; }
+#modal-body p { text-align:left; }
