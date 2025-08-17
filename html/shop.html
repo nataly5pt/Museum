@@ -1,50 +1,158 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Souvenir Shop — Museum of Wonder</title>
-  <link rel="stylesheet" href="/Museum/css/style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Museum of Wonder — Souvenir Shop</title>
+  <link rel="stylesheet" href="../css/styles.css" />
 </head>
-
-<body class="shop-page">
-  <a class="skip-link" href="#main">Skip to content</a>
-
+<body>
+  <!-- Site Header / Nav -->
   <header class="site-header">
-    <nav class="top-nav container" aria-label="Primary">
-      <a href="/Museum/" class="brand">Museum of Wonder</a>
-      <ul class="top-nav__links">
-        <li><a href="/Museum/">Home</a></li>
-        <li><a href="/Museum/html/staff.html">Staff</a></li>
-        <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
-        <li><a id="navCartLink" href="/Museum/html/cart.html">Cart <span id="navCartCount">0</span></a></li>
-      </ul>
-      <button id="viewCartBtn" class="btn btn-amber">View Cart</button>
-    </nav>
+    <div class="container">
+      <div class="brand">Museum of Wonder</div>
+      <nav class="main-nav" aria-label="Main">
+        <a href="../index.html">Home</a>
+        <a href="staff.html">Staff</a>
+        <a href="collections.html">Collections</a>
+        <a href="cart.html">Cart <span id="cart-count">0</span></a>
+        <a class="active" href="shop.html" aria-current="page">Shop</a>
+      </nav>
+
+      <!-- View Cart button (as in instructor example) -->
+      <button id="viewCartBtn" onclick="location.href='cart.html'">View Cart</button>
+    </div>
   </header>
 
-  <main id="main" class="content-area">
-    <div class="container">
-      <h1 class="page-title">Souvenir Shop</h1>
-      <p class="ai-notice">The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.</p>
+  <main id="main" class="container">
+    <!-- Hero / Banner -->
+    <section class="hero">
+      <h1>Souvenir Shop</h1>
+      <p class="subtle">
+        The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.
+      </p>
+      <figure class="banner">
+        <img src="../images/souvenir-shop.jpg" alt="Souvenir Shop banner" />
+      </figure>
+    </section>
 
-      <!-- SHOP GRID GOES HERE -->
-      <section aria-labelledby="shop-title">
-        <h2 id="shop-title" class="sr-only">Items</h2>
-        <div id="shopGrid" class="shop-grid"></div>
-      </section>
-    </div>
+    <!-- Products Grid -->
+    <section class="grid shop-grid" aria-label="Products">
+      <!-- Celestial Inkstone -->
+      <article class="souvenir-item card">
+        <div class="img-wrap">
+          <img src="../images/celestial-inkstone.jpg" alt="Celestial Inkstone" />
+        </div>
+        <div class="body">
+          <h3>Celestial Inkstone</h3>
+          <p class="desc">
+            Carved meteoric basalt with iridescent inlay. Likely used for ritual pigment mixing—astronomical in function.
+          </p>
+          <p class="price">Price: $14.95</p>
+
+          <!-- qty badge (instructor pattern) -->
+          <span class="qty-badge" aria-live="polite"></span>
+
+          <!-- Add to Cart with data-* -->
+          <button
+            onclick="addToCart(this)"
+            data-id="item001"
+            data-name="Celestial Inkstone"
+            data-price="14.95"
+            data-image="../images/celestial-inkstone.jpg">
+            Add Celestial Inkstone to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- Spiral Claw Fossil -->
+      <article class="souvenir-item card">
+        <div class="img-wrap">
+          <img src="../images/spiral-claw-fossil.jpg" alt="Spiral Claw Fossil" />
+        </div>
+        <div class="body">
+          <h3>Spiral Claw Fossil</h3>
+          <p class="desc">
+            Coiled claw impression from a prehistoric creature; a museum favorite for aspiring paleontologists.
+          </p>
+          <p class="price">Price: $27.99</p>
+
+          <span class="qty-badge" aria-live="polite"></span>
+
+          <button
+            onclick="addToCart(this)"
+            data-id="item002"
+            data-name="Spiral Claw Fossil"
+            data-price="27.99"
+            data-image="../images/spiral-claw-fossil.jpg">
+            Add Spiral Claw Fossil to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- Marker Arch Fragment -->
+      <article class="souvenir-item card">
+        <div class="img-wrap">
+          <img src="../images/marker-arch-fragment.jpg" alt="Marker Arch Fragment" />
+        </div>
+        <div class="body">
+          <h3>Marker Arch Fragment</h3>
+          <p class="desc">
+            Weathered architectural shard with ceremonial markings—perfect for desks and display shelves.
+          </p>
+          <p class="price">Price: $31.50</p>
+
+          <span class="qty-badge" aria-live="polite"></span>
+
+          <button
+            onclick="addToCart(this)"
+            data-id="item003"
+            data-name="Marker Arch Fragment"
+            data-price="31.50"
+            data-image="../images/marker-arch-fragment.jpg">
+            Add Marker Arch Fragment to Cart
+          </button>
+        </div>
+      </article>
+
+      <!-- Coprolite Sample (if you have this file in images/collections) -->
+      <article class="souvenir-item card">
+        <div class="img-wrap">
+          <img src="../images/collections/coprolite-sample.jpg" alt="Coprolite Sample" />
+        </div>
+        <div class="body">
+          <h3>Coprolite Sample</h3>
+          <p class="desc">
+            Fossilized evidence of ancient diets—oddly charming and 100% classroom friendly.
+          </p>
+          <p class="price">Price: $15.95</p>
+
+          <span class="qty-badge" aria-live="polite"></span>
+
+          <button
+            onclick="addToCart(this)"
+            data-id="item004"
+            data-name="Coprolite Sample"
+            data-price="15.95"
+            data-image="../images/collections/coprolite-sample.jpg">
+            Add Coprolite Sample to Cart
+          </button>
+        </div>
+      </article>
+    </section>
   </main>
 
   <footer class="site-footer container">
+    <hr />
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Non-module JS so it runs on GitHub Pages without CORS quirks -->
-  <script src="/Museum/js/shop.js" defer></script>
+  <!-- JS (paths are from /html/) -->
+  <script src="../js/shop.js" defer></script>
+  <script src="../js/cart.js" defer></script>
 </body>
 </html>
+
 
 
 
