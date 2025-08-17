@@ -19,18 +19,22 @@ AI tools were used to accelerate content generation, image description, and code
 
 ## Repository Structure
 Museum/
-│
-├── css/                 # External stylesheets
-│   └── style.css
-│
-├── html/                # HTML subpages
-│   ├── staff.html
-│   └── collections.html
-│
-├── images/              # All images with descriptive filenames
-│   ├── ancient-egypt-landscape.jpg
-│   ├── staff-portrait-john-doe.jpg
-│   └── ...
+/ (repo root)
+├─ html/
+│  └─ collections.html
+├─ css/
+│  └─ collections.css
+├─ js/
+│  └─ collections.js
+├─ images/
+│  ├─ collections/
+│  │  ├─ glyphstone.jpg
+│  │  ├─ ritual-mask.jpg
+│  │  └─ ...your other images
+│  └─ validation/
+│     └─ (HTML validator screenshots)
+└─ doc/
+   └─ design-notes.md  (optional rationale if you right-align anything)
 │
 ├── index.html           # Main landing page
 ├── robots.txt           # Search engine crawler directives
