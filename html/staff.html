@@ -2,57 +2,112 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="author" content="Your Name">
-  <title>Our Staff · Museum of Wonder</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Natalia Glushak">
+  <title>Our Staff — Museum of Wonder</title>
 
+  <!-- Global styles (already in your repo) -->
   <link rel="stylesheet" href="../css/style.css">
+  <!-- Page-specific styles for this lighter “sand” theme -->
   <link rel="stylesheet" href="../css/staff.css">
 </head>
-<body>
-  <header class="container" style="padding-top:1rem">
-    <nav aria-label="breadcrumb">
-      <a href="index.html">Museum of Wonder</a>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a aria-current="page" href="staff.html">Staff</a></li>
-        <li><a href="collections.html">Collections</a></li>
-        <li><a href="shop.html">Shop</a></li>
+<body class="theme-sand">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header container">
+    <nav class="top-nav" aria-label="Primary">
+      <a href="../index.html" class="brand">Museum of Wonder</a>
+      <ul class="top-nav__links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a aria-current="page" href="./staff.html">Staff</a></li>
+        <li><a href="./collections.html">Collections</a></li>
+        <li><a href="./shop.html">Shop</a></li>
       </ul>
     </nav>
-    <h1 class="section-title">Our Staff</h1>
-    <p class="eyebrow">Meet the team behind the exhibits, fieldwork, and preservation efforts.</p>
+
+    <h1 class="page-title">Our Staff</h1>
+    <p class="intro">
+      Meet the team behind the exhibits, fieldwork, and preservation efforts.
+    </p>
   </header>
 
-  <main class="container">
-    <section class="staff-grid" aria-label="Staff profiles">
-      <article class="staff-card card">
-        <figure class="media-frame">
-          <img src="../images/staff/curator.jpg" alt="Chief Curator in desert setting">
+  <main id="main" class="container content-area">
+    <!-- Team grid -->
+    <section class="team-grid" aria-label="Museum Staff">
+      <!-- Amina -->
+      <article class="team-card card">
+        <figure class="portrait-frame">
+          <img src="../images/staff/dr-amina-selim.jpg"
+               alt="Chief Curator, Dr. Amina Selim, in desert setting">
         </figure>
-        <h3>Amara Diop — Chief Curator</h3>
-        <p>Specializes in Sahelian material culture and ethical collections care.</p>
+        <div class="team-text">
+          <h2 class="name">Dr. Amina Selim</h2>
+          <p class="role">Chief Curator &amp; Field Director</p>
+          <p class="bio">
+            Oversees acquisitions and leads seasonal surveys along the inland Sahel corridor.
+            Amina champions community-first conservation and open access to findings.
+          </p>
+        </div>
       </article>
 
-      <article class="staff-card card">
-        <figure class="media-frame">
-          <img src="../images/staff/director.jpg" alt="Museum Director portrait">
+      <!-- Luis -->
+      <article class="team-card card">
+        <figure class="portrait-frame">
+          <img src="../images/staff/luis-ortega.jpg"
+               alt="Conservator Luis Ortega in conservation lab">
         </figure>
-        <h3>Karim Ben Salah — Director</h3>
-        <p>Leads partnerships and community stewardship programs.</p>
+        <div class="team-text">
+          <h2 class="name">Luis Ortega</h2>
+          <p class="role">Objects Conservator</p>
+          <p class="bio">
+            Specializes in copper alloys, pigments, and stabilized organics. Leads our lab’s
+            preventive care program and exhibition mount design.
+          </p>
+        </div>
       </article>
 
-      <article class="staff-card card">
-        <figure class="media-frame">
-          <img src="../images/staff/conservator.jpg" alt="Objects Conservator at workbench">
+      <!-- Mei Lin -->
+      <article class="team-card card">
+        <figure class="portrait-frame">
+          <img src="../images/staff/mei-lin.jpg"
+               alt="Registrar Mei Lin with storage drawers">
         </figure>
-        <h3>Naila Ouedraogo — Conservator</h3>
-        <p>Responsible for conservation treatments and preventive care.</p>
+        <div class="team-text">
+          <h2 class="name">Mei Lin</h2>
+          <p class="role">Registrar</p>
+          <p class="bio">
+            Manages collections data, rights &amp; reproductions, and transit logistics.
+            If it’s cataloged and findable, Mei made sure of it.
+          </p>
+        </div>
+      </article>
+
+      <!-- Riley -->
+      <article class="team-card card">
+        <figure class="portrait-frame">
+          <img src="../images/staff/riley-thompson.jpg"
+               alt="Educator Riley Thompson during a gallery tour">
+        </figure>
+        <div class="team-text">
+          <h2 class="name">Riley Thompson</h2>
+          <p class="role">Learning &amp; Public Programs</p>
+          <p class="bio">
+            Designs curriculum, gallery talks, and hands-on labs for all ages. Riley builds
+            bridges between research, stories, and visitors.
+          </p>
+        </div>
       </article>
     </section>
   </main>
+
+  <footer class="container site-footer">
+    <p class="tiny">
+      Some content/images were generated with AI and edited by a human. © Museum of Wonder
+    </p>
+  </footer>
 </body>
 </html>
+
 
 
 
