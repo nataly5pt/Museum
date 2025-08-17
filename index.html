@@ -1,110 +1,62 @@
-<!DOCTYPE html> 
-<html lang="en">
+<!doctype html>
+<html lang="en" class="home-page">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="author" content="Nataly Glushak" />
-  <title>Museum of Wonder</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Natalia Glushak">
+  <title>Museum of Wonder — Home</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- Skip link for keyboard users -->
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- Header -->
-  <header class="site-header" role="banner">
-    <div class="brand">
-      <span class="logo" aria-hidden="true">🏛️</span>
-      <a class="site-title" href="index.html">Museum of Wonder</a>
-    </div>
-
-    <!-- Primary nav -->
-    <nav class="main-nav" aria-label="Primary">
-      <ul class="nav-list">
-        <li><a href="index.html" aria-current="page">Home</a></li>
-        <li><a href="html/staff.html">Staff</a></li>
-        <li><a href="html/collections.html">Collections</a></li>
-        <li><a href="html/shop.html">Shop</a></li>
+  <header class="site-header container">
+    <nav class="top-nav" aria-label="Primary">
+      <a href="./index.html" class="brand">Museum of Wonder</a>
+      <ul class="top-nav__links">
+        <li><a aria-current="page" href="./index.html">Home</a></li>
+        <li><a href="./staff.html">Staff</a></li>
+        <li><a href="./collections.html">Collections</a></li>
+        <li><a href="./shop.html">Shop</a></li>
       </ul>
     </nav>
+
+    <h1 class="page-title">Welcome to the Museum of Wonder</h1>
+    <p class="eyebrow">
+      A fictitious museum for coursework. Explore staff profiles and our archaeology & anthropology collections.
+      Some content/images were generated with AI and edited by a human.
+    </p>
   </header>
 
-  <!-- Main -->
-  <main id="main" class="container" role="main">
-    <section class="hero" aria-labelledby="home-hero-title">
-      <h1 id="home-hero-title">Welcome to the Museum of Wonder</h1>
-      <p class="lead">A fictitious museum for coursework. Explore staff profiles and our archeology &amp; anthropology collections.</p>
-      <p class="disclosure">Some content/images were generated with AI and edited by a human.</p>
-    </section>
+  <main id="main" class="container">
+    <h2 class="section-title">Featured Highlights</h2>
 
-    <section class="card-grid" aria-labelledby="featured-title">
-      <h2 id="featured-title">Featured Highlights</h2>
-
-      <!-- Card 1 -->
-      <article class="card">
-        <figure class="card-media">
-          <img src="images/ancient-egypt-landscape.jpg"
-               alt="Desert landscape with the Nile in the distance" loading="lazy" />
-        </figure>
-        <div class="card-body">
-          <h3>Ancient Egypt Landscape</h3>
-          <p>Explore breathtaking ancient landscapes from our collection.</p>
-          <p class="card-cta"><a class="button" href="html/collections.html">View Collections</a></p>
+    <section class="card-grid" aria-label="Homepage highlights">
+      <figure class="card">
+        <div class="media-frame" style="aspect-ratio: 16/9">
+          <img src="../images/home/ancient-egypt-landscape.jpg" alt="Sunlit desert valley with ancient temples">
         </div>
-      </article>
+        <figcaption>Sun Over the Valley</figcaption>
+      </figure>
 
-      <!-- Card 2 -->
-      <article class="card">
-        <figure class="card-media">
-          <img src="images/pyramids-giza.jpg"
-               alt="Pyramids rising above the desert" loading="lazy" />
-        </figure>
-        <div class="card-body">
-          <h3>Pyramids</h3>
-          <p>Discover the mysteries of the pyramids and their builders.</p>
-          <p class="card-cta"><a class="button" href="html/collections.html">Explore Archeology</a></p>
+      <figure class="card">
+        <div class="media-frame" style="aspect-ratio: 16/9">
+          <img src="../images/home/ancient-egypt-portalgate.jpg" alt="Monumental doorway and relief carvings">
         </div>
-      </article>
+        <figcaption>Gateway Reliefs</figcaption>
+      </figure>
 
-      <!-- Card 3 -->
-      <article class="card">
-        <figure class="card-media">
-          <img src="images/egyptian-queen-portrait.jpg"
-               alt="Portrait of an Egyptian queen in a headdress" loading="lazy" />
-        </figure>
-        <div class="card-body">
-          <h3>Egyptian Queen</h3>
-          <p>Meet the queens and rulers who shaped ancient history.</p>
-          <p class="card-cta"><a class="button" href="html/collections.html">Explore Anthropology</a></p>
+      <figure class="card">
+        <div class="media-frame" style="aspect-ratio: 16/9">
+          <img src="../images/home/pyramids-giza.jpg" alt="Pyramids on the horizon at dusk">
         </div>
-      </article>
-
-      <!-- Card 4 (Souvenir Shop) -->
-      <article class="card">
-        <figure class="card-media">
-          <img src="images/Souvenir-Shop.jpg"
-               alt="Souvenir Shop interior with artifacts and decor" loading="lazy" />
-        </figure>
-        <div class="card-body">
-          <h3>Souvenir Shop</h3>
-          <p>Bring a piece of the Museum home—prints, pendants, and more.</p>
-          <p class="card-cta"><a class="button" href="html/shop.html">Visit Shop</a></p>
-        </div>
-      </article>
-
+        <figcaption>Pyramids at Dusk</figcaption>
+      </figure>
     </section>
   </main>
-
-  <!-- Footer -->
-  <footer class="site-footer" role="contentinfo">
-    <p>© <span id="year"></span> Museum of Wonder • Academic use only.</p>
-  </footer>
-
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
+
 
 
 
