@@ -1,159 +1,95 @@
-/* /Museum/js/shop.js */
-(function () {
-  'use strict';
+// /Museum/js/shop.js
+import { renderProductCard, formatMoney } from "./card.js";
 
-  // ---------- Shared storage key (must match cart.js) ----------
-  const CART_KEY = 'museumCartV1';
+/* ---------- Constants ---------- */
+const STORAGE_KEY = "museumCartV1";
 
-  // ---------- Small DOM helpers ----------
-  const $ = (s, r = document) => r.querySelector(s);
-  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-
-  // ---------- Cart I/O ----------
-  function readCart() {
-    try {
-      const raw = localStorage.getItem(CART_KEY);
-      return raw ? JSON.parse(raw) : [];
-    } catch (err) {
-      console.warn('Invalid cart JSON, resetting.', err);
-      localStorage.removeItem(CART_KEY);
-      return [];
-    }
+/* ---------- Data: products for the shop ---------- */
+const PRODUCTS = [
+  {
+    id: "postcard-pack",
+    name: "Curios Postcard Pack",
+    short: "Postcard Pack",
+    desc: "Set of 10 matte postcards featuring highlights from the Museum of Wonder.",
+    price: 9.95,
+    image: "/Museum/images/shop/souvenir-shop.jpg",
+    alt: "Souvenir shop full of curios"
   }
+];
 
-  function writeCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    updateHeaderCount(cart);
-    updateBadges(cart);
-    // Let anything else (e.g., card.js, a header widget) react to changes
-    window.dispatchEvent(
-      new CustomEvent('cart:updated', {
-        detail: { cart, count: cartCount(cart) }
-      })
-    );
+/* ---------- Storage helpers ---------- */
+function readCart() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch {
+    return [];
   }
+}
+function writeCart(cart) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+function cartCount(cart) {
+  return cart.reduce((sum, it) => sum + (it.qty || 0), 0);
+}
+function findIndex(cart, id) {
+  return cart.findIndex((x) => x.id === id);
+}
 
-  // ---------- Helpers ----------
-  function cartCount(cart = readCart()) {
-    return cart.reduce((n, it) => n + (Number(it.qty) || 0), 0);
+/* ---------- UI: header count ---------- */
+function updateHeaderCount(count) {
+  const el = document.getElementById("cartCount");
+  if (el) el.textContent = String(count);
+}
+
+/* ---------- Add-to-cart ---------- */
+function addToCart(productId) {
+  const cart = readCart();
+  const i = findIndex(cart, productId);
+  if (i >= 0) cart[i].qty += 1;
+  else cart.push({ id: productId, qty: 1 });
+  writeCart(cart);
+
+  // Update header count
+  updateHeaderCount(cartCount(cart));
+
+  // Update this card’s badge
+  const badge = document.getElementById(`badge-${productId}`);
+  if (badge) {
+    const item = cart.find((x) => x.id === productId);
+    badge.hidden = false;
+    badge.textContent = `Qty: ${item.qty}`;
   }
+}
 
-  function updateHeaderCount(cart = readCart()) {
-    const badge = $('#cartCount');
-    if (!badge) return;
-    const n = cartCount(cart);
-    badge.textContent = n;
-    badge.hidden = n === 0;
-  }
+/* ---------- Render ---------- */
+function render() {
+  const grid = document.getElementById("shop-list");
+  if (!grid) return;
 
-  function updateBadges(cart = readCart()) {
-    $$('.souvenir-card').forEach(card => {
-      const id = card?.dataset?.id;
-      const badge = $('.qty-badge', card);
-      if (!badge || !id) return;
+  grid.textContent = ""; // clear
 
-      const found = cart.find(it => it.id === id);
-      const qty = found ? Number(found.qty) : 0;
+  const cart = readCart();
+  const qtyById = Object.fromEntries(cart.map((c) => [c.id, c.qty]));
 
-      badge.textContent = qty > 0 ? `Qty: ${qty}` : '';
-      badge.style.display = qty > 0 ? 'inline-block' : 'none';
+  PRODUCTS.forEach((p) => {
+    const card = renderProductCard(p, {
+      onAdd: addToCart,
+      qty: qtyById[p.id] || 0
     });
-  }
-
-  function addToCartFromCard(card) {
-    if (!card) return console.error('addToCartFromCard: missing card element');
-
-    const { id, name, price, image } = card.dataset || {};
-    if (!id || !name || price == null) {
-      console.error(
-        'Card is missing required data attributes on <article.souvenir-card>',
-        card
-      );
-      return;
-    }
-
-    const unitPrice = Number(price);
-    if (Number.isNaN(unitPrice)) {
-      console.error('Invalid data-price on card:', price);
-      return;
-    }
-
-    const cart = readCart();
-    const row = cart.find(it => it.id === id);
-
-    if (row) {
-      row.qty += 1;
-    } else {
-      cart.push({
-        id,
-        name,
-        unitPrice,
-        qty: 1,
-        image: image || ''
-      });
-    }
-
-    writeCart(cart);
-  }
-
-  function bindAddButtons() {
-    $$('.souvenir-card .add-btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        e.preventDefault();
-        const card = e.currentTarget.closest('.souvenir-card');
-        addToCartFromCard(card);
-      });
-    });
-  }
-
-  // Sync badges/count if another tab changes the cart
-  window.addEventListener('storage', evt => {
-    if (evt.key === CART_KEY) {
-      const cart = readCart();
-      updateHeaderCount(cart);
-      updateBadges(cart);
-    }
+    grid.append(card);
   });
 
-  // ---------- Boot ----------
-  document.addEventListener('DOMContentLoaded', () => {
-    // If card.js exposes a hydrate hook, run it first so cards are ready
-    if (window.MuseumCard && typeof window.MuseumCard.hydrate === 'function') {
-      try {
-        window.MuseumCard.hydrate();
-      } catch (e) {
-        console.warn('MuseumCard.hydrate() failed:', e);
-      }
-    }
+  updateHeaderCount(cartCount(cart));
 
-    bindAddButtons();
-    updateHeaderCount();
-    updateBadges();
+  const vc = document.getElementById("viewCartBtn");
+  if (vc) vc.addEventListener("click", () => {
+    location.href = "/Museum/html/cart.html";
   });
+}
 
-  // ---------- Small public API (optional; useful for card.js/tests) ----------
-  window.ShopCart = {
-    read: readCart,
-    count: cartCount,
-    add(id, name, unitPrice, qty = 1, image = '') {
-      if (!id) return;
-      const cart = readCart();
-      let row = cart.find(it => it.id === id);
-      if (!row) {
-        row = { id, name, unitPrice: Number(unitPrice) || 0, qty: 0, image };
-        cart.push(row);
-      }
-      row.qty += Math.max(1, Number(qty) || 1);
-      writeCart(cart);
-    },
-    clear() {
-      localStorage.removeItem(CART_KEY);
-      updateHeaderCount([]);
-      updateBadges([]);
-      window.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: [], count: 0 } }));
-    }
-  };
-})();
+/* ---------- boot ---------- */
+document.addEventListener("DOMContentLoaded", render);
+
 
 
 
