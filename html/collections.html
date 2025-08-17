@@ -1,29 +1,33 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Collections — Museum of Wonder</title>
 
-  <!-- Global + page CSS -->
+  <!-- Global styles (your brown–yellow theme) -->
   <link rel="stylesheet" href="/Museum/css/style.css">
+  <!-- If you kept a page-specific sheet, keep this line. If not, it's harmless. -->
   <link rel="stylesheet" href="/Museum/css/collections.css">
 </head>
+
 <body class="collections-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
+  <!-- ============ Header / Nav ============ -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a class="brand" href="/Museum/">Museum of Wonder</a>
+      <a href="/Museum/" class="brand">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
-        <li><a aria-current="page" href="/Museum/html/collections.html">Collections</a></li>
+        <li><a href="/Museum/html/collections.html" aria-current="page">Collections</a></li>
         <li><a href="/Museum/html/shop.html">Shop</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- ============ Main ============ -->
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Collections</h1>
@@ -31,6 +35,7 @@
         The content in this gallery was created by AI under human direction, then curated, reviewed, and edited by a human.
       </p>
 
+      <!-- Subnav chips -->
       <nav class="subnav" aria-label="Collections sections">
         <a class="chip" href="#archaeology">Archaeology</a>
         <a class="chip" href="#anthropology">Anthropology</a>
@@ -42,11 +47,9 @@
         <h2 id="arch-title" class="section-title">Archaeology</h2>
 
         <div class="card-grid">
-
           <!-- Obsidian Spearhead -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="obsidian"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="obsidian" aria-controls="modal"
                aria-label="Open note for Obsidian Spearhead">
               <figure class="media-frame">
                 <img src="/Museum/images/archaeology/obsidian-spearhead.jpg"
@@ -59,8 +62,7 @@
 
           <!-- Coprolite Sample -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="coprolite"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="coprolite" aria-controls="modal"
                aria-label="Open note for Coprolite Sample">
               <figure class="media-frame">
                 <img src="/Museum/images/archaeology/coprolite-sample.jpg"
@@ -71,20 +73,18 @@
             <p>Dietary and seasonal record in fossilized micro-details.</p>
           </article>
 
-          <!-- Basaltic Glyphstone (file lives in /images/collections/) -->
+          <!-- Basaltic Glyphstone (FIXED path & clean <img>) -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="glyphstone"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="glyphstone" aria-controls="modal"
                aria-label="Open note for Basaltic Glyphstone">
               <figure class="media-frame">
-                <img src="/Museum/images/collections/basaltic-glyphstone.jpg"
+                <img src="/Museum/images/archaeology/basaltic-glyphstone.jpg"
                      alt="Basaltic glyphstone with shallow incisions">
               </figure>
             </a>
             <h3>Basaltic Glyphstone</h3>
             <p>Boundary marker incised with shallow crossing lines.</p>
           </article>
-
         </div>
       </section>
 
@@ -95,8 +95,7 @@
         <div class="card-grid">
           <!-- Bronze Kohl Container -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="kohl"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="kohl" aria-controls="modal"
                aria-label="Open note for Bronze Kohl Container">
               <figure class="media-frame">
                 <img src="/Museum/images/anthropology/bronze-kohl-container.jpg"
@@ -109,8 +108,7 @@
 
           <!-- Cranial Vault Fragment -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="cranial"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="cranial" aria-controls="modal"
                aria-label="Open note for Cranial Vault Fragment">
               <figure class="media-frame">
                 <img src="/Museum/images/anthropology/cranial-vault-fragment.jpg"
@@ -123,8 +121,7 @@
 
           <!-- Faience Scarab Amulet -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="scarab"
-               aria-haspopup="dialog" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal="scarab" aria-controls="modal"
                aria-label="Open note for Faience Scarab Amulet">
               <figure class="media-frame">
                 <img src="/Museum/images/anthropology/faience-scarab-amulet.jpg"
@@ -137,13 +134,13 @@
         </div>
       </section>
 
-      <!-- =================== Histories (sample full label) =================== -->
+      <!-- =================== Histories (label) =================== -->
       <section id="histories" class="histories" aria-labelledby="hist-title">
         <h2 id="hist-title" class="section-title">Histories</h2>
 
         <article class="history-item card">
+          <!-- FIXED: use the Obsidian Spearhead photo here -->
           <figure class="media-frame" style="aspect-ratio:5/4">
-            <!-- use the archaeology image here, per fix -->
             <img src="/Museum/images/archaeology/obsidian-spearhead.jpg"
                  alt="Obsidian spearhead displayed on neutral mount">
           </figure>
@@ -156,41 +153,49 @@
             <p><strong>Approx. date:</strong> Late Holocene (relative, stratigraphic).</p>
             <p><strong>Region:</strong> Inland Sahel caravan margin, secondary dune ridge.</p>
             <p><strong>Dimensions:</strong> 11.2 × 3.1 × 0.7 cm.
-              <em> On display courtesy of the Field School Depot.</em>
-            </p>
+              <em> On display courtesy of the Field School Depot.</em></p>
 
             <h4>Interpretation</h4>
             <p>
-              Obsidian cuts because it breaks like lightning: conchoidal, fast, and purposeful. The maker seated the blank
-              on a palm and drew sharp pressure along the edge to lift thin flakes, a rhythm of intake and release that
-              turned glass into intention. Spearheads like this travel easily through both space and story…
+              Obsidian cuts because it breaks like lightning: conchoidal, fast, and purposeful. The maker seated the
+              blank on a palm and drew sharp pressure along the edge to lift thin flakes, a rhythm of intake and release
+              that turned glass into intention. Spearheads like this travel easily through both space and story. Their raw
+              material often moves hundreds of kilometers from volcano to camp, bundled in trade as nodules or rough
+              preforms. The polish along the hafting end suggests repeated mounting and removal—a kit that shifted between
+              hunter, scout, and guardian as a day unfolded. Under magnification, tiny step fractures near the tip imply
+              contact with bone or heavy hide. Whether that contact was feast or defense is not knowable here; the point
+              is honest about use but discreet about outcome.
             </p>
 
             <h4>Comparative Notes</h4>
             <p>
               Similar pressure-flaked forms occur across Africa’s Rift and Sahara margins, but the narrow “waisted”
-              hafting seen here aligns with riverine groups who preferred slimmer foreshafts that could be repaired quickly…
+              hafting seen here aligns with riverine groups who preferred slimmer foreshafts that could be repaired quickly.
+              Trace-element sourcing may link this glass to an East African flow; if so, the object also maps a conversation
+              route—merchants, marriage ties, and seasonal employment—threading savanna and desert.
             </p>
 
             <h4>Cautionary Note on Interpretation</h4>
             <p>
-              Functional labels like “weapon” or “hunting spear” risk flattening a complex life. Without secure context
-              and community testimony, this label keeps multiple possibilities open.
+              Functional labels like “weapon” or “hunting spear” risk flattening a complex life. Points live in ceremonies,
+              bridewealth, oaths, and teaching kits. Without a secure excavated context and community testimony, this label
+              keeps multiple possibilities open rather than declaring a single past.
             </p>
 
             <p class="courtesy"><strong>On display, courtesy of:</strong> Field School Depot and the dune-ridge community committee.</p>
-            <p class="back-link"><a href="/Museum/">↩ Back to Home</a></p>
+            <p class="back-link"><a href="#archaeology">↩ Back to Archaeology</a></p>
           </div>
         </article>
       </section>
     </div>
   </main>
 
+  <!-- ============ Footer ============ -->
   <footer class="site-footer container">
-    <p>© Museum of Wonder</p>
+    <p>© Museum of Wonder · <a href="/Museum/">Back to Home</a></p>
   </footer>
 
-  <!-- =================== Modal Shell =================== -->
+  <!-- ============ Modal shell (JS will clone hidden content) ============ -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-content">
       <button class="close-modal" aria-label="Close">×</button>
@@ -198,81 +203,76 @@
     </div>
   </div>
 
-  <!-- =================== Hidden modal content (6 items) =================== -->
-  <div id="modal-text-obsidian" class="modal-item" hidden>
+  <!-- ============ Hidden modal content blocks ============ -->
+
+  <!-- Obsidian -->
+  <div class="modal-item" id="modal-text-obsidian" hidden>
     <h2 id="modal-title">Obsidian Spearhead — Collection Note</h2>
     <p><strong>Material:</strong> Volcanic glass (obsidian). <strong>Function:</strong> Spear point / hunting &amp; defense.</p>
     <p><strong>Location Found:</strong> Dune-margin campsite, inland Sahel.</p>
-    <p>Obsidian is sharper than steel but brittle; its maker chose speed and precision over durability…</p>
+    <p>
+      Obsidian is sharper than steel but brittle; its maker chose speed and precision over durability. Long, parallel
+      pressure flake scars run from base to tip, showing controlled manufacture and a preference for a slim profile that
+      flies true. Polish at the base indicates hafting with fiber wrap and resin. Impact step-fractures at the tip hint at
+      contact with bone or dense hide. Obsidian sources are absent locally, signaling trade or mobility; the point is thus
+      also a map in miniature.
+    </p>
   </div>
 
-  <div id="modal-text-coprolite" class="modal-item" hidden>
+  <!-- Coprolite -->
+  <div class="modal-item" id="modal-text-coprolite" hidden>
     <h2 id="modal-title">Coprolite Sample — Collection Note</h2>
     <p><strong>Material:</strong> Fossilized dung. <strong>Function:</strong> Dietary &amp; environmental record.</p>
     <p><strong>Location Found:</strong> Shelter floor lens.</p>
-    <p>Coprolites are time capsules…</p>
+    <p>
+      Coprolites are time capsules—seed coats, bone splinters, and phytoliths unravel meals, seasons, and risk.
+    </p>
   </div>
 
-  <div id="modal-text-glyphstone" class="modal-item" hidden>
+  <!-- Basaltic Glyphstone -->
+  <div class="modal-item" id="modal-text-glyphstone" hidden>
     <h2 id="modal-title">Basaltic Glyphstone — Collection Note</h2>
     <p><strong>Material:</strong> Basalt with iron-rich patina. <strong>Function:</strong> Boundary / oath marker.</p>
     <p><strong>Location Found:</strong> River terrace.</p>
-    <p>The shallow, crossing incisions are not letters so much as witnesses…</p>
+    <p>
+      Shallow crossing incisions serve as witnesses—names paired with promises renewed by touch. Basalt’s weight anchors
+      law to deep time more than to a single ruler.
+    </p>
   </div>
 
-  <div id="modal-text-kohl" class="modal-item" hidden>
+  <!-- Bronze Kohl -->
+  <div class="modal-item" id="modal-text-kohl" hidden>
     <h2 id="modal-title">Bronze Kohl Container — Collection Note</h2>
     <p><strong>Material:</strong> Cast bronze; traces of galena. <strong>Function:</strong> Cosmetic storage.</p>
-    <p>Both beauty and medicine—lining eyelids cuts glare…</p>
+    <p>
+      Kohl is both beauty and medicine; lining eyelids cuts glare. Years of touch and oil turned the metal’s surface into
+      memory.
+    </p>
   </div>
 
-  <div id="modal-text-cranial" class="modal-item" hidden>
+  <!-- Cranial -->
+  <div class="modal-item" id="modal-text-cranial" hidden>
     <h2 id="modal-title">Cranial Vault Fragment — Collection Note</h2>
     <p><strong>Material:</strong> Human bone. <strong>Function:</strong> Osteological evidence.</p>
-    <p>Healed groove implies an old injury survived…</p>
+    <p>
+      Healed groove implies an old injury survived; ethics of handling remain paramount.
+    </p>
   </div>
 
-  <div id="modal-text-scarab" class="modal-item" hidden>
+  <!-- Scarab -->
+  <div class="modal-item" id="modal-text-scarab" hidden>
     <h2 id="modal-title">Faience Scarab Amulet — Collection Note</h2>
     <p><strong>Material:</strong> Silica glaze with copper colorants. <strong>Function:</strong> Protective amulet.</p>
-    <p>Blue-green faience promises water and life in a dry land…</p>
+    <p>
+      Blue-green faience promises water and life—ornament and passport moving between trade languages.
+    </p>
   </div>
 
-  <!-- Tiny modal script (works without external JS) -->
-  <script>
-    (function () {
-      const modal = document.getElementById('modal');
-      const body  = document.getElementById('modal-body');
-      const closeBtn = modal.querySelector('.close-modal');
-
-      function openModal(key) {
-        const src = document.getElementById('modal-text-' + key);
-        if (!src) return;
-        body.innerHTML = src.innerHTML;
-        modal.setAttribute('aria-hidden', 'false');
-        closeBtn.focus();
-        document.body.style.overflow = 'hidden';
-      }
-      function closeModal() {
-        modal.setAttribute('aria-hidden', 'true');
-        body.innerHTML = '';
-        document.body.style.overflow = '';
-      }
-
-      document.addEventListener('click', (e) => {
-        const a = e.target.closest('.open-modal');
-        if (a) {
-          e.preventDefault();
-          openModal(a.dataset.modal);
-        }
-        if (e.target === modal) closeModal(); // click backdrop
-      });
-      closeBtn.addEventListener('click', closeModal);
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-    }());
-  </script>
+  <!-- Page JS (opens/closes the modal) -->
+  <script src="/Museum/js/collections.js" defer></script>
 </body>
 </html>
+
 
 
 
