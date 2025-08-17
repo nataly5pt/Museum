@@ -1,41 +1,36 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Souvenir Shop — Museum of Wonder</title>
-  <link rel="stylesheet" href="/Museum/css/style.css">
+  <link rel="stylesheet" href="/Museum/css/style.css" />
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
-      <a href="/Museum/" class="brand">Museum of Wonder</a>
+      <a class="brand" href="/Museum/">Museum of Wonder</a>
       <ul class="top-nav__links">
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li>
-          <a href="/Museum/html/cart.html" id="cartLink">
-            Cart <span id="cartCount">0</span>
-          </a>
-        </li>
+        <!-- cartLink id used by shop.js to show Cart N -->
+        <li><a id="cartLink" href="/Museum/html/cart.html">Cart 0</a></li>
         <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
       </ul>
-      <button id="viewCartBtn" class="btn">View Cart</button>
+      <button class="btn" onclick="location.href='/Museum/html/cart.html'">View Cart</button>
     </nav>
   </header>
 
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Souvenir Shop</h1>
-      <p class="ai-notice">
-        The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.
-      </p>
+      <p class="muted">The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.</p>
 
-      <!-- The grid that JS will fill -->
-      <section id="shop-list" class="souvenir-grid" aria-label="Products"></section>
+      <!-- where shop.js will inject product cards -->
+      <div id="shop-list" class="shop-grid"></div>
     </div>
   </main>
 
@@ -43,10 +38,12 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Only load shop.js. It imports card.js. -->
-  <script type="module" src="/Museum/js/shop.js"></script>
+  <!-- Scripts: core first, then page script. Use ABSOLUTE paths on GH Pages -->
+  <script src="/Museum/js/card.js"></script>
+  <script src="/Museum/js/shop.js"></script>
 </body>
 </html>
+
 
 
 
