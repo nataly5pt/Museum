@@ -1,245 +1,372 @@
-/* ===============================
-   Global Styles
-================================== */
+/* ==========================================================================
+   Museum — Savanna Theme (yellow + brown)
+   Author: Your Name
+   ========================================================================== */
+
+/* ------------------------------
+   0) CSS Reset / Base
+   ------------------------------ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
 html {
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-  background-color: #f9f9f9;
+  -webkit-text-size-adjust: 100%;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial,
+               "Apple Color Emoji","Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.5;
+  scroll-behavior: smooth;
 }
-*, *::before, *::after {
-  box-sizing: inherit;
+
+img, svg, video { max-width: 100%; height: auto; display: block; }
+button, input, select, textarea { font: inherit; }
+
+/* Better default link focus visibility */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
 }
-body {
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ------------------------------
+   1) Theme Tokens (Savanna)
+   ------------------------------ */
+:root{
+  /* Core browns */
+  --bg-deep:#0f0804;
+  --bg-1:#24160d;
+  --bg-2:#1a1109;
+  --bg-3:#120b07;
+
+  /* Sun / ochre accents */
+  --sun-1:#f2b705; /* warm yellow */
+  --sun-2:#dfa114; /* ochre */
+  --sun-3:#d97706; /* amber */
+  --clay: #8b5e34; /* brown clay */
+  --leaf:#5f6f52;  /* muted olive accent */
+
+  /* Text */
+  --text:#f6edd3;           /* ivory */
+  --text-strong:#fff7d6;
+  --text-muted:#e4d7ae;
+
+  /* Surfaces */
+  --surface: rgba(255,244,214,.06);
+  --surface-2: rgba(255,244,214,.10);
+  --stroke: rgba(255,244,214,.18);
+  --shadow: 0 10px 30px rgba(21,10,4,.55);
+
+  /* UI */
+  --link:#ffd166;
+  --focus:#ffd166;
+  --chip-bg: rgba(242,183,5,.18);
+  --chip-border: rgba(242,183,5,.35);
+
+  /* Sizing */
+  --radius-xl: 18px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
+  --container: 1200px;
+  --space-1:.25rem; --space-2:.5rem; --space-3:.75rem; --space-4:1rem;
+  --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem;
+}
+
+/* ------------------------------------------------------
+   2) Global background + body text (applies site-wide).
+   To scope only to Collections, add class="savanna-theme"
+   to that page’s <body>. Both selectors are targeted.
+   ------------------------------------------------------ */
+body,
+.savanna-theme{
   margin: 0;
-  color: #222;
-  line-height: 1.6;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 800px at -10% -10%, var(--sun-1) 55%, transparent 45%),
+    radial-gradient(900px 700px at 110% 0%,  var(--sun-3) 60%, transparent 40%),
+    radial-gradient(900px 800px at 50% 120%, var(--clay) 44%, transparent 50%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2) 55%, var(--bg-deep));
+  background-attachment: fixed;
+  min-height: 100vh;
 }
 
-/* ===============================
-   Accessibility
-================================== */
-.skip-link {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-}
-.skip-link:focus {
-  left: 1rem;
-  top: 1rem;
-  background: #fff;
-  padding: 0.5rem 0.75rem;
-  border: 2px solid #000;
-  border-radius: 0.5rem;
-  z-index: 1000;
+/* Subtle “dust” noise overlay */
+body::after,
+.savanna-theme::after{
+  content:"";
+  position: fixed; inset:0; pointer-events:none;
+  background-image: radial-gradient(#ffd16622 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity:.08; mix-blend-mode:screen;
+  z-index: 0;
 }
 
-/* ===============================
-   Layout Container
-================================== */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1rem;
-}
+/* Layout helpers */
+.container{ width: min(100%, var(--container)); margin-inline:auto; padding-inline: var(--space-4); }
+main{ position: relative; z-index:1; }
 
-/* ===============================
-   Header
-================================== */
-.site-header {
-  background-color: #333;
-  color: #fff;
-  padding: 1rem 0;
-  text-align: center;
-}
-.brand {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.site-title {
-  color: #fff;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.25rem;
-}
+/* ------------------------------
+   3) Typography
+   ------------------------------ */
+h1,h2,h3,h4 { line-height: 1.2; margin: 0 0 var(--space-6); color: var(--text-strong); }
+h1{ font-size: clamp(2rem, 3vw + 1rem, 3rem); letter-spacing:.02em; }
+h2{ font-size: clamp(1.5rem, 2vw + .75rem, 2.125rem); }
+h3{ font-size: clamp(1.25rem, 1.2vw + .75rem, 1.5rem); }
+p { margin: 0 0 var(--space-5); color: var(--text); }
+small, .muted { color: var(--text-muted); }
 
-/* ===============================
-   Navigation
-================================== */
-.main-nav .nav-list {
-  list-style: none; /* Removes bullets */
-  margin: 0.5rem 0 0;
-  padding: 0;
-  display: flex;
-  gap: 1.25rem;
-  justify-content: center;
-}
-.main-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-.main-nav a:hover,
-.main-nav a[aria-current="page"] {
-  text-decoration: underline;
-}
-
-/* ===============================
-   Hero Section
-================================== */
-.hero .lead {
-  margin-top: 0.5rem;
-}
-.disclosure {
-  color: #555;
-  font-size: 0.95rem;
-}
-
-/* ===============================
-   Cards
-================================== */
-.card-grid {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-}
-.card {
-  background: #fff;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-.card-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.card-body {
-  padding: 1rem;
-  flex: 1;
-}
-.card-body h3 {
-  margin-top: 0;
-}
-.card-cta .button {
-  display: inline-block;
-  padding: 0.5rem 0.9rem;
-  border-radius: 0.5rem;
-  background: #333;
-  color: #fff;
-  text-decoration: none;
-}
-.card-cta .button:hover {
-  background: #555;
-}
-
-/* ===============================
-   Footer
-================================== */
-.site-footer {
-  text-align: center;
-  padding: 1rem 0;
-  color: #666;
-  background-color: #f2f2f2;
-}
-
-/* ===============================
-   Responsive Design
-================================== */
-@media (max-width: 900px) {
-  .card-grid {
-    grid-template-columns: 1fr;
-  }
-}
-/* ========= Shop ========= */
-.shop-title { margin-bottom: .5rem; }
-.ai-banner {
-  background: #e9eef6;
-  border: 1px solid #cfd8ea;
-  color: #20324d;
-  padding: .6rem .8rem;
-  border-radius: .5rem;
-  margin: .5rem 0 1rem;
+/* Tip text under subnav */
+.tip {
+  margin: var(--space-6) 0 var(--space-4);
+  color: var(--text-muted);
   font-size: .95rem;
 }
 
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
-  align-items: start;
+/* ------------------------------
+   4) Top Navigation (generic)
+   ------------------------------ */
+.site-nav {
+  position: sticky; top:0; z-index: 10;
+  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(18,11,7,.85), rgba(18,11,7,.55));
+  border-bottom: 1px solid var(--stroke);
+}
+.site-nav .bar {
+  display: flex; gap: var(--space-3); align-items: center;
+  padding: var(--space-3) var(--space-4);
+}
+.brand { font-weight: 700; color: var(--text-strong); margin-right: auto; }
+.nav-btn, .pill {
+  display:inline-flex; align-items:center; gap:.5ch;
+  padding:.55rem .85rem; border-radius: 999px;
+  border:1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--text-strong);
+  text-decoration: none;
+  transition: transform .18s ease, background-color .18s ease, border-color .18s ease;
+}
+.nav-btn:hover, .pill:hover{ transform: translateY(-1px); border-color: #ffd166; }
+
+/* Sub-navigation tabs (Archaeology / Anthropology / Histories) */
+.subnav { display:flex; gap:.6rem; align-items:center; margin: var(--space-4) 0 var(--space-3); }
+.tab {
+  padding:.55rem .9rem; border-radius: 999px;
+  border:1px solid var(--chip-border);
+  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
+  color: var(--text-strong); cursor: pointer; user-select: none;
+}
+.tab[aria-current="page"],
+.tab.is-active{
+  background: linear-gradient(180deg, rgba(242,183,5,.32), rgba(242,183,5,.15));
+  border-color: #ffd166;
 }
 
-.shop-card {
-  background: #fff;
-  border: 1px solid #dcdcdc;
-  border-radius: .75rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,.06);
-  overflow: hidden;
-  display: grid;
-  grid-template-rows: auto 1fr;
+/* ------------------------------
+   5) Cards / Tiles (Collections grid)
+   ------------------------------ */
+.grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(14px, 2.4vw, 22px);
+  margin: var(--space-6) 0 var(--space-8);
 }
 
-.shop-media img {
-  display: block;
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  cursor: pointer;
-}
-
-.shop-body { padding: 1rem 1rem 1.1rem; }
-.shop-name { font-size: 1.15rem; margin: .25rem 0 .35rem; }
-.shop-desc { color: #333; font-size: .95rem; margin: 0 0 .5rem; line-height: 1.4; }
-.shop-price { font-weight: 700; margin: .25rem 0 .65rem; }
-
-.shop-card .button,
-.shop-card .add-btn {
-  width: 100%;
-  display: inline-block;
-  text-align: center;
-  padding: .6rem .8rem;
-  border-radius: .5rem;
-}
-
-/* ========= Modal (reusable) ========= */
-.modal[aria-hidden="false"] { display: block; }
-.modal[hidden] { display: none; }
-.modal { position: fixed; inset: 0; z-index: 999; }
-
-.modal-backdrop {
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,.55);
-}
-
-.modal-dialog {
+.card, .tile, .collection-card {
   position: relative;
-  max-width: 880px;
-  margin: 6vh auto;
-  background: #fff;
-  border-radius: 1rem;
-  padding: 1.1rem 1.1rem 1.25rem;
-  box-shadow: 0 30px 80px rgba(0,0,0,.3);
+  background: var(--surface);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  min-height: 340px;
+  display: flex; flex-direction: column; justify-content: flex-end;
 }
 
-.modal-close {
-  position: absolute; top: .4rem; right: .6rem;
-  border: 0; background: transparent;
-  font-size: 1.8rem; line-height: 1; cursor: pointer;
+.card img, .tile img, .collection-card img {
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit: cover;
+  filter: saturate(.9) contrast(1.05) brightness(.9);
+  transition: transform .35s ease, filter .35s ease;
 }
 
-.modal-media img {
-  width: 100%; height: auto; border-radius: .5rem;
-  aspect-ratio: 16 / 9; object-fit: cover;
-  margin-bottom: .6rem;
+.card:hover img,
+.tile:hover img,
+.collection-card:hover img {
+  transform: scale(1.04);
+  filter: saturate(1.05) contrast(1.1) brightness(.95);
 }
 
-.modal-title { font-weight: 700; font-size: 1.25rem; margin: .4rem 0; }
-.modal-desc { margin: .25rem 0 .35rem; color: #333; }
-.modal-price { font-weight: 700; margin: 0 0 .75rem; }
+.card .title, .tile .title, .collection-card .title {
+  position: relative; z-index: 1;
+  background: linear-gradient(0deg, rgba(18,11,7,.85), rgba(18,11,7,0));
+  padding: 90px var(--space-5) var(--space-5);
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+/* An optional subtle border glow on hover */
+.card:hover, .tile:hover, .collection-card:hover {
+  border-color: #ffd166aa;
+}
+
+/* ------------------------------
+   6) Histories section
+   ------------------------------ */
+.histories {
+  margin-top: var(--space-8);
+}
+
+.history-block {
+  display:grid; gap: var(--space-6);
+  grid-template-columns: minmax(260px, 480px) 1fr;
+  align-items: start;
+  background: var(--surface-2);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: var(--space-6);
+}
+
+.history-block img {
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 12px 24px rgba(0,0,0,.35);
+}
+
+/* Definition-ish label structure */
+.fact-title { margin-top: var(--space-4); color: var(--text-strong); font-weight: 700; }
+.facts p { margin: .35rem 0; }
+
+/* Back link under histories */
+.back-link {
+  display:inline-block; margin-top: var(--space-6);
+  color: var(--link);
+}
+
+/* ------------------------------
+   7) Modal (text-only for assignment)
+   ------------------------------ */
+.modal {
+  position: fixed; inset:0;
+  background: rgba(5,3,2,.65);
+  display:none; /* toggled by JS */
+  padding: clamp(12px, 3vw, 24px);
+  z-index: 50;
+}
+.modal-content{
+  position: relative;
+  width: min(880px, 100%);
+  margin: auto;
+  background: linear-gradient(180deg, rgba(25,16,10,.96), rgba(19,12,8,.96));
+  color: var(--text);
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow);
+  padding: clamp(18px, 3.5vw, 28px);
+}
+.close-modal{
+  position:absolute; top:10px; right:10px;
+  width: 38px; height: 38px; border-radius: 999px;
+  display:grid; place-items:center;
+  border:1px solid var(--chip-border);
+  background: var(--chip-bg);
+  color: var(--text-strong);
+  cursor:pointer;
+}
+.close-modal:hover{ border-color:#ffd166; }
+#modal-body h2, #modal-body h3 { margin-top: .25rem; }
+#modal-body p { margin: .6rem 0 1rem; }
+#modal-body .meta { font-size:.95rem; color: var(--text-muted); }
+
+/* Optional list layout inside modal */
+.spec-list{
+  display:grid; gap:.35rem;
+  grid-template-columns: 160px 1fr;
+  margin: .75rem 0 1rem;
+}
+.spec-list dt{ color: var(--text-muted); }
+.spec-list dd{ margin:0; color:var(--text); }
+
+/* ------------------------------
+   8) Buttons / Chips
+   ------------------------------ */
+.btn{
+  display:inline-flex; align-items:center; gap:.6ch;
+  padding:.6rem 1rem; border-radius: var(--radius-md);
+  border:1px solid var(--chip-border);
+  background: linear-gradient(180deg, rgba(242,183,5,.18), rgba(242,183,5,.08));
+  color: var(--text-strong); text-decoration:none; cursor:pointer;
+  transition: transform .18s ease, border-color .18s ease, background-color .18s ease;
+}
+.btn:hover{ transform: translateY(-1px); border-color:#ffd166; }
+.btn.secondary{
+  background: linear-gradient(180deg, rgba(139,94,52,.24), rgba(139,94,52,.12));
+  border-color: rgba(139,94,52,.45);
+}
+
+/* Small “AI disclaimer” banner style */
+.banner {
+  background: rgba(255, 244, 214, .06);
+  border: 1px dashed var(--stroke);
+  padding: .6rem .8rem;
+  border-radius: var(--radius-md);
+  color: var(--text-muted);
+}
+
+/* ------------------------------
+   9) Accessibility helpers
+   ------------------------------ */
+/* Skip to content */
+.skip-link{
+  position:absolute; left:-9999px; top:0;
+}
+.skip-link:focus{
+  left: 1rem; top: 1rem;
+  background: #1b120b; color: var(--text-strong);
+  border:2px solid var(--focus); border-radius: 8px;
+  padding:.4rem .6rem; z-index: 9999;
+}
+
+/* Force left alignment for interpretation text as per assignment */
+.modal p, .history-block p, .history-block li, .facts, .interpretation {
+  text-align: left;
+}
+
+/* ------------------------------
+   10) Footer (optional)
+   ------------------------------ */
+.site-footer{
+  margin-top: var(--space-8);
+  padding: var(--space-6) 0;
+  color: var(--text-muted);
+  border-top: 1px solid var(--stroke);
+  background: linear-gradient(180deg, rgba(18,11,7,.35), rgba(18,11,7,.6));
+}
+
+/* ------------------------------
+   11) Utilities
+   ------------------------------ */
+.flow > * + * { margin-top: var(--space-4); }
+.center { text-align:center; }
+.mt-0{ margin-top:0!important; }
+.mt-4{ margin-top: var(--space-4)!important; }
+.mt-6{ margin-top: var(--space-6)!important; }
+.mb-0{ margin-bottom:0!important; }
+.hidden { display:none !important; }
+
+/* ------------------------------
+   12) Responsive tweaks
+   ------------------------------ */
+@media (max-width: 860px){
+  .history-block { grid-template-columns: 1fr; }
+  .card, .tile, .collection-card { min-height: 300px; }
+  .subnav { flex-wrap: wrap; }
+}
+
 
