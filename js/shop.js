@@ -1,139 +1,85 @@
-/* ===== Shop page (non-module) ========================================= */
-(function () {
-  "use strict";
+/* shop.js — renders products and wires Add to Cart */
+"use strict";
 
-  // ---- Constants / keys ----
-  const CART_KEY = "museumCartV1";
-
-  // ---- Products (you can add more later) ----
-  const PRODUCTS = [
-    {
-      id: "postcard-pack",
-      name: "Curios Postcard Pack",
-      unitPrice: 9.95,
-      image: "/Museum/images/shop/souvenir-shop.jpg",
-      blurb:
-        "Set of 10 matte postcards featuring highlights from the Museum of Wonder."
-    },
-    {
-      id: "celestial-inkstone",
-      name: "Celestial Inkstone",
-      unitPrice: 14.95,
-      image: "/Museum/images/celestial-inkstone.jpg",
-      blurb: "Pigment-making platform, possibly ceremonial or archway-related."
-    },
-    {
-      id: "marker-arch-fragment",
-      name: "Marker Arch Fragment",
-      unitPrice: 13.55,
-      image: "/Museum/images/marker-arch-fragment.jpg",
-      blurb: "A shard with incised motifs; travel token or invocation tablet."
-    },
-    {
-      id: "spiral-claw-fossil",
-      name: "Spiral Claw Fossil",
-      unitPrice: 12.8,
-      image: "/Museum/images/spiral-claw-fossil.jpg",
-      blurb: "Curio fossil with helical ridges—beloved in our field kits."
-    }
-  ];
-
-  // ---- Storage helpers ----
-  function readCart() {
-    try {
-      return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-    } catch {
-      return [];
-    }
+// Try to load from ../data/products.json, but fall back to this list if not found.
+// You can change titles/prices/images freely.
+const FALLBACK_PRODUCTS = [
+  {
+    id: 1,
+    title: "Celestial Inkstone",
+    price: 24.00,
+    image: "../images/celestial-inkstone.jpg"
+  },
+  {
+    id: 2,
+    title: "Marker Arch Fragment",
+    price: 18.50,
+    image: "../images/marker-arch-fragment.jpg"
+  },
+  {
+    id: 3,
+    title: "Spiral Claw Fossil",
+    price: 32.00,
+    image: "../images/spiral-claw-fossil.jpg"
   }
-  function saveCart(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  // Add more later if you like
+];
+
+const $ = (sel, root=document) => root.querySelector(sel);
+
+async function getProducts() {
+  // If you create /Museum/data/products.json later, it will auto-load.
+  // Example JSON structure:
+  // [{ "id": 1, "title": "Name", "price": 19.99, "image": "../images/xxx.jpg" }, ...]
+  try {
+    const res = await fetch("../data/products.json", { cache: "no-store" });
+    if (!res.ok) throw new Error("No products.json");
+    const data = await res.json();
+    if (!Array.isArray(data) || !data.length) throw new Error("Empty list");
+    return data;
+  } catch {
+    return FALLBACK_PRODUCTS;
   }
-  function cartCount() {
-    return readCart().reduce((n, it) => n + (it.qty || 0), 0);
-  }
-  function updateNavCount() {
-    const el = document.getElementById("navCartCount");
-    if (el) el.textContent = cartCount();
-  }
+}
 
-  // ---- Shop rendering ----
-  function renderShop() {
-    const grid = document.getElementById("shopGrid");
-    if (!grid) return;
+function renderProducts(products) {
+  const grid = $("#product-grid");
+  if (!grid) return;
 
-    const cart = readCart();
+  grid.innerHTML = products.map(p => `
+    <article class="card product" data-id="${p.id}">
+      <div class="img-wrap">
+        <img src="${p.image}" alt="${p.title}">
+      </div>
+      <div class="body">
+        <h3 class="title">${p.title}</h3>
+        <p class="price">$${Number(p.price).toFixed(2)}</p>
+        <button class="btn-add">Add to Cart</button>
+      </div>
+    </article>
+  `).join("");
 
-    grid.innerHTML = PRODUCTS.map(p => {
-      const inCart = cart.find(it => it.id === p.id);
-      const qty = inCart ? inCart.qty : 0;
+  grid.addEventListener("click", (e) => {
+    const card = e.target.closest(".product");
+    if (!card) return;
+    if (!e.target.matches(".btn-add")) return;
 
-      return `
-        <article class="card shop-card" data-id="${p.id}">
-          <figure class="media-frame">
-            <img src="${p.image}" alt="${p.name}">
-          </figure>
-          <div class="content">
-            <h3>${p.name}</h3>
-            <p class="muted">${p.blurb}</p>
-            <div class="price-row">
-              <div class="price">$${p.unitPrice.toFixed(2)}</div>
-              <button class="btn btn-amber add-btn" data-id="${p.id}">
-                Add to Cart
-              </button>
-            </div>
-            <span class="qty-badge" aria-live="polite">
-              ${qty ? `Qty in cart: ${qty}` : ``}
-            </span>
-          </div>
-        </article>
-      `;
-    }).join("");
+    const id = Number(card.dataset.id);
+    const p = products.find(x => x.id === id);
+    if (!p) return;
 
-    // Wire buttons
-    grid.querySelectorAll(".add-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        addToCart(btn.getAttribute("data-id"));
-      });
-    });
-  }
-
-  // ---- Add to cart ----
-  function addToCart(id) {
-    const product = PRODUCTS.find(p => p.id === id);
-    if (!product) return;
-
-    const cart = readCart();
-    const found = cart.find(it => it.id === id);
-    if (found) {
-      found.qty += 1;
-    } else {
-      cart.push({
-        id: product.id,
-        name: product.name,
-        unitPrice: product.unitPrice,
-        qty: 1,
-        image: product.image
-      });
-    }
-    saveCart(cart);
-    updateNavCount();
-    renderShop(); // refresh qty badges
-  }
-
-  // ---- Nav “View Cart” ----
-  document.addEventListener("DOMContentLoaded", () => {
-    const goCart = () => (location.href = "/Museum/html/cart.html");
-    const vbtn = document.getElementById("viewCartBtn");
-    if (vbtn) vbtn.addEventListener("click", goCart);
-
-    const ncl = document.getElementById("navCartLink");
-    if (ncl) ncl.addEventListener("click", goCart);
-
-    renderShop();
-    updateNavCount();
+    window.Cart.add(p, 1);
+    // Optional: little confirmation
+    e.target.textContent = "Added!";
+    setTimeout(() => (e.target.textContent = "Add to Cart"), 800);
   });
-})();
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  const products = await getProducts();
+  renderProducts(products);
+});
+
 
 
 
