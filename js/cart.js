@@ -1,18 +1,17 @@
-/* ==========================================================================
-   Cart logic – one named function: render()
-   - Meets requirements for math, order of ops, formatting, UX.
-   - Persists to localStorage across pages.
-   ========================================================================== */
+/* =========================
+   Cart – single render() pass
+   ========================= */
+const CART_KEY = 'museumCartV1';
 
-/*** Constants (UPPER_SNAKE_CASE) ***/
-const CART_KEY = "museumCartV1";
-const MEMBER_KEY = "museumMember";
-const MODE_KEY = "museumDiscountMode"; // 'member' | 'volume' | ''
+let cart = [];                  // [{id,name,unitPrice,qty,image}]
+let member = false;             // member checkbox state
+let discountPref = null;        // 'member' or 'volume' if both could apply
 
-const TAX_RATE = 0.102;                // 10.2%
-const MEMBER_DISCOUNT_RATE = 0.15;     // 15%
+// ---------- Constants (UPPER_SNAKE_CASE)
+const TAX_RATE = 0.102;               // 10.2%
+const MEMBER_DISCOUNT_RATE = 0.15;
 const SHIPPING_RATE = 25.00;
-
+// Volume tiers: upper bound (inclusive), rate
 const VOLUME_DISCOUNT_TIERS = [
   { max: 49.99, rate: 0.00 },
   { max: 99.99, rate: 0.05 },
@@ -20,212 +19,148 @@ const VOLUME_DISCOUNT_TIERS = [
   { max: Infinity, rate: 0.15 }
 ];
 
-/*** State ***/
-let cart = [];
-try { cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]"); } catch { cart = []; }
-let isMember = localStorage.getItem(MEMBER_KEY) === "true";
-let DISCOUNT_MODE = localStorage.getItem(MODE_KEY) || ""; // '', 'member', 'volume'
+// Load persisted state
+try {
+  const raw = localStorage.getItem(CART_KEY);
+  if (raw) {
+    const saved = JSON.parse(raw);
+    cart = saved.cart || [];
+    member = !!saved.member;
+    discountPref = saved.discountPref ?? null;
+  }
+} catch(e){ /* ignore parse issues */ }
 
-/*** DOM refs ***/
-const mount = document.getElementById("cartMount");
-const memberCheck = document.getElementById("memberCheck");
-const live = document.getElementById("cartLive");
-if (memberCheck) memberCheck.checked = isMember;
+// Money format (parentheses for negatives)
+function fmt(x){
+  const sign = x < 0 ? -1 : 1;
+  const v = Math.abs(x);
+  const s = `$${v.toFixed(2)}`;
+  return sign < 0 ? `(${s})` : s;
+}
 
-/*** Formatter (use formatter object, not a helper function) ***/
-const moneyFmt = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", minimumFractionDigits: 2, maximumFractionDigits: 2 });
+// Save
+function persist(){
+  localStorage.setItem(CART_KEY, JSON.stringify({ cart, member, discountPref }));
+}
 
-/*** Main render box (single named function per the assignment) ***/
-function render() {
-  // 1) Normalize cart (drop zero price or zero qty items)
-  cart = Array.isArray(cart) ? cart.filter(it => it && it.unitPrice > 0 && it.qty > 0) : [];
+// Single box: compute & paint UI
+function render(){
+  const root = document.getElementById('cart-root');
+  if(!root) return;
 
-  // 2) Compute ItemTotal across cart (unrounded)
+  // 1) Items subtotal (unrounded sum, round for display only)
   let itemTotal = 0;
-  for (let i = 0; i < cart.length; i++) {
-    const it = cart[i];
-    itemTotal += (it.unitPrice * it.qty);
-  }
+  cart.forEach(it => { itemTotal += (it.unitPrice * it.qty); });
 
-  // 3) Volume rate from tiers
+  // 2) Determine volume discount rate by tiers
   let volumeRate = 0;
-  for (let i = 0; i < VOLUME_DISCOUNT_TIERS.length; i++) {
-    if (itemTotal <= VOLUME_DISCOUNT_TIERS[i].max) {
-      volumeRate = VOLUME_DISCOUNT_TIERS[i].rate;
-      break;
-    }
+  for (const t of VOLUME_DISCOUNT_TIERS){
+    if (itemTotal <= t.max){ volumeRate = t.rate; break; }
   }
 
-  // 4) Member desired?
-  const memberRateWanted = isMember ? MEMBER_DISCOUNT_RATE : 0;
+  // 3) Member vs Volume (mutually exclusive)
+  let volumeDiscount = 0;
+  let memberDiscount = 0;
 
-  // 5) Mutually exclusive discounts (prompt user only when both are available)
-  let appliedMemberRate = 0;
-  let appliedVolumeRate = 0;
+  const volumeAvail = volumeRate > 0;
+  const memberAvail = member;
 
-  if (memberRateWanted > 0 && volumeRate > 0) {
-    if (!DISCOUNT_MODE) {
-      const useMember = window.confirm(
-        `Both discounts are available.\n\nOK = Apply Member (15%)\nCancel = Apply Volume (${(volumeRate*100).toFixed(0)}%)`
+  if (memberAvail && volumeAvail){
+    // Require an explicit choice (remember preference)
+    if (!discountPref){
+      const ok = window.confirm(
+        `Both discounts could apply.\n\nOK = Use MEMBER 15%\nCancel = Use VOLUME ${(volumeRate*100).toFixed(0)}%`
       );
-      DISCOUNT_MODE = useMember ? "member" : "volume";
-      localStorage.setItem(MODE_KEY, DISCOUNT_MODE);
+      discountPref = ok ? 'member' : 'volume';
+      persist();
     }
-    if (DISCOUNT_MODE === "member") {
-      appliedMemberRate = MEMBER_DISCOUNT_RATE;
-      appliedVolumeRate = 0;
-    } else {
-      appliedMemberRate = 0;
-      appliedVolumeRate = volumeRate;
-    }
-  } else {
-    // Only one possible
-    appliedMemberRate = memberRateWanted;
-    appliedVolumeRate = memberRateWanted > 0 ? 0 : volumeRate;
-    // if none available, DISCOUNT_MODE is irrelevant
   }
 
-  // 6) Discounts (unrounded)
-  const volumeDiscount = itemTotal * appliedVolumeRate;
-  const memberDiscount = itemTotal * appliedMemberRate;
-  const totalDiscounts = volumeDiscount + memberDiscount;
+  if (memberAvail && (!volumeAvail || discountPref === 'member')){
+    memberDiscount = itemTotal * MEMBER_DISCOUNT_RATE;
+  } else if (volumeAvail){
+    memberDiscount = 0;
+    volumeDiscount = itemTotal * volumeRate;
+  }
 
-  // 7) Shipping (flat) added after discounts (0 if empty)
-  const shipping = cart.length ? SHIPPING_RATE : 0;
+  // 4) Shipping (flat after discounts)
+  const discountTotal = volumeDiscount + memberDiscount;
+  const taxableBase = Math.max(0, itemTotal - discountTotal) + (cart.length ? SHIPPING_RATE : 0);
 
-  // 8) SubTotal (taxable) and tax & total (unrounded)
-  const taxableSubTotal = itemTotal - totalDiscounts + shipping;
-  const taxAmount = taxableSubTotal * TAX_RATE;
-  const invoiceTotal = taxableSubTotal + taxAmount;
+  // 5) Tax + Invoice
+  const taxAmount = taxableBase * TAX_RATE;
+  const invoiceTotal = taxableBase + taxAmount;
 
-  // 9) Build table rows
-  let rows = "";
-  for (let i = 0; i < cart.length; i++) {
-    const it = cart[i];
-    const lineTotal = it.unitPrice * it.qty;
-    const unitFormatted = moneyFmt.format(it.unitPrice);
-    const lineFormatted = moneyFmt.format(lineTotal);
+  // ---- Build HTML
+  const empty = cart.length === 0;
+  let itemsHtml = '';
 
-    rows += `
-      <tr data-id="${it.id}">
-        <td class="thumb"><img src="${it.image || ""}" alt=""></td>
-        <td class="name"><div class="item-name">${it.name}</div></td>
-        <td class="amount">${unitFormatted}</td>
-        <td class="qty">x ${it.qty}</td>
-        <td class="amount">${lineFormatted}</td>
-        <td class="controls">
-          <button class="cart-remove" type="button" data-remove="${it.id}">Remove</button>
-        </td>
-      </tr>
+  if (empty){
+    itemsHtml = `
+      <p class="meta">Your cart is empty.</p>
     `;
-  }
-
-  // 10) Empty cart UX
-  const emptyHtml = `
-    <div class="cart-empty">Your cart is empty. Add souvenirs in the Shop and they’ll appear here.</div>
-  `;
-
-  // 11) Summary block (display with parentheses for negatives)
-  const fmt = (v) => (v < 0 ? "(" + moneyFmt.format(Math.abs(v)) + ")" : moneyFmt.format(v));
-  const itemTotalDisplay = moneyFmt.format(itemTotal);
-  const volDisplay = fmt(-volumeDiscount);
-  const memDisplay = fmt(-memberDiscount);
-  const shipDisplay = moneyFmt.format(shipping);
-  const taxableDisplay = moneyFmt.format(taxableSubTotal);
-  const taxRateDisplay = (TAX_RATE * 100).toFixed(1) + "%";
-  const taxDisplay = moneyFmt.format(taxAmount);
-  const totalDisplay = moneyFmt.format(invoiceTotal);
-
-  // Optional note about which discount applied when both could apply
-  let discountNote = "";
-  if (memberRateWanted > 0 && volumeRate > 0) {
-    discountNote = `
-      <div class="note" style="margin:.35rem 0;color:var(--text-300,#E9D8A6);opacity:.9">
-        Discount mode: <strong>${DISCOUNT_MODE === "member" ? "Member (15%)" : "Volume (" + (volumeRate*100).toFixed(0) + "%)"}</strong>.
-        <a href="#" id="changeDiscount">Change</a>
+  } else {
+    itemsHtml = `
+      <div class="cart-items">
+        ${cart.map((it, idx) => `
+          <div class="cart-item" data-index="${idx}">
+            <img src="${it.image}" alt="">
+            <div>
+              <div class="name">${it.name}</div>
+              <div class="meta">Qty ${it.qty} × ${fmt(it.unitPrice)}</div>
+            </div>
+            <button class="remove-btn" data-remove="${idx}">Remove</button>
+          </div>
+        `).join('')}
       </div>
     `;
   }
 
-  // 12) Single render injection
-  mount.innerHTML = `
-    ${cart.length ? `
-      <table class="cart-table" role="table" aria-label="Cart items">
-        <thead>
-          <tr>
-            <th scope="col">Item</th>
-            <th scope="col">Name</th>
-            <th scope="col">Unit</th>
-            <th scope="col">Qty</th>
-            <th scope="col">Line Total</th>
-            <th scope="col" class="controls">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rows}
-        </tbody>
-      </table>
-    ` : emptyHtml}
-
-    ${discountNote}
-
-    <div class="summary" aria-label="Order summary">
-      <div class="row"><div class="label">Subtotal of ItemTotals</div><div class="value">${itemTotalDisplay}</div></div>
-      <div class="row"><div class="label">Volume Discount</div><div class="value">${volDisplay}</div></div>
-      <div class="row"><div class="label">Member Discount</div><div class="value">${memDisplay}</div></div>
-      <div class="row"><div class="label">Shipping</div><div class="value">${shipDisplay}</div></div>
-      <div class="row"><div class="label">Subtotal (Taxable amount)</div><div class="value">${taxableDisplay}</div></div>
-      <div class="row"><div class="label">Tax Rate</div><div class="value">${taxRateDisplay}</div></div>
-      <div class="row"><div class="label">Tax Amount</div><div class="value">${taxDisplay}</div></div>
-      <div class="row total"><div class="label">Invoice Total</div><div class="value">${totalDisplay}</div></div>
+  const summaryHtml = `
+    <div class="cart-summary">
+      <div class="summary-row"><div class="label">Subtotal of ItemTotals</div><div class="amt">${fmt(itemTotal)}</div></div>
+      <div class="summary-row"><div class="label">Volume Discount</div><div class="amt">${fmt(-volumeDiscount)}</div></div>
+      <div class="summary-row"><div class="label">Member Discount</div><div class="amt">${fmt(-memberDiscount)}</div></div>
+      <div class="summary-row"><div class="label">Shipping</div><div class="amt">${cart.length ? fmt(SHIPPING_RATE) : fmt(0)}</div></div>
+      <div class="summary-row"><div class="label">Subtotal (Taxable amount)</div><div class="amt">${fmt(taxableBase)}</div></div>
+      <div class="summary-row"><div class="label">Tax Rate %</div><div class="amt">${(TAX_RATE*100).toFixed(1)}%</div></div>
+      <div class="summary-row"><div class="label">Tax Amount $</div><div class="amt">${fmt(taxAmount)}</div></div>
+      <div class="summary-row"><div class="label"><strong>Invoice Total</strong></div><div class="amt"><strong>${fmt(invoiceTotal)}</strong></div></div>
     </div>
   `;
 
-  // 13) Announce updates for a11y
-  if (live) {
-    live.textContent = `Cart has ${cart.length} item${cart.length===1?"":"s"}. Total ${totalDisplay}.`;
-  }
+  const controlsHtml = `
+    <div class="member-toggle">
+      <label><input id="memberBox" type="checkbox" ${member ? 'checked':''}> Member (15% off)</label>
+    </div>
+    <div class="cart-controls">
+      <button class="cart-btn" id="keepShoppingBtn">Keep Shopping</button>
+      <button class="cart-btn" id="clearBtn">Clear Cart</button>
+    </div>
+  `;
 
-  // 14) Persist
-  localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  localStorage.setItem(MEMBER_KEY, isMember ? "true" : "false");
-}
+  root.innerHTML = itemsHtml + summaryHtml + controlsHtml;
 
-/*** Interactions (anonymous handlers so we don’t add named helpers) ***/
+  // --- Events (re-render after each)
+  const keep = document.getElementById('keepShoppingBtn');
+  if (keep) keep.onclick = () => { location.href = '/Museum/html/shop.html'; };
 
-// Remove item
-document.addEventListener("click", (e) => {
-  const t = e.target;
-  if (t.matches("[data-remove]")) {
-    const id = t.getAttribute("data-remove");
-    cart = cart.filter(it => String(it.id) !== String(id));
-    render();
-  }
-  if (t.matches("#clearCart")) {
-    cart = [];
-    DISCOUNT_MODE = "";
-    localStorage.removeItem(MODE_KEY);
-    render();
-  }
-  if (t.matches("#changeDiscount")) {
-    e.preventDefault();
-    DISCOUNT_MODE = "";
-    localStorage.removeItem(MODE_KEY);
-    render();
-  }
-});
+  const clear = document.getElementById('clearBtn');
+  if (clear) clear.onclick = () => { cart = []; persist(); render(); };
 
-// Member toggle
-if (memberCheck) {
-  memberCheck.addEventListener("change", () => {
-    isMember = memberCheck.checked;
-    // Force new choice when both apply
-    DISCOUNT_MODE = "";
-    localStorage.removeItem(MODE_KEY);
-    render();
+  const mb = document.getElementById('memberBox');
+  if (mb) mb.onchange = () => { member = mb.checked; discountPref = null; persist(); render(); };
+
+  root.querySelectorAll('[data-remove]').forEach(btn => {
+    btn.onclick = (e) => {
+      const idx = +e.currentTarget.getAttribute('data-remove');
+      cart.splice(idx,1);
+      persist(); render();
+    };
   });
 }
 
-/*** First paint ***/
-render();
+// kick off
+document.addEventListener('DOMContentLoaded', render);
+
 
