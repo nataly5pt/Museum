@@ -4,17 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Souvenir Shop — Museum of Wonder</title>
-
-  <!-- Site styles (brown–yellow theme) -->
   <link rel="stylesheet" href="/Museum/css/style.css">
-
-  <!-- Preload optional external card template (if you keep card.html in its own file) -->
-  <link rel="preload" as="fetch" href="/Museum/html/card.html" crossorigin="anonymous">
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ================= Header / Top Nav ================= -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
       <a href="/Museum/" class="brand">Museum of Wonder</a>
@@ -22,80 +16,26 @@
         <li><a href="/Museum/">Home</a></li>
         <li><a href="/Museum/html/staff.html">Staff</a></li>
         <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li><a href="/Museum/html/cart.html">Cart <span id="cartCount">0</span></a></li>
+        <li>
+          <a href="/Museum/html/cart.html" id="cartLink">
+            Cart <span id="cartCount">0</span>
+          </a>
+        </li>
         <li><a aria-current="page" href="/Museum/html/shop.html">Shop</a></li>
       </ul>
-
-      <!-- View Cart button (spec asks to include it on the shop page) -->
-      <button id="viewCartBtn" class="btn chip" onclick="location.href='/Museum/html/cart.html'">
-        View Cart
-      </button>
+      <button id="viewCartBtn" class="btn">View Cart</button>
     </nav>
   </header>
 
-  <!-- ================= Main ================= -->
   <main id="main" class="content-area">
     <div class="container">
       <h1 class="page-title">Souvenir Shop</h1>
       <p class="ai-notice">
-        The content in this shop was entirely created by AI under human direction, then curated,
-        reviewed, and edited by a human. Prices in USD.
+        The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.
       </p>
 
-      <!-- Where cards will render -->
-      <section aria-label="Products">
-        <div id="shopGrid" class="cards-grid" aria-live="polite"></div>
-      </section>
-
-      <!-- ============== Inline template (fallback if /html/card.html is not used) ============== -->
-      <template id="card-template">
-        <article class="souvenir-card"
-                 data-id=""
-                 data-name=""
-                 data-price=""
-                 data-image="">
-          <figure class="media-frame">
-            <img src="" alt="">
-          </figure>
-
-          <div class="content">
-            <h3 class="item-title"></h3>
-            <p class="item-desc"></p>
-            <p class="price"><strong class="item-price"></strong></p>
-
-            <div class="actions">
-              <button class="add-btn" type="button">Add to Cart</button>
-              <span class="qty-badge" aria-live="polite"></span>
-            </div>
-          </div>
-        </article>
-      </template>
-
-      <!-- ========= No-JS fallback: one fully-wired card so users can still add to cart ========= -->
-      <noscript>
-        <div class="cards-grid">
-          <article class="souvenir-card"
-                   data-id="postcards"
-                   data-name="Curios Postcard Pack"
-                   data-price="9.95"
-                   data-image="/Museum/images/souvenir-shop.jpg">
-            <figure class="media-frame">
-              <img src="/Museum/images/souvenir-shop.jpg"
-                   alt="Shelves of colorful souvenirs in a cozy shop">
-            </figure>
-
-            <div class="content">
-              <h3>Curios Postcard Pack</h3>
-              <p>Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
-              <p class="price"><strong>$9.95</strong></p>
-              <div class="actions">
-                <button class="add-btn" type="button">Add Postcard Pack to Cart</button>
-                <span class="qty-badge" aria-live="polite"></span>
-              </div>
-            </div>
-          </article>
-        </div>
-      </noscript>
+      <!-- The grid that JS will fill -->
+      <section id="shop-list" class="souvenir-grid" aria-label="Products"></section>
     </div>
   </main>
 
@@ -103,14 +43,11 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- ================= Scripts =================
-       card.js = shared constants / helpers used by both shop and cart
-       shop.js = builds the product list, wires buttons, writes to localStorage
-  -->
-  <script src="/Museum/js/card.js" defer></script>
-  <script src="/Museum/js/shop.js" defer></script>
+  <!-- Only load shop.js. It imports card.js. -->
+  <script type="module" src="/Museum/js/shop.js"></script>
 </body>
 </html>
+
 
 
 
