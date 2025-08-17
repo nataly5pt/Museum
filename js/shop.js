@@ -1,133 +1,160 @@
-/* ==========================================================================
-   Museum of Wonder – Shop bootstrap
-   File: /Museum/js/shop.js
-   Purpose:
-     - Wire “Add to Cart” buttons
-     - Persist cart to localStorage using a stable schema
-     - Update quantity badges on each product
-     - (Optional) Update a live header count if #cartCount exists
-   Cart item shape expected by cart.js:
-     { id, name, unitPrice, qty, image }
-   ========================================================================== */
+/* /Museum/js/shop.js */
+(function () {
+  'use strict';
 
-(() => {
-  "use strict";
+  // ---------- Shared storage key (must match cart.js) ----------
+  const CART_KEY = 'museumCartV1';
 
-  /* -------------------- Config / Storage -------------------- */
-  const CART_KEY = "museumCartV1"; // must match cart.js
-  const $ = (sel, root = document) => root.querySelector(sel);
-  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+  // ---------- Small DOM helpers ----------
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 
-  const readCart = () => {
+  // ---------- Cart I/O ----------
+  function readCart() {
     try {
       const raw = localStorage.getItem(CART_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      return Array.isArray(parsed) ? parsed : [];
-    } catch (e) {
-      console.warn("Cart read error:", e);
+      return raw ? JSON.parse(raw) : [];
+    } catch (err) {
+      console.warn('Invalid cart JSON, resetting.', err);
+      localStorage.removeItem(CART_KEY);
       return [];
     }
-  };
+  }
 
-  const writeCart = (cart) => {
-    try {
-      localStorage.setItem(CART_KEY, JSON.stringify(cart));
-    } catch (e) {
-      console.warn("Cart write error:", e);
+  function writeCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateHeaderCount(cart);
+    updateBadges(cart);
+    // Let anything else (e.g., card.js, a header widget) react to changes
+    window.dispatchEvent(
+      new CustomEvent('cart:updated', {
+        detail: { cart, count: cartCount(cart) }
+      })
+    );
+  }
+
+  // ---------- Helpers ----------
+  function cartCount(cart = readCart()) {
+    return cart.reduce((n, it) => n + (Number(it.qty) || 0), 0);
+  }
+
+  function updateHeaderCount(cart = readCart()) {
+    const badge = $('#cartCount');
+    if (!badge) return;
+    const n = cartCount(cart);
+    badge.textContent = n;
+    badge.hidden = n === 0;
+  }
+
+  function updateBadges(cart = readCart()) {
+    $$('.souvenir-card').forEach(card => {
+      const id = card?.dataset?.id;
+      const badge = $('.qty-badge', card);
+      if (!badge || !id) return;
+
+      const found = cart.find(it => it.id === id);
+      const qty = found ? Number(found.qty) : 0;
+
+      badge.textContent = qty > 0 ? `Qty: ${qty}` : '';
+      badge.style.display = qty > 0 ? 'inline-block' : 'none';
+    });
+  }
+
+  function addToCartFromCard(card) {
+    if (!card) return console.error('addToCartFromCard: missing card element');
+
+    const { id, name, price, image } = card.dataset || {};
+    if (!id || !name || price == null) {
+      console.error(
+        'Card is missing required data attributes on <article.souvenir-card>',
+        card
+      );
+      return;
     }
-  };
 
-  const findIndexById = (cart, id) => cart.findIndex((i) => i.id === id);
+    const unitPrice = Number(price);
+    if (Number.isNaN(unitPrice)) {
+      console.error('Invalid data-price on card:', price);
+      return;
+    }
 
-  /* -------------------- Cart mutations -------------------- */
-  const addOne = ({ id, name, unitPrice, image }) => {
     const cart = readCart();
-    const idx = findIndexById(cart, id);
-    if (idx >= 0) {
-      // increment existing
-      cart[idx].qty += 1;
+    const row = cart.find(it => it.id === id);
+
+    if (row) {
+      row.qty += 1;
     } else {
-      // add new
       cart.push({
         id,
         name,
-        unitPrice: Number(unitPrice),
+        unitPrice,
         qty: 1,
-        image
+        image: image || ''
       });
     }
+
     writeCart(cart);
-    return cart;
-  };
+  }
 
-  /* -------------------- UI helpers -------------------- */
-  const sumQty = (cart) => cart.reduce((n, it) => n + (Number(it.qty) || 0), 0);
-
-  const updateBadge = (cardEl) => {
-    const badge = $(".qty-badge", cardEl);
-    const id = cardEl.dataset.id;
-    const cart = readCart();
-    const found = cart.find((i) => i.id === id);
-    const qty = found ? Number(found.qty) : 0;
-    badge.textContent = qty > 0 ? `Qty: ${qty}` : "";
-    badge.style.visibility = qty > 0 ? "visible" : "hidden";
-  };
-
-  // Optional: header mini-count if you add <span id="cartCount"></span>
-  const updateHeaderCount = () => {
-    const el = $("#cartCount");
-    if (!el) return;
-    const total = sumQty(readCart());
-    el.textContent = total > 0 ? total : "0";
-  };
-
-  const attachCard = (cardEl) => {
-    const btn = $(".add-btn", cardEl);
-    if (!btn) return;
-
-    // Initialize badge from persisted cart
-    updateBadge(cardEl);
-
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const { id, name, price, image } = cardEl.dataset;
-
-      // Defensive: ignore zero/invalid priced products
-      const unitPrice = Number(price);
-      if (!isFinite(unitPrice) || unitPrice <= 0) {
-        console.warn("Skipping add: invalid or zero price for", id);
-        return;
-      }
-
-      addOne({ id, name, unitPrice, image });
-      updateBadge(cardEl);
-      updateHeaderCount();
-
-      // Small micro-feedback
-      btn.disabled = true;
-      btn.classList.add("pressed");
-      window.setTimeout(() => {
-        btn.disabled = false;
-        btn.classList.remove("pressed");
-      }, 220);
+  function bindAddButtons() {
+    $$('.souvenir-card .add-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        const card = e.currentTarget.closest('.souvenir-card');
+        addToCartFromCard(card);
+      });
     });
-  };
+  }
 
-  /* -------------------- Bootstrap -------------------- */
-  document.addEventListener("DOMContentLoaded", () => {
-    // Attach to every product card
-    $$(".souvenir-card").forEach(attachCard);
-
-    // On load, reflect any persisted quantities
-    updateHeaderCount();
-
-    // If you navigate back from the cart, ensure badges reflect reality
-    window.addEventListener("focus", () => {
-      $$(".souvenir-card").forEach(updateBadge);
-      updateHeaderCount();
-    });
+  // Sync badges/count if another tab changes the cart
+  window.addEventListener('storage', evt => {
+    if (evt.key === CART_KEY) {
+      const cart = readCart();
+      updateHeaderCount(cart);
+      updateBadges(cart);
+    }
   });
+
+  // ---------- Boot ----------
+  document.addEventListener('DOMContentLoaded', () => {
+    // If card.js exposes a hydrate hook, run it first so cards are ready
+    if (window.MuseumCard && typeof window.MuseumCard.hydrate === 'function') {
+      try {
+        window.MuseumCard.hydrate();
+      } catch (e) {
+        console.warn('MuseumCard.hydrate() failed:', e);
+      }
+    }
+
+    bindAddButtons();
+    updateHeaderCount();
+    updateBadges();
+  });
+
+  // ---------- Small public API (optional; useful for card.js/tests) ----------
+  window.ShopCart = {
+    read: readCart,
+    count: cartCount,
+    add(id, name, unitPrice, qty = 1, image = '') {
+      if (!id) return;
+      const cart = readCart();
+      let row = cart.find(it => it.id === id);
+      if (!row) {
+        row = { id, name, unitPrice: Number(unitPrice) || 0, qty: 0, image };
+        cart.push(row);
+      }
+      row.qty += Math.max(1, Number(qty) || 1);
+      writeCart(cart);
+    },
+    clear() {
+      localStorage.removeItem(CART_KEY);
+      updateHeaderCount([]);
+      updateBadges([]);
+      window.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart: [], count: 0 } }));
+    }
+  };
 })();
+
 
 
 
