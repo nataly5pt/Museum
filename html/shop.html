@@ -1,157 +1,75 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" class="shop-page">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Museum of Wonder — Souvenir Shop</title>
-  <link rel="stylesheet" href="../css/styles.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="author" content="Natalia Glushak">
+  <title>Souvenir Shop — Museum of Wonder</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-  <!-- Site Header / Nav -->
-  <header class="site-header">
-    <div class="container">
-      <div class="brand">Museum of Wonder</div>
-      <nav class="main-nav" aria-label="Main">
-        <a href="../index.html">Home</a>
-        <a href="staff.html">Staff</a>
-        <a href="collections.html">Collections</a>
-        <a href="cart.html">Cart <span id="cart-count">0</span></a>
-        <a class="active" href="shop.html" aria-current="page">Shop</a>
-      </nav>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-      <!-- View Cart button (as in instructor example) -->
-      <button id="viewCartBtn" onclick="location.href='cart.html'">View Cart</button>
-    </div>
+  <header class="site-header container">
+    <nav class="top-nav" aria-label="Primary">
+      <a href="./index.html" class="brand">Museum of Wonder</a>
+      <ul class="top-nav__links">
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./staff.html">Staff</a></li>
+        <li><a href="./collections.html">Collections</a></li>
+        <li><a aria-current="page" href="./shop.html">Shop</a></li>
+      </ul>
+    </nav>
+
+    <h1 class="page-title">Souvenir Shop</h1>
+    <p class="eyebrow">
+      The content in this shop was created by AI under human direction and curated by a human. Prices shown in USD.
+    </p>
+
+    <figure class="media-frame container" style="aspect-ratio: 16/9; margin-top:1rem;">
+      <img src="../images/shop/souvenir-shop.jpg" alt="Warm, colorful museum shop interior">
+    </figure>
   </header>
 
   <main id="main" class="container">
-    <!-- Hero / Banner -->
-    <section class="hero">
-      <h1>Souvenir Shop</h1>
-      <p class="subtle">
-        The content in this shop was entirely created by AI under human direction, then curated, reviewed, and edited by a human. Prices in USD.
-      </p>
-      <figure class="banner">
-        <img src="../images/souvenir-shop.jpg" alt="Souvenir Shop banner" />
-      </figure>
-    </section>
-
-    <!-- Products Grid -->
-    <section class="grid shop-grid" aria-label="Products">
-      <!-- Celestial Inkstone -->
-      <article class="souvenir-item card">
-        <div class="img-wrap">
-          <img src="../images/celestial-inkstone.jpg" alt="Celestial Inkstone" />
-        </div>
-        <div class="body">
-          <h3>Celestial Inkstone</h3>
-          <p class="desc">
-            Carved meteoric basalt with iridescent inlay. Likely used for ritual pigment mixing—astronomical in function.
-          </p>
-          <p class="price">Price: $14.95</p>
-
-          <!-- qty badge (instructor pattern) -->
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <!-- Add to Cart with data-* -->
-          <button
-            onclick="addToCart(this)"
-            data-id="item001"
-            data-name="Celestial Inkstone"
-            data-price="14.95"
-            data-image="../images/celestial-inkstone.jpg">
-            Add Celestial Inkstone to Cart
-          </button>
-        </div>
+    <section class="card-grid" aria-label="Shop products">
+      <!-- Spiral Claw Fossil -->
+      <article class="card">
+        <figure class="media-frame" style="aspect-ratio: 4/3">
+          <img src="../images/spiral-claw-fossil.jpg" alt="Stone spiral claw fossil replica">
+        </figure>
+        <h3>Spiral Claw Fossil</h3>
+        <p class="eyebrow">$22.25</p>
+        <p>Stone spiral replica; cast from original impression.</p>
+        <button type="button" class="button">Add Spiral Claw Fossil to Cart</button>
       </article>
 
-      <!-- Spiral Claw Fossil -->
-      <article class="souvenir-item card">
-        <div class="img-wrap">
-          <img src="../images/spiral-claw-fossil.jpg" alt="Spiral Claw Fossil" />
-        </div>
-        <div class="body">
-          <h3>Spiral Claw Fossil</h3>
-          <p class="desc">
-            Coiled claw impression from a prehistoric creature; a museum favorite for aspiring paleontologists.
-          </p>
-          <p class="price">Price: $27.99</p>
-
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <button
-            onclick="addToCart(this)"
-            data-id="item002"
-            data-name="Spiral Claw Fossil"
-            data-price="27.99"
-            data-image="../images/spiral-claw-fossil.jpg">
-            Add Spiral Claw Fossil to Cart
-          </button>
-        </div>
+      <!-- Celestial Inkstone -->
+      <article class="card">
+        <figure class="media-frame" style="aspect-ratio: 4/3">
+          <img src="../images/celestial-inkstone.jpg" alt="Celestial inkstone with starry flecks">
+        </figure>
+        <h3>Celestial Inkstone</h3>
+        <p class="eyebrow">$18.50</p>
+        <p>Polished slate with mineral flecks; perfect for brush scripts.</p>
+        <button type="button" class="button">Add Celestial Inkstone to Cart</button>
       </article>
 
       <!-- Marker Arch Fragment -->
-      <article class="souvenir-item card">
-        <div class="img-wrap">
-          <img src="../images/marker-arch-fragment.jpg" alt="Marker Arch Fragment" />
-        </div>
-        <div class="body">
-          <h3>Marker Arch Fragment</h3>
-          <p class="desc">
-            Weathered architectural shard with ceremonial markings—perfect for desks and display shelves.
-          </p>
-          <p class="price">Price: $31.50</p>
-
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <button
-            onclick="addToCart(this)"
-            data-id="item003"
-            data-name="Marker Arch Fragment"
-            data-price="31.50"
-            data-image="../images/marker-arch-fragment.jpg">
-            Add Marker Arch Fragment to Cart
-          </button>
-        </div>
-      </article>
-
-      <!-- Coprolite Sample (if you have this file in images/collections) -->
-      <article class="souvenir-item card">
-        <div class="img-wrap">
-          <img src="../images/collections/coprolite-sample.jpg" alt="Coprolite Sample" />
-        </div>
-        <div class="body">
-          <h3>Coprolite Sample</h3>
-          <p class="desc">
-            Fossilized evidence of ancient diets—oddly charming and 100% classroom friendly.
-          </p>
-          <p class="price">Price: $15.95</p>
-
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <button
-            onclick="addToCart(this)"
-            data-id="item004"
-            data-name="Coprolite Sample"
-            data-price="15.95"
-            data-image="../images/collections/coprolite-sample.jpg">
-            Add Coprolite Sample to Cart
-          </button>
-        </div>
+      <article class="card">
+        <figure class="media-frame" style="aspect-ratio: 4/3">
+          <img src="../images/marker-arch-fragment.jpg" alt="Resin cast of carved arch fragment">
+        </figure>
+        <h3>Marker Arch Fragment</h3>
+        <p class="eyebrow">$19.75</p>
+        <p>Resin cast from a carved arch fragment; warm ochre finish.</p>
+        <button type="button" class="button">Add Marker Arch Fragment to Cart</button>
       </article>
     </section>
   </main>
-
-  <footer class="site-footer container">
-    <hr />
-    <p>© Museum of Wonder</p>
-  </footer>
-
-  <!-- JS (paths are from /html/) -->
-  <script src="../js/shop.js" defer></script>
-  <script src="../js/cart.js" defer></script>
 </body>
 </html>
+
 
 
 
