@@ -1,45 +1,194 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Your Cart — Museum of Wonder</title>
-  <link rel="stylesheet" href="/Museum/css/style.css"/>
+  <meta charset="utf-8" />
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    /* Minimal table polish; your site styles can override */
+    .cart-shell{max-width:1100px;margin:32px auto;padding:24px;border-radius:18px;background:#1c140e;}
+    .cart-h{font-size:2.6rem;margin:0 0 16px;}
+    table.cart{width:100%;border-collapse:collapse;margin:10px 0 24px;}
+    table.cart th, table.cart td{padding:14px 12px;border-bottom:1px dashed rgba(255,255,255,.12);vertical-align:middle;}
+    table.cart th{font-weight:700;text-align:left;}
+    table.cart td.amount{text-align:right;font-variant-numeric: tabular-nums;}
+    .thumb{width:68px;height:68px;border-radius:10px;object-fit:cover;display:block}
+    .btn{padding:10px 14px;border-radius:12px;border:0;background:#a66a2c;color:#fff;cursor:pointer}
+    .btn.secondary{background:#3a2a1f}
+    .summary{width:360px;margin-left:auto;background:#2a2119;border-radius:16px;padding:16px 18px}
+    .summary .row{display:flex;justify-content:space-between;margin:8px 0}
+    .lead{font-weight:700}
+    #memberRow{margin:10px 0 14px}
+    #memberRow label{margin-left:8px}
+  </style>
 </head>
-<body class="cart-page">
-  <a class="skip-link" href="#main">Skip to content</a>
+<body>
 
-  <header class="site-header">
-    <nav class="top-nav container" aria-label="Primary">
-      <a href="/Museum/" class="brand">Museum of Wonder</a>
-      <ul class="top-nav__links">
-        <li><a href="/Museum/">Home</a></li>
-        <li><a href="/Museum/html/staff.html">Staff</a></li>
-        <li><a href="/Museum/html/collections.html">Collections</a></li>
-        <li><a href="/Museum/html/shop.html">Shop</a></li>
-        <li>
-          <a href="/Museum/html/cart.html" class="pill" aria-current="page">
-            Cart <span id="cart-count">0</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <main class="cart-shell">
+    <h1 class="cart-h">Your Cart</h1>
 
-  <main id="main" class="content-area">
-    <div class="container">
-      <h1 class="page-title">Your Cart</h1>
-      <div id="cart-view" class="card"></div>
-    </div>
+    <!-- Cart output goes here -->
+    <div id="cartView"></div>
   </main>
 
-  <footer class="site-footer container">
-    <p>© Museum of Wonder</p>
-  </footer>
+  <script>
+  // =================== STUDENT WORK STARTS HERE ===================
+  // One function only: render()
+  const CART_KEY = 'museumCartV1';
+  const TAX_RATE = 0.102;           // 10.2%
+  const MEMBER_DISCOUNT_RATE = 0.15; // 15%
+  const SHIPPING_RATE = 25.00;
 
-  <script src="/Museum/js/cart.js"></script>
+  function render() {
+    // helpers (scoped inside render, still counts as single render function)
+    const readCart = () => {
+      try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
+      catch { return []; }
+    };
+    const writeCart = (cart) => localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    const fmt = (n) => {
+      const v = Math.round(n * 100) / 100;
+      const s = '$' + v.toFixed(2);
+      return (v < 0) ? '(' + s.replace('-', '') + ')' : s;
+    };
+    const cartEl = document.getElementById('cartView');
+    let cart = readCart();
+
+    // Empty cart?
+    if (!cart.length) {
+      cartEl.innerHTML = `
+        <p>Your cart is empty.</p>
+        <div class="summary">
+          <div class="row"><span>Subtotal of Items</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row"><span>Volume Discount</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row"><span>Member Discount</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row"><span>Shipping</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row"><span>Subtotal (Taxable amount)</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row"><span>Tax Rate %</span><span class="amount">${(TAX_RATE*100).toFixed(2)}%</span></div>
+          <div class="row"><span>Tax Amount $</span><span class="amount">${fmt(0)}</span></div>
+          <div class="row lead"><span>Invoice Total</span><span class="amount">${fmt(0)}</span></div>
+        </div>
+        <div style="margin-top:14px;display:flex;gap:10px">
+          <button class="btn secondary" onclick="location.href='shop.html'">Keep Shopping</button>
+          <button class="btn" onclick="localStorage.removeItem('${CART_KEY}'); render()">Clear Cart</button>
+        </div>
+      `;
+      return;
+    }
+
+    // --- Item rows & ItemTotal (unrounded math) ---
+    const lineTotal = (it) => it.unitPrice * it.qty;
+    const itemTotal = cart.reduce((s, it) => s + lineTotal(it), 0);
+
+    // --- Volume discount rate tiers ---
+    let volumeRate = 0;
+    if (itemTotal >= 200) volumeRate = 0.15;
+    else if (itemTotal >= 100) volumeRate = 0.10;
+    else if (itemTotal >= 50) volumeRate = 0.05;
+
+    // --- member checkbox state ---
+    let member = localStorage.getItem('museumMember') === '1';
+
+    // --- mutual exclusion prompt (remember choice this session) ---
+    // choice: 'member' or 'volume'
+    let choice = localStorage.getItem('discountChoice') || '';
+    if (member && volumeRate > 0 && !choice) {
+      const useMember = confirm(
+        `Both discounts are available.\n\n` +
+        `Member (15%) vs Volume (${(volumeRate*100).toFixed(0)}%).\n` +
+        `Click OK for Member, Cancel for Volume.`
+      );
+      choice = useMember ? 'member' : 'volume';
+      localStorage.setItem('discountChoice', choice);
+    }
+    // if user unchecks member, clear remembered choice to allow fresh decision later
+    if (!member && choice === 'member') {
+      localStorage.removeItem('discountChoice');
+      choice = '';
+    }
+
+    // --- compute discounts on unrounded ItemTotal ---
+    const volumeDiscount = (member && choice==='member') ? 0 : (itemTotal * volumeRate);
+    const memberDiscount = (member && (choice!=='volume')) ? (itemTotal * MEMBER_DISCOUNT_RATE) : 0;
+
+    // Shipping after discounts (flat)
+    const subTotalTaxable = itemTotal - volumeDiscount - memberDiscount + (cart.length ? SHIPPING_RATE : 0);
+    const taxAmount = subTotalTaxable * TAX_RATE;
+    const invoiceTotal = subTotalTaxable + taxAmount;
+
+    // --- Build table rows ---
+    const rows = cart.map(it => `
+      <tr>
+        <td><img class="thumb" src="${it.image || '../images/placeholder.png'}" alt=""></td>
+        <td>${it.name}</td>
+        <td class="amount">${it.qty}</td>
+        <td class="amount">${fmt(it.unitPrice)}</td>
+        <td class="amount">${fmt(lineTotal(it))}</td>
+        <td><button class="btn" onclick="
+          (function(){
+            const c = JSON.parse(localStorage.getItem('${CART_KEY}')) || [];
+            const n = c.filter(x => x.id !== '${it.id}');
+            localStorage.setItem('${CART_KEY}', JSON.stringify(n));
+            render();
+          })()
+        ">Remove</button></td>
+      </tr>
+    `).join('');
+
+    cartEl.innerHTML = `
+      <div id="memberRow">
+        <input id="memberChk" type="checkbox" ${member ? 'checked' : ''} />
+        <label for="memberChk">Member Discount (15%)</label>
+        <div style="opacity:.7;font-size:.95rem;margin-top:6px">
+          Volume discount applies at $50 / $100 / $200. If both apply, you'll choose one.
+        </div>
+      </div>
+
+      <table class="cart" aria-label="Shopping cart">
+        <thead>
+          <tr>
+            <th>Item</th><th>Name</th><th>Qty</th><th>Unit Price</th><th>Line Total</th><th>Remove</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+
+      <div class="summary" aria-live="polite">
+        <div class="row"><span>Subtotal of Items</span><span class="amount">${fmt(itemTotal)}</span></div>
+        <div class="row"><span>Volume Discount</span><span class="amount">${fmt(-volumeDiscount)}</span></div>
+        <div class="row"><span>Member Discount</span><span class="amount">${fmt(-memberDiscount)}</span></div>
+        <div class="row"><span>Shipping</span><span class="amount">${fmt(SHIPPING_RATE)}</span></div>
+        <div class="row"><span>Subtotal (Taxable amount)</span><span class="amount">${fmt(subTotalTaxable)}</span></div>
+        <div class="row"><span>Tax Rate %</span><span class="amount">${(TAX_RATE*100).toFixed(2)}%</span></div>
+        <div class="row"><span>Tax Amount $</span><span class="amount">${fmt(taxAmount)}</span></div>
+        <div class="row lead"><span>Invoice Total</span><span class="amount">${fmt(invoiceTotal)}</span></div>
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:10px">
+        <button class="btn" onclick="localStorage.removeItem('${CART_KEY}'); localStorage.removeItem('discountChoice'); render()">Clear Cart</button>
+        <button class="btn secondary" onclick="location.href='shop.html'">Keep Shopping</button>
+      </div>
+    `;
+
+    // member toggle (no extra named functions created)
+    const chk = document.getElementById('memberChk');
+    if (chk) {
+      chk.addEventListener('change', () => {
+        localStorage.setItem('museumMember', chk.checked ? '1' : '0');
+        if (!chk.checked) localStorage.removeItem('discountChoice');
+        render();
+      }, { once: true });
+    }
+  }
+
+  // first render
+  render();
+  // =================== STUDENT WORK ENDS HERE ===================
+  </script>
 </body>
 </html>
+
 
 
 
