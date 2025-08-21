@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Souvenir Shop — Museum of Wonder</title>
 
-  <!-- CSS: update to ../css/styles.css if your file name is plural -->
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="shop-page">
@@ -20,14 +19,15 @@
         <li><a href="staff.html">Staff</a></li>
         <li><a href="collections.html">Collections</a></li>
         <li>
-          <a id="navCartLink" href="cart.html">
-            Cart <span id="cart-count" class="cart-count">0</span>
+          <!-- Cart link with live count -->
+          <a href="cart.html" id="navCartLink">
+            Cart <span id="navCartCount">0</span>
           </a>
         </li>
         <li><a aria-current="page" href="shop.html" class="active">Shop</a></li>
       </ul>
 
-      <!-- View Cart button (per instructor example) -->
+      <!-- View Cart button (per request) -->
       <button class="btn pill" onclick="location.href='cart.html'">View Cart</button>
     </nav>
 
@@ -45,7 +45,6 @@
 
   <main id="main" class="content-area">
     <div class="container">
-      <!-- Helpful details -->
       <aside class="shop-notes" aria-label="How checkout works">
         <p><strong>Checkout math:</strong> volume discount <em>or</em> member discount (not both), then flat shipping,
         then 10.2% tax on the subtotal. See your totals on the Cart page.</p>
@@ -56,106 +55,74 @@
       <!-- Products Grid -->
       <section class="shop-grid" aria-label="Shop Items">
 
-        <!-- Item 1: Celestial Inkstone -->
+        <!-- Item 1: Curios Postcard Pack -->
         <article class="card shop-card souvenir-item" id="item001">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img src="../images/celestial-inkstone.jpg" alt="Celestial inkstone with subtle mineral flecks" />
+            <img src="../images/shop/postcard-pack.jpg" alt="Colorful pack of museum postcards on a counter" />
           </figure>
           <header>
-            <h3>Celestial Inkstone</h3>
-            <p class="muted">
-              Basalt dish with iridescent inlay, inspired by astronomical pigment trays.
-            </p>
+            <h3>Curios Postcard Pack</h3>
+            <p class="muted">Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
           </header>
-          <p class="price-row"><strong>$14.95</strong></p>
+          <p class="price-row"><strong>$9.95</strong></p>
 
-          <!-- qty badge required by assignment -->
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <!-- Add button with data-* for cart -->
-          <button class="btn"
+          <!-- EXACT SNIPPET YOU REQUESTED -->
+          <button
+            class="btn add-to-cart"
             onclick="addToCart(this)"
             data-id="item001"
-            data-name="Celestial Inkstone"
-            data-price="14.95"
-            data-image="../images/celestial-inkstone.jpg">
-            Add Celestial Inkstone to Cart
+            data-name="Curios Postcard Pack"
+            data-price="9.95"
+            data-image="../images/shop/postcard-pack.jpg">
+            Add Postcard Pack to Cart
           </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </article>
 
         <!-- Item 2: Spiral Claw Fossil -->
         <article class="card shop-card souvenir-item" id="item002">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img src="../images/spiral-claw-fossil.jpg" alt="Curled claw fossil replica on dark sand" />
+            <img src="../images/shop/spiral-claw.jpg" alt="Coiled fossil replica on dark sand" />
           </figure>
           <header>
             <h3>Spiral Claw Fossil</h3>
-            <p class="muted">
-              Coiled talon replica from a prehistoric predator; classroom-friendly display piece.
-            </p>
+            <p class="muted">Stone spiral replica; cast from original impression.</p>
           </header>
-          <p class="price-row"><strong>$22.95</strong></p>
+          <p class="price-row"><strong>$22.25</strong></p>
 
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <button class="btn"
+          <!-- EXACT SNIPPET YOU REQUESTED -->
+          <button class="btn add-to-cart"
             onclick="addToCart(this)"
             data-id="item002"
             data-name="Spiral Claw Fossil"
-            data-price="22.95"
-            data-image="../images/spiral-claw-fossil.jpg">
+            data-price="22.25"
+            data-image="../images/shop/spiral-claw.jpg">
             Add Spiral Claw Fossil to Cart
           </button>
+          <span class="qty-badge" aria-live="polite"></span>
         </article>
 
-        <!-- Item 3: Basaltic Glyphstone -->
+        <!-- Item 3: Celestial Inkstone -->
         <article class="card shop-card souvenir-item" id="item003">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img src="../images/archaeology/basaltic-glyphstone.jpg" alt="Basaltic glyphstone with crossing incisions" />
+            <img src="../images/shop/celestial-inkstone.jpg" alt="Basalt inkstone with subtle mineral flecks" />
           </figure>
           <header>
-            <h3>Basaltic Glyphstone</h3>
-            <p class="muted">
-              Replica boundary marker with shallow cross-incisions—great on a bookshelf.
-            </p>
+            <h3>Celestial Inkstone</h3>
+            <p class="muted">Polished slate with mineral flecks—perfect for brush scripts.</p>
           </header>
-          <p class="price-row"><strong>$15.95</strong></p>
+          <p class="price-row"><strong>$18.50</strong></p>
 
-          <span class="qty-badge" aria-live="polite"></span>
-
-          <button class="btn"
+          <!-- EXACT SNIPPET YOU REQUESTED -->
+          <button class="btn add-to-cart"
             onclick="addToCart(this)"
             data-id="item003"
-            data-name="Basaltic Glyphstone"
-            data-price="15.95"
-            data-image="../images/archaeology/basaltic-glyphstone.jpg">
-            Add Basaltic Glyphstone to Cart
+            data-name="Celestial Inkstone"
+            data-price="18.50"
+            data-image="../images/shop/celestial-inkstone.jpg">
+            Add Celestial Inkstone to Cart
           </button>
-        </article>
-
-        <!-- Item 4: Marker Arch Fragment -->
-        <article class="card shop-card souvenir-item" id="item004">
-          <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img src="../images/marker-arch-fragment.jpg" alt="Weathered fragment from a carved arch" />
-          </figure>
-          <header>
-            <h3>Marker Arch Fragment</h3>
-            <p class="muted">
-              Resin cast of a carved market arch fragment; warm ochre finish.
-            </p>
-          </header>
-          <p class="price-row"><strong>$17.80</strong></p>
-
           <span class="qty-badge" aria-live="polite"></span>
-
-          <button class="btn"
-            onclick="addToCart(this)"
-            data-id="item004"
-            data-name="Marker Arch Fragment"
-            data-price="17.80"
-            data-image="../images/marker-arch-fragment.jpg">
-            Add Marker Arch Fragment to Cart
-          </button>
         </article>
 
       </section>
@@ -167,15 +134,15 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Scripts (relative from /html/) -->
+  <!-- Scripts -->
   <script src="../js/shop.js" defer></script>
-  <script src="../js/cart.js" defer></script>
 
   <noscript>
     <p class="container">JavaScript is required to use the shopping cart.</p>
   </noscript>
 </body>
 </html>
+
 
 
 
