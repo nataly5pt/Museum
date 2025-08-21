@@ -138,19 +138,38 @@ a:hover{ text-decoration:underline; }
 }
 .chip:hover{ background: rgba(255,255,255,.14); }
 
-/* -------- 7) Histories layout (image + text card) -------- */
-.history-item{
-  display:grid; gap:26px; align-items:start;
-  grid-template-columns: minmax(260px, 560px) 1fr;
-  padding:22px; border-radius:22px; background: rgba(0,0,0,.22);
-  border:1px solid rgba(255,255,255,.10);
+/* -------- 7)   Histories label layout =============== */
+.histories .history-item{
+  display: grid;
+  grid-template-columns: clamp(260px, 42vw, 520px) 1fr; /* image | text */
+  gap: 28px;
+  align-items: start;
 }
-.history-item .media-frame{ aspect-ratio:5/4; }
-.history-text h4{ margin:.6rem 0 .2rem; color:var(--text-100); }
-.history-text .courtesy{ color:var(--text-300); }
-.back-link a{ color:var(--sand-300); }
-@media (max-width: 880px){
-  .history-item{ grid-template-columns: 1fr; }
+
+/* keep the figure from overflowing */
+.histories .history-item .media-frame{
+  margin: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* make the image fill only its column */
+.histories .history-item .media-frame img{
+  display: block;
+  width: 100%;
+  height: auto;          /* or height: 100%; object-fit: cover; if you prefer a cropped fill */
+}
+
+/* allow long text to wrap properly */
+.histories .history-item .history-text{ min-width: 0; }
+
+/* stack on small screens */
+@media (max-width: 900px){
+  .histories .history-item{
+    grid-template-columns: 1fr;
+  }
+}
+
 }
 
 /* -------- 8) Staff grid (uniform card sizes) -------- */
