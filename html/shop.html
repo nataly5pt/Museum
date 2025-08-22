@@ -17,7 +17,6 @@
         <li><a href="staff.html">Staff</a></li>
         <li><a href="collections.html">Collections</a></li>
         <li>
-          <!-- LIVE cart link + count -->
           <a href="cart.html" id="navCartLink">
             Cart <span id="navCartCount">0</span>
           </a>
@@ -25,7 +24,7 @@
         <li><a aria-current="page" href="shop.html" class="active">Shop</a></li>
       </ul>
 
-      <!-- View Cart button -->
+      <!-- View Cart pill -->
       <button class="btn pill" onclick="location.href='cart.html'">View Cart</button>
     </nav>
 
@@ -36,8 +35,7 @@
         Prices in USD.
       </p>
       <figure class="banner media-frame" style="aspect-ratio:16/9;">
-        <!-- This file exists in /images -->
-        <img src="../images/souvenir-shop.jpg" alt="Warm, golden-lit museum souvenir shop" loading="lazy"/>
+        <img src="../images/souvenir-shop.jpg" alt="Warm, golden-lit museum souvenir shop" />
       </figure>
     </div>
   </header>
@@ -52,35 +50,34 @@
       <h2 class="section-title">Items</h2>
 
       <section class="shop-grid" aria-label="Shop Items">
-
-        <!-- Item 1: Curios Postcard Pack (use souvenir-shop.jpg as the product art you already have) -->
+        <!-- Item 1: Curios Postcard Pack -->
         <article class="card shop-card souvenir-item" id="item001">
-          <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img src="../images/marker-arch-fragment.jpg" alt="Colorful pack of museum curios on shelves" loading="lazy"/>
-          </figure>
-          <header>
-            <h3>Curios Postcard Pack</h3>
-            <p class="muted">Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
-          </header>
-          <p class="price-row"><strong>$9.95</strong></p>
+  <figure class="media-frame" style="aspect-ratio:4/3;">
+    <img src="../images/marker-arch-fragment.jpg"
+         alt="Postcard pack cover art featuring the Marker Arch fragment" />
+  </figure>
+  <header>
+    <h3>Curios Postcard Pack</h3>
+    <p class="muted">Set of 10 matte postcards featuring highlights from the Museum of Wonder.</p>
+  </header>
+  <p class="price-row"><strong>$9.95</strong></p>
 
-          <button
-            class="btn add-to-cart"
-            onclick="addToCart(this)"
-            data-id="item001"
-            data-name="Curios Postcard Pack"
-            data-price="9.95"
-            data-image="../images/marker-arch-fragment.jpg">
-            Add Postcard Pack to Cart
-          </button>
-          <span class="qty-badge" aria-live="polite"></span>
-        </article>
+  <button
+    class="btn add-to-cart"
+    onclick="addToCart(this)"
+    data-id="item001"
+    data-name="Curios Postcard Pack"
+    data-price="9.95"
+    data-image="../images/marker-arch-fragment.jpg">
+    Add Postcard Pack to Cart
+  </button>
+  <span class="qty-badge" aria-live="polite"></span>
+</article>
 
         <!-- Item 2: Spiral Claw Fossil -->
         <article class="card shop-card souvenir-item" id="item002">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <!-- Correct path from your repo listing -->
-            <img src="../images/spiral-claw-fossil.jpg" alt="Coiled fossil replica on dark sand" loading="lazy"/>
+            <img src="../images/spiral-claw-fossil.jpg" alt="Coiled fossil replica on dark sand" />
           </figure>
           <header>
             <h3>Spiral Claw Fossil</h3>
@@ -102,8 +99,7 @@
         <!-- Item 3: Celestial Inkstone -->
         <article class="card shop-card souvenir-item" id="item003">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <!-- Correct path from your repo listing -->
-            <img src="../images/celestial-inkstone.jpg" alt="Basalt inkstone with subtle mineral flecks" loading="lazy"/>
+            <img src="../images/celestial-inkstone.jpg" alt="Basalt inkstone with subtle mineral flecks" />
           </figure>
           <header>
             <h3>Celestial Inkstone</h3>
@@ -121,7 +117,6 @@
           </button>
           <span class="qty-badge" aria-live="polite"></span>
         </article>
-
       </section>
     </div>
   </main>
@@ -131,12 +126,12 @@
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- One script is enough for Shop -->
+  <!-- IMPORTANT: shop page loads ONLY shop.js -->
   <script src="../js/shop.js" defer></script>
-
   <noscript><p class="container">JavaScript is required to use the shopping cart.</p></noscript>
 </body>
 </html>
+
 
 
 
