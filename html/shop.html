@@ -4,14 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Souvenir Shop — Museum of Wonder</title>
-
-  <!-- Site styles -->
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body class="shop-page">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <!-- ================= Header / Nav ================= -->
   <header class="site-header">
     <nav class="top-nav container" aria-label="Primary">
       <a class="brand" href="../index.html">Museum of Wonder</a>
@@ -20,7 +17,7 @@
         <li><a href="staff.html">Staff</a></li>
         <li><a href="collections.html">Collections</a></li>
         <li>
-          <!-- Cart link with live count (JS fills the number) -->
+          <!-- LIVE cart link + count -->
           <a href="cart.html" id="navCartLink">
             Cart <span id="navCartCount">0</span>
           </a>
@@ -28,7 +25,7 @@
         <li><a aria-current="page" href="shop.html" class="active">Shop</a></li>
       </ul>
 
-      <!-- View Cart shortcut -->
+      <!-- View Cart button -->
       <button class="btn pill" onclick="location.href='cart.html'">View Cart</button>
     </nav>
 
@@ -39,34 +36,27 @@
         Prices in USD.
       </p>
       <figure class="banner media-frame" style="aspect-ratio:16/9;">
-        <img src="../images/souvenir-shop.jpg" alt="Warm, golden-lit museum souvenir shop" />
+        <!-- This file exists in /images -->
+        <img src="../images/souvenir-shop.jpg" alt="Warm, golden-lit museum souvenir shop" loading="lazy"/>
       </figure>
     </div>
   </header>
 
-  <!-- ================= Main ================= -->
   <main id="main" class="content-area">
     <div class="container">
       <aside class="shop-notes" aria-label="How checkout works">
-        <p>
-          <strong>Checkout math:</strong>
-          volume discount <em>or</em> member discount (not both), then flat shipping,
-          then 10.2% tax on the subtotal. See your totals on the Cart page.
-        </p>
+        <p><strong>Checkout math:</strong> volume discount <em>or</em> member discount (not both), then flat shipping,
+        then 10.2% tax on the subtotal. See your totals on the Cart page.</p>
       </aside>
 
       <h2 class="section-title">Items</h2>
 
-      <!-- Products Grid -->
       <section class="shop-grid" aria-label="Shop Items">
 
-        <!-- ================= Item 1 ================= -->
-        <!-- OPTION B: use an image that already exists in /images -->
+        <!-- Item 1: Curios Postcard Pack (use souvenir-shop.jpg as the product art you already have) -->
         <article class="card shop-card souvenir-item" id="item001">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img
-              src="../images/marker-arch-fragment.jpg"
-              alt="Colorful pack of museum postcards on a counter" />
+            <img src="../images/marker-arch-fragment.jpg" alt="Colorful pack of museum curios on shelves" loading="lazy"/>
           </figure>
           <header>
             <h3>Curios Postcard Pack</h3>
@@ -86,13 +76,11 @@
           <span class="qty-badge" aria-live="polite"></span>
         </article>
 
-        <!-- ================= Item 2 ================= -->
-        <!-- OPTION B path -> existing ../images/spiral-claw-fossil.jpg -->
+        <!-- Item 2: Spiral Claw Fossil -->
         <article class="card shop-card souvenir-item" id="item002">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img
-              src="../images/spiral-claw-fossil.jpg"
-              alt="Coiled fossil replica on dark sand" />
+            <!-- Correct path from your repo listing -->
+            <img src="../images/spiral-claw-fossil.jpg" alt="Coiled fossil replica on dark sand" loading="lazy"/>
           </figure>
           <header>
             <h3>Spiral Claw Fossil</h3>
@@ -111,13 +99,11 @@
           <span class="qty-badge" aria-live="polite"></span>
         </article>
 
-        <!-- ================= Item 3 ================= -->
-        <!-- OPTION B path -> existing ../images/celestial-inkstone.jpg -->
+        <!-- Item 3: Celestial Inkstone -->
         <article class="card shop-card souvenir-item" id="item003">
           <figure class="media-frame" style="aspect-ratio:4/3;">
-            <img
-              src="../images/celestial-inkstone.jpg"
-              alt="Basalt inkstone with subtle mineral flecks" />
+            <!-- Correct path from your repo listing -->
+            <img src="../images/celestial-inkstone.jpg" alt="Basalt inkstone with subtle mineral flecks" loading="lazy"/>
           </figure>
           <header>
             <h3>Celestial Inkstone</h3>
@@ -140,20 +126,18 @@
     </div>
   </main>
 
-  <!-- ================= Footer ================= -->
   <footer class="site-footer container">
     <hr />
     <p>© Museum of Wonder</p>
   </footer>
 
-  <!-- Scripts -->
+  <!-- One script is enough for Shop -->
   <script src="../js/shop.js" defer></script>
 
-  <noscript>
-    <p class="container">JavaScript is required to use the shopping cart.</p>
-  </noscript>
+  <noscript><p class="container">JavaScript is required to use the shopping cart.</p></noscript>
 </body>
 </html>
+
 
 
 
