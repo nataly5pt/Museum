@@ -379,6 +379,11 @@
     // If the URL was loaded with #histories, open it
     if (location.hash === '#histories') histories.classList.add('active');
   })();
+    
+    <!-- ===== External page JS goes LAST, just before </body> ===== -->
+  <script src="/Museum/js/collections.js" defer></script>
+  <!-- If testing locally without a site root, switch to: <script src="../js/collections.js" defer></script> -->
+
   </script>
 </body>
 </html>
