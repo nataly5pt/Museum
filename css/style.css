@@ -32,6 +32,10 @@ html { box-sizing: border-box; }
 
   /* Layout widths */
   --container: 1200px;
+
+  /* Staff sizing tokens (used on /staff) */
+  --staff-card-min: 560px;       /* total card height on large screens */
+  --staff-image-ratio: 3 / 4;    /* portrait image ratio */
 }
 
 /* -------- 2) Base typography & page chrome -------- */
@@ -115,7 +119,7 @@ a:hover{ text-decoration:underline; }
 .media-frame{ border-radius:16px; overflow:hidden; background:var(--brown-600); }
 .media-frame img{ display:block; width:100%; height:auto; }
 
-/* -------- 5) Home “Featured” grid (optional general grid) -------- */
+/* -------- 5) Generic grids -------- */
 .grid-3{
   display:grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap:24px;
@@ -138,45 +142,25 @@ a:hover{ text-decoration:underline; }
 }
 .chip:hover{ background: rgba(255,255,255,.14); }
 
-/* -------- 7)   Histories label layout =============== */
+/* -------- 7) Histories (legacy label layout supported) -------- */
 .histories .history-item{
   display: grid;
   grid-template-columns: clamp(260px, 42vw, 520px) 1fr; /* image | text */
   gap: 28px;
   align-items: start;
 }
-
-/* keep the figure from overflowing */
 .histories .history-item .media-frame{
-  margin: 0;
-  border-radius: 18px;
-  overflow: hidden;
+  margin: 0; border-radius: 18px; overflow: hidden;
 }
-
-/* make the image fill only its column */
 .histories .history-item .media-frame img{
-  display: block;
-  width: 100%;
-  height: auto;          /* or height: 100%; object-fit: cover; if you prefer a cropped fill */
+  display: block; width: 100%; height: auto;
 }
-
-/* allow long text to wrap properly */
 .histories .history-item .history-text{ min-width: 0; }
-
-/* stack on small screens */
 @media (max-width: 900px){
-  .histories .history-item{
-    grid-template-columns: 1fr;
-  }
-}
-
+  .histories .history-item{ grid-template-columns: 1fr; }
 }
 
 /* -------- 8) Staff grid (uniform card sizes) -------- */
-:root{
-  --staff-card-min: 560px;      /* large screens total card height */
-  --staff-image-ratio: 3 / 4;   /* portrait ratio */
-}
 .staff-grid{
   display:grid;
   grid-template-columns: repeat(4, minmax(240px,1fr));
@@ -204,7 +188,7 @@ a:hover{ text-decoration:underline; }
 @media (max-width: 1100px){ .staff-card.card{ min-height:520px; } }
 @media (max-width: 680px){ .staff-card.card{ min-height:unset; } }
 
-/* -------- 9) SHOP GRID / CARDS ================= */
+/* -------- 9) SHOP GRID / CARDS -------- */
 .shop-grid{
   display:grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -217,7 +201,7 @@ a:hover{ text-decoration:underline; }
 .shop-card .price-row{ display:flex; justify-content:space-between; align-items:center; margin-top:.5rem; }
 .qty-badge{ display:inline-block; margin-top:.25rem; font-size:.9rem; opacity:.8; }
 
-/* ================= CART VIEW ================= */
+/* -------- 10) CART VIEW -------- */
 .cart-list{ display:flex; flex-direction:column; gap:12px; margin-bottom:20px; }
 .cart-row{ display:flex; justify-content:space-between; align-items:center; padding:12px; border-radius:14px; background:rgba(255,255,255,.03); }
 .cart-left{ display:flex; gap:12px; align-items:center; }
@@ -231,28 +215,75 @@ a:hover{ text-decoration:underline; }
 .cart-controls .spacer{ flex:1; }
 .switch{ display:flex; align-items:center; gap:8px; }
 
-
-/* -------- 10) Tables / amounts (cart) -------- */
+/* Tables / amounts (cart) */
 .amounts, .mono{
   font-variant-numeric: tabular-nums lining-nums; font-feature-settings:"tnum","lnum";
 }
-.summary{
-  border-collapse: collapse; width:100%;
-}
+.summary{ border-collapse: collapse; width:100%; }
 .summary th, .summary td{
   padding: .65rem .25rem; border-bottom:1px dashed rgba(255,255,255,.10);
 }
 .summary td.amounts{ text-align:right; }
 .summary tfoot td{ font-weight:800; color:var(--text-100); }
 
-/* -------- 11) Footer -------- */
+/* -------- 11) Interpretations modal (Collections) -------- */
+.modal[aria-hidden="true"]{ display:none; }
+.modal{
+  position: fixed; inset: 0; z-index: 1000;
+  display:none; /* toggled by JS */
+  background: rgba(0,0,0,.6);
+  overflow-y: auto;
+}
+.modal .modal-content{
+  margin: 6vh auto;
+  width: min(92vw, 1100px);
+  background: #24170f;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+.close-modal{
+  appearance:none; border:0; background:#3a281c; color:#f8e7c9;
+  font-weight:700; border-radius:999px; width:36px; height:36px;
+  display:inline-grid; place-items:center; cursor:pointer; float:right;
+}
+.close-modal:focus-visible{
+  outline:3px solid var(--ring-focus); outline-offset:2px;
+}
+#modal-body{ color:#f2e8d8; }
+#modal-body h2, #modal-body h3{ margin: 0 0 .5rem 0; }
+#modal-body p{ line-height:1.6; margin:.5rem 0; }
+#modal-body .facts{ margin:.75rem 0 1rem; }
+#modal-body .facts dt{ font-weight:700; }
+#modal-body .facts dd{ margin:0 0 .5rem 0; }
+
+/* -------- 12) Histories section (new .hist-card layout) -------- */
+#histories{ display:none; }
+#histories.active{ display:block; }
+
+.hist-card{
+  background:#201611; border-radius:24px; padding:24px; margin:24px 0;
+  color:#f2e8d8; box-shadow:0 10px 30px rgba(0,0,0,.35);
+  display:grid; gap:20px; grid-template-columns: min(42ch, 40%) 1fr;
+}
+.hist-card figure{ margin:0; }
+.hist-card img{ width:100%; height:auto; border-radius:16px; display:block; }
+.hist-card h3{ margin:.25rem 0 .75rem 0; }
+.hist-card p{ line-height:1.7; }
+.hist-meta{ font-style:italic; opacity:.9; margin:.5rem 0 1rem; }
+
+@media (max-width: 900px){
+  .hist-card{ grid-template-columns: 1fr; }
+}
+
+/* Helper hint on collections */
+.interpretation-hint{
+  margin-top: 6px; color:#f0d9ad; opacity:.9; font-size:.95rem;
+}
+
+/* -------- 13) Footer -------- */
 .site-footer{ padding: 40px 0 60px; color: var(--text-300); }
 
-/* -------- 12) Utility spacing -------- */
+/* -------- 14) Utility spacing -------- */
 .mt-1{ margin-top:.5rem; } .mt-2{ margin-top:1rem; } .mt-3{ margin-top:1.5rem; }
 .mb-1{ margin-bottom:.5rem; } .mb-2{ margin-bottom:1rem; } .mb-3{ margin-bottom:1.5rem; }
-
-
-
-
-
