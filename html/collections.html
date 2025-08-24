@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Collections — Museum of Wonder</title>
 
-  <!-- Global styles (your brown–yellow theme) -->
+  <!-- Global styles -->
   <link rel="stylesheet" href="/Museum/css/style.css">
-  <!-- If you kept a page-specific sheet, keep this line. If not, it's harmless. -->
+  <!-- Optional page-specific sheet (harmless if missing) -->
   <link rel="stylesheet" href="/Museum/css/collections.css">
 </head>
 
@@ -39,21 +39,21 @@
       <nav class="subnav" aria-label="Collections sections">
         <a class="chip" href="#archaeology">Archaeology</a>
         <a class="chip" href="#anthropology">Anthropology</a>
-        <a class="chip" href="#histories">Histories</a>
+        <a class="chip" href="#histories" id="open-histories">Histories</a>
       </nav>
 
       <!-- =================== Archaeology =================== -->
       <section id="archaeology" class="collection-section" aria-labelledby="arch-title">
         <h2 id="arch-title" class="section-title">Archaeology</h2>
+        <p class="interpretation-hint">Tip: click any image to open a 150-word Interpretation modal.</p>
 
         <div class="card-grid">
           <!-- Obsidian Spearhead -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="obsidian" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-obsidian" aria-controls="modal"
                aria-label="Open note for Obsidian Spearhead">
               <figure class="media-frame">
-                <img src="/Museum/images/archaeology/obsidian-spearhead.jpg"
-                     alt="Obsidian spearhead on mount">
+                <img src="/Museum/images/archaeology/obsidian-spearhead.jpg" alt="Obsidian spearhead on mount">
               </figure>
             </a>
             <h3>Obsidian Spearhead</h3>
@@ -62,24 +62,22 @@
 
           <!-- Coprolite Sample -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="coprolite" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-coprolite" aria-controls="modal"
                aria-label="Open note for Coprolite Sample">
               <figure class="media-frame">
-                <img src="/Museum/images/archaeology/coprolite-sample.jpg"
-                     alt="Coprolite sample close-up">
+                <img src="/Museum/images/archaeology/coprolite-sample.jpg" alt="Coprolite sample close-up">
               </figure>
             </a>
             <h3>Coprolite Sample</h3>
             <p>Dietary and seasonal record in fossilized micro-details.</p>
           </article>
 
-          <!-- Basaltic Glyphstone (FIXED path & clean <img>) -->
+          <!-- Basaltic Glyphstone -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="glyphstone" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-glyphstone" aria-controls="modal"
                aria-label="Open note for Basaltic Glyphstone">
               <figure class="media-frame">
-                <img src="/Museum/images/archaeology/basaltic-glyphstone.jpg"
-                     alt="Basaltic glyphstone with shallow incisions">
+                <img src="/Museum/images/archaeology/basaltic-glyphstone.jpg" alt="Basaltic glyphstone with shallow incisions">
               </figure>
             </a>
             <h3>Basaltic Glyphstone</h3>
@@ -91,15 +89,15 @@
       <!-- =================== Anthropology =================== -->
       <section id="anthropology" class="collection-section" aria-labelledby="anth-title">
         <h2 id="anth-title" class="section-title">Anthropology</h2>
+        <p class="interpretation-hint">Tip: click any image to open a 150-word Interpretation modal.</p>
 
         <div class="card-grid">
           <!-- Bronze Kohl Container -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="kohl" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-kohl" aria-controls="modal"
                aria-label="Open note for Bronze Kohl Container">
               <figure class="media-frame">
-                <img src="/Museum/images/anthropology/bronze-kohl-container.jpg"
-                     alt="Small bronze kohl container">
+                <img src="/Museum/images/anthropology/bronze-kohl-container.jpg" alt="Small bronze kohl container">
               </figure>
             </a>
             <h3>Bronze Kohl Container</h3>
@@ -108,11 +106,10 @@
 
           <!-- Cranial Vault Fragment -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="cranial" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-cranial" aria-controls="modal"
                aria-label="Open note for Cranial Vault Fragment">
               <figure class="media-frame">
-                <img src="/Museum/images/anthropology/cranial-vault-fragment.jpg"
-                     alt="Human cranial vault fragment">
+                <img src="/Museum/images/anthropology/cranial-vault-fragment.jpg" alt="Human cranial vault fragment">
               </figure>
             </a>
             <h3>Cranial Vault Fragment</h3>
@@ -121,11 +118,10 @@
 
           <!-- Faience Scarab Amulet -->
           <article class="card">
-            <a href="#modal" class="open-modal" data-modal="scarab" aria-controls="modal"
+            <a href="#modal" class="open-modal" data-modal-target="#modal-text-scarab" aria-controls="modal"
                aria-label="Open note for Faience Scarab Amulet">
               <figure class="media-frame">
-                <img src="/Museum/images/anthropology/faience-scarab-amulet.jpg"
-                     alt="Blue-green faience scarab amulet">
+                <img src="/Museum/images/anthropology/faience-scarab-amulet.jpg" alt="Blue-green faience scarab amulet">
               </figure>
             </a>
             <h3>Faience Scarab Amulet</h3>
@@ -134,58 +130,109 @@
         </div>
       </section>
 
-      <!-- =================== Histories (label) =================== -->
-      <section id="histories" class="histories" aria-labelledby="hist-title">
-        <h2 id="hist-title" class="section-title">Histories</h2>
+      <!-- =================== Histories (your full labels) =================== -->
+      <section id="histories" class="collection-section" aria-labelledby="hist-title">
+        <h2 id="hist-title">Histories</h2>
 
-        <article class="history-item card">
-          <!-- FIXED: use the Volcanic glass sample with glowing orange core and purple rind photo here -->
+        <!-- 1. Obsidian Spearhead -->
+        <article class="hist-card" id="hist-obsidian">
           <figure class="media-frame">
-  <img src="/Museum/images/histories/volcanic_glass-sample.jpg"
-       alt="Volcanic glass sample with glowing orange core and purple rind">
-</figure>
-
-          <div class="history-text">
-            <h3>Volcanic Glass Sample — Exhibit Label</h3>
-
-            <h4>Facts</h4>
-            <p><strong>Material:</strong> Volcanic glass (obsidian), pressure-flaked.</p>
-            <p><strong>Approx. date:</strong> Late Holocene (relative, stratigraphic).</p>
-            <p><strong>Region:</strong> Inland Sahel caravan margin, secondary dune ridge.</p>
-            <p><strong>Dimensions:</strong> 11.2 × 3.1 × 0.7 cm.
-              <em> On display courtesy of the Field School Depot.</em></p>
-
-            <h4>Interpretation</h4>
-            <p>
-              Obsidian cuts because it breaks like lightning: conchoidal, fast, and purposeful. The maker seated the
-              blank on a palm and drew sharp pressure along the edge to lift thin flakes, a rhythm of intake and release
-              that turned glass into intention. Spearheads like this travel easily through both space and story. Their raw
-              material often moves hundreds of kilometers from volcano to camp, bundled in trade as nodules or rough
-              preforms. The polish along the hafting end suggests repeated mounting and removal—a kit that shifted between
-              hunter, scout, and guardian as a day unfolded. Under magnification, tiny step fractures near the tip imply
-              contact with bone or heavy hide. Whether that contact was feast or defense is not knowable here; the point
-              is honest about use but discreet about outcome.
-            </p>
-
-            <h4>Comparative Notes</h4>
-            <p>
-              Similar pressure-flaked forms occur across Africa’s Rift and Sahara margins, but the narrow “waisted”
-              hafting seen here aligns with riverine groups who preferred slimmer foreshafts that could be repaired quickly.
-              Trace-element sourcing may link this glass to an East African flow; if so, the object also maps a conversation
-              route—merchants, marriage ties, and seasonal employment—threading savanna and desert.
-            </p>
-
-            <h4>Cautionary Note on Interpretation</h4>
-            <p>
-              Functional labels like “weapon” or “hunting spear” risk flattening a complex life. Points live in ceremonies,
-              bridewealth, oaths, and teaching kits. Without a secure excavated context and community testimony, this label
-              keeps multiple possibilities open rather than declaring a single past.
-            </p>
-
-            <p class="courtesy"><strong>On display, courtesy of:</strong> Field School Depot and the dune-ridge community committee.</p>
-            <p class="back-link"><a href="#archaeology">↩ Back to Archaeology</a></p>
+            <img src="/Museum/images/archaeology/obsidian-spearhead.jpg" alt="Pressure-flaked obsidian spearhead on dark background">
+            <figcaption class="hist-meta">Volcanic glass (obsidian); Late Holocene; Inland Sahel caravan margin</figcaption>
+          </figure>
+          <div>
+            <h3>Obsidian Spearhead — Exhibit Label</h3>
+            <p>This pressure-flaked obsidian point likely functioned as the replaceable tip of a slim foreshaft—part of a modular system designed for travel. The geometry is deliberate: parallel flake scars run from the base toward a finely reduced tip; the waisted hafting end takes binding well and sits securely in a narrow socket. Along the basal margins a soft sheen indicates hafting polish; near the tip, short step-fractures suggest impact and repair. Trace-element studies on obsidian across the region show that glass sources are often hundreds of kilometers from sites like this one; the tool is therefore also a traveler, a portable link among volcanic outcrops, river corridors, and dune-edge camps.</p>
+            <p>Function is reasonably secure—this is a spear point used in hunting or defense—but specifics remain unknown. Points do not reveal what animal was taken, who carried it, or the story told afterward around the fire. What the object does preserve is a cadence of care: mounting, testing, sharpening, replacing. The modular foreshaft implies a kit a skilled person could keep in motion: when the brittle glass failed (as brittle materials do), the binding was unwound and a fresh point slid into place.</p>
+            <p><strong>Comparative Notes.</strong> Narrow, waisted bases appear widely along riverine groups where quick re-hafting mattered and lighter shafts were preferred. The finishing strategy here resembles pressure-flaking seen on other Late Holocene pieces in the inland Sahel.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> Tool typologies can flatten lived experience. We avoid heroic readings and keep claims grounded in material traces and context: polish, fracture, and placement on a dune margin camp lens.</p>
+            <p><em>On display courtesy of the Field School Depot.</em></p>
           </div>
         </article>
+
+        <!-- 2. Bronze Kohl Container -->
+        <article class="hist-card" id="hist-kohl">
+          <figure class="media-frame">
+            <img src="/Museum/images/anthropology/bronze-kohl-container.jpg" alt="Small bronze kohl container with patina">
+            <figcaption class="hist-meta">Cast bronze with traces of galena; domestic refuse context</figcaption>
+          </figure>
+          <div>
+            <h3>Bronze Kohl Container — Exhibit Label</h3>
+            <p>Small enough to fit the palm yet carefully made, this bronze vessel once held kohl—finely ground mineral used to line the eyelids. The lip is darkened from the repeated dip and twist of an applicator; faint abrasion inside the rim suggests years of measured scoops. A tiny foot ring keeps the mouth lifted from dusty floors and work surfaces. The weight is balanced, the casting clean: a quietly sophisticated object meant for daily touch.</p>
+            <p>Kohl occupies a space where care, protection, and presentation meet. Lining the eyelids can reduce glare in bright conditions; in some historical mixtures, lead-based minerals such as galena may inhibit bacterial growth, though risks accompany certain recipes. The container’s portability points to routines that move through the day—face washing, preparation for market or ceremony, shared moments at a threshold mirror. In many communities such vessels circulate among genders and ages; they belong to households rather than to a single role.</p>
+            <p>The jar’s long warm patina is not neglect but devotion: repeated handling and skin oils turned bronze into memory. Its presence in a courtyard refuse pit likely marks the end of service after breakage of a lid or depletion of contents, rather than ritual disposal. Comparable forms appear widely across North Africa and the Near East; ours aligns with a pragmatic tradition that keeps powder clean and close at hand.</p>
+            <p><strong>Interpretive Thread.</strong> Through a decolonial lens, we approach the container as evidence of ordinary expertise rather than a “curious cosmetic.” It embodies the knowledge of mixing minerals, maintaining hygiene, and preparing a public face—skills that live within households and persist across generations.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> Health effects depend on recipe and use; while some historical formulations may have offered antimicrobial benefits, others carried risks. Without surviving contents, claims remain provisional. We honor descendant knowledge where communities continue these practices today.</p>
+            <p><em>On display courtesy of the House Courtyard Salvage, Unit H-12.</em></p>
+          </div>
+        </article>
+
+        <!-- 3. Basaltic Glyphstone -->
+        <article class="hist-card" id="hist-glyphstone">
+          <figure class="media-frame">
+            <img src="/Museum/images/archaeology/basaltic-glyphstone.jpg" alt="Basalt boulder with shallow crossing incisions">
+            <figcaption class="hist-meta">Non-local basalt; river terrace context</figcaption>
+          </figure>
+          <div>
+            <h3>Basaltic Glyphstone — Exhibit Label</h3>
+            <p>This non-local basalt boulder was transported to a river terrace and seated with its working face slightly tilted forward to shed rain. The incised field comprises shallow, crossing lines that organize the surface into interwoven tracks. Overlap relationships and differential weathering indicate the marks were not made in a single session but renewed episodically. Inside several grooves, microscopic residues of dark pigment persist; the lower edge carries a soft sheen from repeated touch. The boulder’s importation and careful placement signal intention beyond mere convenience.</p>
+            <p><strong>Interpretation.</strong> Stones used to “witness” oaths, demarcate crossings, or log claims are documented along trade corridors. DU-R22-T19 shares public siting and touch-polished zones, yet its incision “grammar” is interlaced rather than enumerative. Rather than counting, the lines appear to bind—linking persons, paths, and obligations restated across seasons. From an Indigenous Storywork perspective, such surfaces hold layered memory: not a single text to decode but a place where commitments are renewed.</p>
+            <p><strong>Comparative Notes.</strong> While analogous to oath stones along Saharan caravan routes, the basalt here carries a local weathering rind and distinct cut style. The choice of imported lithology may have conveyed permanence and authority.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> No legible script is present; readings remain qualified. Further pigment characterization (Raman/µXRF) and basalt source studies (pXRF/LA-ICP-MS) could refine episode timing and mobility networks.</p>
+            <p><em>On display courtesy of the River Terrace Survey, Trench R-22.</em></p>
+          </div>
+        </article>
+
+        <!-- 4. Coprolite Sample -->
+        <article class="hist-card" id="hist-coprolite">
+          <figure class="media-frame">
+            <img src="/Museum/images/archaeology/coprolite-sample.jpg" alt="Coprolite sample on a tray">
+            <figcaption class="hist-meta">Mineralized fecal mass; dry shelter lens</figcaption>
+          </figure>
+          <div>
+            <h3>Coprolite Sample — Exhibit Label</h3>
+            <p>Coprolites—mineralized fecal masses—are unassuming but powerful witnesses. Under the microscope this specimen preserves starch granules from grass seeds and tubers, fragments of insect cuticle, minute fish scales, wind-borne grit, and flecks of micro-charcoal that signal proximity to cooking fires. Pollen spectra tilt toward late-dry-season blooms, suggesting a moment when gathered foods and stored meal were both in use. Mineral grit likely reflects stone-milling or dust entrained in the camp’s airflow. If parasite ova are detected, they reveal health burdens and sanitation regimes; absence can be meaningful, too, though preservation varies.</p>
+            <p>Because coprolites record actual consumption, they complement interpretations based on tools and bones, correcting the overemphasis on meat in many archaeological narratives. Rather than an either/or of “hunter vs. gatherer,” this sample supports a picture of adaptive, seasonal breadth—people tracking ripening plants, fishing opportunistically, and using fires that left charcoal in shelter dust. A single coprolite is a snapshot, but collections of them become time-series that map diet, climate shifts, and contact with new foods.</p>
+            <p><strong>Comparative Notes.</strong> Similar late-season signatures appear in other dry-shelter sequences where provisioning strategies balanced stored seedcakes and fresh plants. Isotopic analysis and residue proteomics could further refine this profile.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> Ethical handling and consent govern work with human biological remains. Identification here proceeds by non-destructive imaging first, then targeted micro-sampling when justified by research questions.</p>
+            <p><em>On display courtesy of the Shelter Lens Recovery, Unit C-7.</em></p>
+          </div>
+        </article>
+
+        <!-- 5. Cranial Vault Fragment -->
+        <article class="hist-card" id="hist-cranial">
+          <figure class="media-frame">
+            <img src="/Museum/images/anthropology/cranial-vault-fragment.jpg" alt="Human cranial vault fragment on neutral background">
+            <figcaption class="hist-meta">Human bone; redeposited burial margin</figcaption>
+          </figure>
+          <div>
+            <h3>Cranial Vault Fragment — Exhibit Label</h3>
+            <p>This cranial vault fragment preserves traces osteologists read as a record of stress and healing. Along the outer surface, small remodeled chips indicate injuries that had time to heal; on the inner table, localized new bone suggests prior inflammation or infection. The suture margin shows age-appropriate closure, and several fine linear marks may be peri-mortem or taphonomic; distinguishing the two requires microscopic study. None of these observations on their own defines cause of death. Instead, they point to a life in which labor, care, illness, and recovery were present, and to a community that made decisions about treatment and burial.</p>
+            <p><strong>Context & Ethics.</strong> The fragment derives from a redeposited locus near a habitation margin—contexts that can mix individuals and times through later digging or erosion. Modern work with human remains is guided by respect: consultation where possible, secure storage, and an interpretive stance that refuses spectacle. We present the material to foster learning about health, environment, and social response, without reducing a person to pathology.</p>
+            <p><strong>Comparative Notes.</strong> Comparable healing patterns occur in populations subject to intermittent trauma and infection—situations common in pre-antibiotic worlds. Micro-CT and histology could refine timing and differential diagnosis.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> Visual similarity is not identity. We keep conclusions qualified and foreground uncertainty while sharing what careful observation can responsibly support.</p>
+            <p><em>On display courtesy of the Community Stewardship Project.</em></p>
+          </div>
+        </article>
+
+        <!-- 6. Faience Scarab Amulet -->
+        <article class="hist-card" id="hist-scarab">
+          <figure class="media-frame">
+            <img src="/Museum/images/anthropology/faience-scarab-amulet.jpg" alt="Blue-green faience scarab amulet">
+            <figcaption class="hist-meta">Quartz-frit faience; blue-green glaze; domestic scatter</figcaption>
+          </figure>
+          <div>
+            <h3>Faience Scarab Amulet — Exhibit Label</h3>
+            <p>Small enough to hide in the hand yet bright as water, this faience scarab was molded in a quartz-frit paste and fired with a copper-bearing glaze that blooms blue-green. The suspension loop is smooth from wear; recesses retain faint pigment where a thumb could not reach. Scarabs miniaturize the beetle’s labor of rolling and burying—an emblem of renewal widely shared across time and region. Their power lies not in preciousness but in portability: they move in pockets and bundles, traded, gifted, or kept close to skin.</p>
+            <p><strong>Interpretation.</strong> As an everyday companion object, the scarab concentrates intention—protection on a journey, strength for recovery, return after absence. Some scarabs serve as seals or funerary fittings; this example’s wear favors personal adornment. We cannot assign it to one ritual, household, or person, but its material and use-trace anchor it in ordinary life.</p>
+            <p><strong>Comparative Notes.</strong> The body form and glaze composition align with faience traditions that spread through interregional exchange. Compositional analysis could pinpoint recipe families and trade routes.</p>
+            <p><strong>Cautionary Note on Interpretation.</strong> Meanings shift with carriers and communities. Presenting this piece means avoiding a single authoritative story in favor of grounded possibilities informed by fabric, glaze, and wear.</p>
+            <p><em>On display courtesy of the Doorway Scatter Collection, Unit A-3.</em></p>
+          </div>
+        </article>
+
+        <p class="interpretation-hint">The content in this gallery was created by AI under human direction, then curated, reviewed, and edited by a human before being published.</p>
+        <p><a href="#collections" id="close-histories">Back to Collections</a></p>
       </section>
     </div>
   </main>
@@ -195,7 +242,7 @@
     <p>© Museum of Wonder · <a href="/Museum/">Back to Home</a></p>
   </footer>
 
-  <!-- ============ Modal shell (JS will clone hidden content) ============ -->
+  <!-- ============ Modal shell (JS clones hidden content) ============ -->
   <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
     <div class="modal-content">
       <button class="close-modal" aria-label="Close">×</button>
@@ -203,7 +250,7 @@
     </div>
   </div>
 
-  <!-- ============ Hidden modal content blocks ============ -->
+  <!-- ============ Hidden modal content blocks (one per item) ============ -->
 
   <!-- Obsidian -->
   <div class="modal-item" id="modal-text-obsidian" hidden>
@@ -268,10 +315,74 @@
     </p>
   </div>
 
-  <!-- Page JS (opens/closes the modal) -->
-  <script src="/Museum/js/collections.js" defer></script>
+  <!-- ============ Minimal page JS for modals + histories toggle ============ -->
+  <script>
+  (function(){
+    const modal     = document.getElementById('modal');
+    const modalBody = document.getElementById('modal-body');
+    const closeBtn  = modal.querySelector('.close-modal');
+    let lastTrigger = null;
+
+    function openFrom(selector, trigger){
+      const src = document.querySelector(selector);
+      if (!src) { console.warn('Missing modal content:', selector); return; }
+      modalBody.innerHTML = src.innerHTML;         // inject text HTML
+      modal.style.display = 'block';
+      modal.setAttribute('aria-hidden','false');
+      lastTrigger = trigger || null;
+      closeBtn.focus();
+      document.body.style.overflow = 'hidden';     // prevent page scroll under modal
+    }
+
+    function closeModal(){
+      modal.style.display = 'none';
+      modal.setAttribute('aria-hidden','true');
+      modalBody.innerHTML = '';
+      document.body.style.overflow = '';
+      if (lastTrigger) lastTrigger.focus();
+    }
+
+    // open on any element with data-modal-target
+    document.addEventListener('click', (e)=>{
+      const trigger = e.target.closest('[data-modal-target]');
+      if (trigger){
+        e.preventDefault();
+        openFrom(trigger.getAttribute('data-modal-target'), trigger);
+        return;
+      }
+      if (e.target === modal || e.target.closest('.close-modal')) closeModal();
+    });
+
+    document.addEventListener('keydown', (e)=>{
+      if (e.key === 'Escape' && modal.style.display === 'block') closeModal();
+    });
+
+    // Histories reveal/hide
+    const histories = document.getElementById('histories');
+    const openHist  = document.getElementById('open-histories');
+    const closeHist = document.getElementById('close-histories');
+
+    function showHistories(ev){
+      if (ev) ev.preventDefault();
+      histories.classList.add('active');
+      histories.scrollIntoView({behavior:'smooth'});
+    }
+    function hideHistories(ev){
+      if (ev) ev.preventDefault();
+      histories.classList.remove('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    if (openHist)  openHist.addEventListener('click', showHistories);
+    if (closeHist) closeHist.addEventListener('click', hideHistories);
+
+    // If the URL was loaded with #histories, open it
+    if (location.hash === '#histories') histories.classList.add('active');
+  })();
+  </script>
 </body>
 </html>
+
 
 
 
